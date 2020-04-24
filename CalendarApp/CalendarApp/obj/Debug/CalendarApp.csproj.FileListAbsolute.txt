@@ -1,0 +1,10 @@
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\bin\Debug\CalendarApp.exe.config
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\bin\Debug\CalendarApp.exe
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\bin\Debug\CalendarApp.pdb
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\obj\Debug\CalendarApp.csprojAssemblyReference.cache
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\obj\Debug\CalendarApp.CalendarForm.resources
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Properties.Resources.resources
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\obj\Debug\CalendarApp.csproj.GenerateResource.cache
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\obj\Debug\CalendarApp.csproj.CoreCompileInputs.cache
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\obj\Debug\CalendarApp.exe
+C:\Users\vicen\source\repos\CalendarApp\CalendarApp\obj\Debug\CalendarApp.pdb
