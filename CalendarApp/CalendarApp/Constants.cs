@@ -18,5 +18,6 @@ namespace CalendarApp
         public const string MonthAndYearFormat = "MMMM   yyyy";
         public const string EnglishLanguageCode = "en-EN";
         public const string DatabaseName = "CalendarDatabase";
+        public const int HourSubtractionFactor = -1;
     }
 }

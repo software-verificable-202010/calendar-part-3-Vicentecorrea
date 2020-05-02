@@ -65,6 +65,12 @@
     <Compile Include="Views\CreateEventForm.Designer.cs">
       <DependentUpon>CreateEventForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\WeekForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\WeekForm.Designer.cs">
+      <DependentUpon>WeekForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\CalendarForm.resx">
       <DependentUpon>CalendarForm.cs</DependentUpon>
     </EmbeddedResource>

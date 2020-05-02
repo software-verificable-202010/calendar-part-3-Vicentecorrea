@@ -25,7 +25,11 @@ namespace CalendarApp.Views
             string eventDescription = eventDescriptionRichTextBox.Text;
             DateTime eventStartDate = eventStartDateDateTimePicker.Value;
             DateTime eventEndDate = eventEndDateDateTimePicker.Value;
-            Event newEvent = new Event(eventName, eventDescription, eventStartDate, eventEndDate);
+            int eventStartTime = (int)eventStartTimeNumericUpDown.Value;
+            int eventEndTime = (int)eventEndTimeNumericUpDown.Value;
+            DateTime definitiveEventStartDate = GetDateWithSelectedTime(eventStartDate, eventStartTime);
+            DateTime definitiveEventEndDate = GetDateWithSelectedTime(eventEndDate, eventEndTime);
+            Event newEvent = new Event(eventName, eventDescription, definitiveEventStartDate, definitiveEventEndDate);
             try
             {
                 EventController.CreateEvent(newEvent);
@@ -37,6 +41,15 @@ namespace CalendarApp.Views
             {
                 MessageBox.Show("Error, the event could not be created");
             }
+        }
+
+        private DateTime GetDateWithSelectedTime(DateTime selectedDate, int selectedTime)
+        {
+            selectedDate = selectedDate.AddHours(selectedDate.Hour * Constants.HourSubtractionFactor);
+            selectedDate = selectedDate.AddMinutes(selectedDate.Minute * Constants.HourSubtractionFactor);
+            selectedDate = selectedDate.AddSeconds(selectedDate.Second * Constants.HourSubtractionFactor);
+            DateTime dateWithSelectedTime = selectedDate.AddHours(selectedTime);
+            return dateWithSelectedTime;
         }
     }
 }
