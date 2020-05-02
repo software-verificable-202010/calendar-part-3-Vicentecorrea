@@ -17,5 +17,6 @@ namespace CalendarApp
         public const int PreviousTimeInterval = -1;
         public const string MonthAndYearFormat = "MMMM   yyyy";
         public const string EnglishLanguageCode = "en-EN";
+        public const string DatabaseName = "CalendarDatabase";
     }
 }

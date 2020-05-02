@@ -13,5 +13,13 @@ namespace CalendarApp.Models
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        public Event(string title, string description, DateTime startDate, DateTime endDate)
+        {
+            this.Title = title;
+            this.Description = description;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+        }
     }
 }

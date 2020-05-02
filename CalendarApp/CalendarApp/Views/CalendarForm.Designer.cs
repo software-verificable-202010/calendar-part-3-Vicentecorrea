@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.calendarGridView = new System.Windows.Forms.DataGridView();
             this.MondayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TuesdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +42,7 @@
             this.nextMonthButton = new System.Windows.Forms.Button();
             this.todayButton = new System.Windows.Forms.Button();
             this.monthLabel = new System.Windows.Forms.Label();
+            this.goToCreateEventFormButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.calendarGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,15 +90,15 @@
             // 
             // SaturdayColumn
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.SaturdayColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SaturdayColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.SaturdayColumn.HeaderText = "Saturday";
             this.SaturdayColumn.Name = "SaturdayColumn";
             // 
             // SundayColumn
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.SundayColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SundayColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.SundayColumn.HeaderText = "Sunday";
             this.SundayColumn.Name = "SundayColumn";
             // 
@@ -137,15 +138,26 @@
             this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.monthLabel.Location = new System.Drawing.Point(391, 40);
             this.monthLabel.Name = "monthLabel";
-            this.monthLabel.Size = new System.Drawing.Size(70, 25);
+            this.monthLabel.Size = new System.Drawing.Size(107, 25);
             this.monthLabel.TabIndex = 5;
-            this.monthLabel.Text = "label1";
+            this.monthLabel.Text = "dateLabel";
+            // 
+            // goToCreateEventFormButton
+            // 
+            this.goToCreateEventFormButton.Location = new System.Drawing.Point(607, 39);
+            this.goToCreateEventFormButton.Name = "goToCreateEventFormButton";
+            this.goToCreateEventFormButton.Size = new System.Drawing.Size(75, 23);
+            this.goToCreateEventFormButton.TabIndex = 6;
+            this.goToCreateEventFormButton.Text = "create event";
+            this.goToCreateEventFormButton.UseVisualStyleBackColor = true;
+            this.goToCreateEventFormButton.Click += new System.EventHandler(this.GoToCreateEventFormButton_Click);
             // 
             // CalendarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 549);
+            this.Controls.Add(this.goToCreateEventFormButton);
             this.Controls.Add(this.monthLabel);
             this.Controls.Add(this.todayButton);
             this.Controls.Add(this.nextMonthButton);
@@ -173,6 +185,7 @@
         private System.Windows.Forms.Button nextMonthButton;
         private System.Windows.Forms.Button todayButton;
         private System.Windows.Forms.Label monthLabel;
+        private System.Windows.Forms.Button goToCreateEventFormButton;
     }
 }
 

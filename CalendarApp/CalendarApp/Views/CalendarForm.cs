@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Data.SqlClient;
+using CalendarApp.Models;
+using CalendarApp.Views;
 
 namespace CalendarApp
 {
@@ -23,10 +25,10 @@ namespace CalendarApp
         {
             InitializeComponent();
             selectedDate = DateTime.Today;
-            showCalendar();
+            ShowCalendar();
         }
 
-        private void showCalendar()
+        private void ShowCalendar()
         {
             calendarGridView.Rows.Clear();
             UpdateBasicCalendarInformation();
@@ -93,19 +95,25 @@ namespace CalendarApp
         private void NextMonthButton_Click(object sender, EventArgs e)
         {
             selectedDate = selectedDate.AddMonths(Constants.NextTimeInterval);
-            showCalendar();
+            ShowCalendar();
         }
 
         private void PreviousMonthButton_Click(object sender, EventArgs e)
         {
             selectedDate = selectedDate.AddMonths(Constants.PreviousTimeInterval);
-            showCalendar();
+            ShowCalendar();
         }
 
         private void TodayButton_Click(object sender, EventArgs e)
         {
             selectedDate = DateTime.Today;
-            showCalendar();
+            ShowCalendar();
+        }
+
+        private void GoToCreateEventFormButton_Click(object sender, EventArgs e)
+        {
+            CreateEventForm createEventForm = new CreateEventForm();
+            createEventForm.Show();
         }
     }
 }
