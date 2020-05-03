@@ -38,11 +38,12 @@
             this.FridayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaturdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SundayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.previousMonthButton = new System.Windows.Forms.Button();
-            this.nextMonthButton = new System.Windows.Forms.Button();
+            this.previousTimePeriodButton = new System.Windows.Forms.Button();
+            this.nextTimePeriodButton = new System.Windows.Forms.Button();
             this.todayButton = new System.Windows.Forms.Button();
             this.monthLabel = new System.Windows.Forms.Label();
             this.goToCreateEventFormButton = new System.Windows.Forms.Button();
+            this.calendarDisplayMenuListBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.calendarGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@
             this.SundayColumn});
             this.calendarGridView.Location = new System.Drawing.Point(12, 91);
             this.calendarGridView.Name = "calendarGridView";
-            this.calendarGridView.Size = new System.Drawing.Size(863, 384);
+            this.calendarGridView.Size = new System.Drawing.Size(886, 384);
             this.calendarGridView.TabIndex = 1;
             // 
             // MondayColumn
@@ -102,25 +103,25 @@
             this.SundayColumn.HeaderText = "Sunday";
             this.SundayColumn.Name = "SundayColumn";
             // 
-            // previousMonthButton
+            // previousTimePeriodButton
             // 
-            this.previousMonthButton.Location = new System.Drawing.Point(12, 40);
-            this.previousMonthButton.Name = "previousMonthButton";
-            this.previousMonthButton.Size = new System.Drawing.Size(101, 23);
-            this.previousMonthButton.TabIndex = 2;
-            this.previousMonthButton.Text = "previous month";
-            this.previousMonthButton.UseVisualStyleBackColor = true;
-            this.previousMonthButton.Click += new System.EventHandler(this.PreviousMonthButton_Click);
+            this.previousTimePeriodButton.Location = new System.Drawing.Point(12, 40);
+            this.previousTimePeriodButton.Name = "previousTimePeriodButton";
+            this.previousTimePeriodButton.Size = new System.Drawing.Size(101, 23);
+            this.previousTimePeriodButton.TabIndex = 2;
+            this.previousTimePeriodButton.Text = "previous";
+            this.previousTimePeriodButton.UseVisualStyleBackColor = true;
+            this.previousTimePeriodButton.Click += new System.EventHandler(this.PreviousTimePeriodButton_Click);
             // 
-            // nextMonthButton
+            // nextTimePeriodButton
             // 
-            this.nextMonthButton.Location = new System.Drawing.Point(774, 40);
-            this.nextMonthButton.Name = "nextMonthButton";
-            this.nextMonthButton.Size = new System.Drawing.Size(101, 23);
-            this.nextMonthButton.TabIndex = 3;
-            this.nextMonthButton.Text = "next month";
-            this.nextMonthButton.UseVisualStyleBackColor = true;
-            this.nextMonthButton.Click += new System.EventHandler(this.NextMonthButton_Click);
+            this.nextTimePeriodButton.Location = new System.Drawing.Point(774, 40);
+            this.nextTimePeriodButton.Name = "nextTimePeriodButton";
+            this.nextTimePeriodButton.Size = new System.Drawing.Size(101, 23);
+            this.nextTimePeriodButton.TabIndex = 3;
+            this.nextTimePeriodButton.Text = "next";
+            this.nextTimePeriodButton.UseVisualStyleBackColor = true;
+            this.nextTimePeriodButton.Click += new System.EventHandler(this.NextTimePeriodButton_Click);
             // 
             // todayButton
             // 
@@ -152,16 +153,30 @@
             this.goToCreateEventFormButton.UseVisualStyleBackColor = true;
             this.goToCreateEventFormButton.Click += new System.EventHandler(this.GoToCreateEventFormButton_Click);
             // 
+            // calendarDisplayMenuListBox
+            // 
+            this.calendarDisplayMenuListBox.FormattingEnabled = true;
+            this.calendarDisplayMenuListBox.Items.AddRange(new object[] {
+            "Month",
+            "Week"});
+            this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(243, 40);
+            this.calendarDisplayMenuListBox.Name = "calendarDisplayMenuListBox";
+            this.calendarDisplayMenuListBox.Size = new System.Drawing.Size(120, 30);
+            this.calendarDisplayMenuListBox.TabIndex = 7;
+            this.calendarDisplayMenuListBox.SelectedItem = "Month";
+            this.calendarDisplayMenuListBox.SelectedIndexChanged += new System.EventHandler(this.CalendarDisplayMenuListBox_SelectedIndexChanged);
+            // 
             // CalendarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 549);
+            this.Controls.Add(this.calendarDisplayMenuListBox);
             this.Controls.Add(this.goToCreateEventFormButton);
             this.Controls.Add(this.monthLabel);
             this.Controls.Add(this.todayButton);
-            this.Controls.Add(this.nextMonthButton);
-            this.Controls.Add(this.previousMonthButton);
+            this.Controls.Add(this.nextTimePeriodButton);
+            this.Controls.Add(this.previousTimePeriodButton);
             this.Controls.Add(this.calendarGridView);
             this.Name = "CalendarForm";
             this.Text = "Calendar";
@@ -181,11 +196,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FridayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaturdayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SundayColumn;
-        private System.Windows.Forms.Button previousMonthButton;
-        private System.Windows.Forms.Button nextMonthButton;
+        private System.Windows.Forms.Button previousTimePeriodButton;
+        private System.Windows.Forms.Button nextTimePeriodButton;
         private System.Windows.Forms.Button todayButton;
         private System.Windows.Forms.Label monthLabel;
         private System.Windows.Forms.Button goToCreateEventFormButton;
+        private System.Windows.Forms.ListBox calendarDisplayMenuListBox;
     }
 }
 
