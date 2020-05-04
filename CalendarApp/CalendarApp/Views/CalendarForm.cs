@@ -83,17 +83,19 @@ namespace CalendarApp
                 else
                 {
                     DateTime day = new DateTime(selectedDate.Year, selectedDate.Month, iteratorDay);
-                    IEnumerable<string> eventNamesObtained = from eventInMonth in eventsInMonth
-                                                             where EventController.IsEventOnThisDay(eventInMonth, day) == true
-                                                             select eventInMonth.Title;
-                    List<string> eventTitles = new List<string>(eventNamesObtained);
+                    List<string> eventTitles = EventController.GetEventTitlesOnThisDay(eventsInMonth, day);
+                    
                     string cellText = iteratorDay.ToString();
-                    if (eventTitles.Count > 0)
+                    if (eventTitles.Count > Constants.ZeroElements)
                     {
+                        if (iteratorDay.ToString().Length == Constants.OneElement)
+                        {
+                            cellText += Constants.Space + Constants.Space;
+                        }
+                        cellText += GetTextOfNumberOfEventsOnThisDay(eventTitles);
                         foreach (string title in eventTitles)
                         {
-                            cellText += Environment.NewLine + title;
-                            //cellText += " / " + title;
+                            cellText += Environment.NewLine + Constants.FiveSpaces + title;
                         }
                     }
                     weekRow.Add(cellText);
@@ -101,6 +103,16 @@ namespace CalendarApp
                 }
             }
             return weekRow.ToArray();
+        }
+
+        private string GetTextOfNumberOfEventsOnThisDay(List<string> eventTitles)
+        {
+            string eventQuantityText = Constants.TenSpaces + eventTitles.Count + Constants.Space + Constants.Event;
+            if (eventTitles.Count > Constants.OneElement)
+            {
+                eventQuantityText += Constants.Plurality;
+            }
+            return eventQuantityText;
         }
 
         private void PaintToday()

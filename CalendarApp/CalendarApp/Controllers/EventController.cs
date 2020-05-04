@@ -26,5 +26,14 @@ namespace CalendarApp.Controllers
             bool endsOnThisDay = @event.EndDate.Date == day;
             return startsOnThisDay || happensOnThisDay || endsOnThisDay;
         }
+
+        public static List<string> GetEventTitlesOnThisDay(List<Event> eventsInMonth, DateTime day)
+        {
+            IEnumerable<string> eventNamesObtained = from eventInMonth in eventsInMonth
+                                                     where EventController.IsEventOnThisDay(eventInMonth, day) == true
+                                                     select eventInMonth.Title;
+            List<string> eventTitles = new List<string>(eventNamesObtained);
+            return eventTitles;
+        }
     }
 }

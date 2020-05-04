@@ -30,5 +30,11 @@ namespace CalendarApp
         public const bool IsNotGoingToToday = false;
         //public const string HoursColumnHeader = "Hours";
         public const string HyphenWithSpaces = " - ";
+        public const string FiveSpaces = "     ";
+        public const string TenSpaces = "          ";
+        public const string Event = "event";
+        public const string Plurality = "s";
+        public const int OneElement = 1;
+        public const int ZeroElements = 0;
     }
 }
