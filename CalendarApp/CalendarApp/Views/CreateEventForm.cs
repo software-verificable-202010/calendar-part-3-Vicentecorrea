@@ -30,17 +30,15 @@ namespace CalendarApp.Views
             DateTime definitiveEventStartDate = GetDateWithSelectedTime(eventStartDate, eventStartTime);
             DateTime definitiveEventEndDate = GetDateWithSelectedTime(eventEndDate, eventEndTime);
             Event newEvent = new Event(eventName, eventDescription, definitiveEventStartDate, definitiveEventEndDate);
-            try
+            bool couldTheEventBeCreated;
+            string feedbackText;
+            (couldTheEventBeCreated, feedbackText) = EventController.CreateEvent(newEvent);
+            if (couldTheEventBeCreated)
             {
-                EventController.CreateEvent(newEvent);
-                MessageBox.Show("Successfully created event");
                 eventNameTextBox.Clear();
                 eventDescriptionRichTextBox.Clear();
             }
-            catch
-            {
-                MessageBox.Show("Error, the event could not be created");
-            }
+            MessageBox.Show(feedbackText);
         }
 
         private DateTime GetDateWithSelectedTime(DateTime selectedDate, int selectedTime)

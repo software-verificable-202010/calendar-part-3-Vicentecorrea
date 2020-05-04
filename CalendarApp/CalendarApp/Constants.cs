@@ -22,19 +22,15 @@ namespace CalendarApp
         public const string EnglishLanguageCode = "en-EN";
         public const string DatabaseName = "CalendarDatabase";
         public const int HourSubtractionFactor = -1;
-        public const string MonthOptionFromCalendarDisplayMenu = "Month";
-        public const string WeekOptionFromCalendarDisplayMenu = "Week";
+        public const string MonthOption = "Month";
+        public const string WeekOption = "Week";
         public const int HoursInDay = 24;
-        public const string ZerosOfHour = ":00";
+        public const string ZerosOfHour = ":00  ";
         public const bool IsGoingToToday = true;
         public const bool IsNotGoingToToday = false;
         //public const string HoursColumnHeader = "Hours";
         public const string HyphenWithSpaces = " - ";
-        public const string FiveSpaces = "     ";
-        public const string TenSpaces = "          ";
-        public const string Event = "event";
-        public const string Plurality = "s";
-        public const int OneElement = 1;
-        public const int ZeroElements = 0;
+        public const int CellHeightInMonthView = 50;
+        public const bool TheEventCouldBeCreated = true;
     }
 }

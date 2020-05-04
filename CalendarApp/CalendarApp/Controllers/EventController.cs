@@ -9,9 +9,28 @@ namespace CalendarApp.Controllers
 {
     public static class EventController
     {
-        public static void CreateEvent(Event newEvent)
+        public static (bool, string) CreateEvent(Event newEvent)
         {
-            DatabaseHelper.SaveEvent(newEvent);
+            bool couldTheEventBeCreated = Constants.TheEventCouldBeCreated;
+            string feedbackText = "Successfully created event";
+            if (newEvent.StartDate >= newEvent.EndDate)
+            {
+                couldTheEventBeCreated = !Constants.TheEventCouldBeCreated;
+                feedbackText = "Error, the end date must be later than the start date";
+            }
+            else
+            {
+                try
+                {
+                    DatabaseHelper.SaveEvent(newEvent);
+                }
+                catch
+                {
+                    couldTheEventBeCreated = !Constants.TheEventCouldBeCreated;
+                    feedbackText = "Error, the event could not be created";
+                }
+            }
+            return (couldTheEventBeCreated, feedbackText);
         }
 
         public static List<Event> GetEventsInMonth(DateTime date)
@@ -19,21 +38,29 @@ namespace CalendarApp.Controllers
             return DatabaseHelper.GetEventsInMonth(date);
         }
 
-        public static bool IsEventOnThisDay(Event @event, DateTime day)
+        public static bool IsEventInThisTimePeriod(Event eventInDoubt, DateTime timePeriod, string selectedCalendarView)
         {
-            bool startsOnThisDay = @event.StartDate.Date == day;
-            bool happensOnThisDay = @event.StartDate.Date < day && day < @event.EndDate.Date;
-            bool endsOnThisDay = @event.EndDate.Date == day;
-            return startsOnThisDay || happensOnThisDay || endsOnThisDay;
+            bool IsEventInThisTimePeriod;
+            if (selectedCalendarView == Constants.MonthOption)
+            {
+                IsEventInThisTimePeriod = eventInDoubt.StartDate.Date <= timePeriod && timePeriod <= eventInDoubt.EndDate.Date;
+            }
+            else
+            {
+                IsEventInThisTimePeriod = eventInDoubt.StartDate <= timePeriod && timePeriod <= eventInDoubt.EndDate;
+            }
+            return IsEventInThisTimePeriod;
         }
 
-        public static List<string> GetEventTitlesOnThisDay(List<Event> eventsInMonth, DateTime day)
+
+        public static List<Event> GetEventsInThisTimePeriod(List<Event> events, DateTime timePeriod, string selectedCalendarView)
         {
-            IEnumerable<string> eventNamesObtained = from eventInMonth in eventsInMonth
-                                                     where EventController.IsEventOnThisDay(eventInMonth, day) == true
-                                                     select eventInMonth.Title;
-            List<string> eventTitles = new List<string>(eventNamesObtained);
-            return eventTitles;
+            IEnumerable<Event> eventsObtained = from eventInDoubt in events
+                                                where EventController.IsEventInThisTimePeriod(eventInDoubt, timePeriod, selectedCalendarView) == true
+                                                     orderby eventInDoubt.StartDate
+                                                     select eventInDoubt;
+            List<Event> eventsInTimePeriod = new List<Event>(eventsObtained);
+            return eventsInTimePeriod;
         }
     }
 }

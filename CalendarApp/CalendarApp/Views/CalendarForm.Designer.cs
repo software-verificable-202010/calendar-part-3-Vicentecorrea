@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.calendarGridView = new System.Windows.Forms.DataGridView();
+            this.previousTimePeriodButton = new System.Windows.Forms.Button();
+            this.nextTimePeriodButton = new System.Windows.Forms.Button();
+            this.todayButton = new System.Windows.Forms.Button();
+            this.monthLabel = new System.Windows.Forms.Label();
+            this.goToCreateEventFormButton = new System.Windows.Forms.Button();
+            this.calendarDisplayMenuListBox = new System.Windows.Forms.ListBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.MondayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TuesdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WednesdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,12 +46,6 @@
             this.FridayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaturdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SundayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.previousTimePeriodButton = new System.Windows.Forms.Button();
-            this.nextTimePeriodButton = new System.Windows.Forms.Button();
-            this.todayButton = new System.Windows.Forms.Button();
-            this.monthLabel = new System.Windows.Forms.Label();
-            this.goToCreateEventFormButton = new System.Windows.Forms.Button();
-            this.calendarDisplayMenuListBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.calendarGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,49 +61,19 @@
             this.FridayColumn,
             this.SaturdayColumn,
             this.SundayColumn});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.calendarGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.calendarGridView.Location = new System.Drawing.Point(12, 91);
             this.calendarGridView.Name = "calendarGridView";
             this.calendarGridView.Size = new System.Drawing.Size(886, 384);
             this.calendarGridView.TabIndex = 1;
-            // 
-            // MondayColumn
-            // 
-            this.MondayColumn.HeaderText = "Monday";
-            this.MondayColumn.Name = "MondayColumn";
-            // 
-            // TuesdayColumn
-            // 
-            this.TuesdayColumn.HeaderText = "Tuesday";
-            this.TuesdayColumn.Name = "TuesdayColumn";
-            // 
-            // WednesdayColumn
-            // 
-            this.WednesdayColumn.HeaderText = "Wednesday";
-            this.WednesdayColumn.Name = "WednesdayColumn";
-            // 
-            // ThursdayColumn
-            // 
-            this.ThursdayColumn.HeaderText = "Thursday";
-            this.ThursdayColumn.Name = "ThursdayColumn";
-            // 
-            // FridayColumn
-            // 
-            this.FridayColumn.HeaderText = "Friday";
-            this.FridayColumn.Name = "FridayColumn";
-            // 
-            // SaturdayColumn
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.SaturdayColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.SaturdayColumn.HeaderText = "Saturday";
-            this.SaturdayColumn.Name = "SaturdayColumn";
-            // 
-            // SundayColumn
-            // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.SundayColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.SundayColumn.HeaderText = "Sunday";
-            this.SundayColumn.Name = "SundayColumn";
+            this.calendarGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CalendarGridView_CellContentClick);
             // 
             // previousTimePeriodButton
             // 
@@ -159,18 +131,65 @@
             this.calendarDisplayMenuListBox.Items.AddRange(new object[] {
             "Month",
             "Week"});
+            this.calendarDisplayMenuListBox.SetSelected(0, true);
             this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(778, 40);
             this.calendarDisplayMenuListBox.Name = "calendarDisplayMenuListBox";
             this.calendarDisplayMenuListBox.Size = new System.Drawing.Size(120, 30);
             this.calendarDisplayMenuListBox.TabIndex = 7;
-            this.calendarDisplayMenuListBox.SelectedItem = "Month";
             this.calendarDisplayMenuListBox.SelectedIndexChanged += new System.EventHandler(this.CalendarDisplayMenuListBox_SelectedIndexChanged);
+            // 
+            // MondayColumn
+            // 
+            this.MondayColumn.HeaderText = "Monday";
+            this.MondayColumn.Name = "MondayColumn";
+            this.MondayColumn.ReadOnly = true;
+            // 
+            // TuesdayColumn
+            // 
+            this.TuesdayColumn.HeaderText = "Tuesday";
+            this.TuesdayColumn.Name = "TuesdayColumn";
+            this.TuesdayColumn.ReadOnly = true;
+            // 
+            // WednesdayColumn
+            // 
+            this.WednesdayColumn.HeaderText = "Wednesday";
+            this.WednesdayColumn.Name = "WednesdayColumn";
+            this.WednesdayColumn.ReadOnly = true;
+            // 
+            // ThursdayColumn
+            // 
+            this.ThursdayColumn.HeaderText = "Thursday";
+            this.ThursdayColumn.Name = "ThursdayColumn";
+            this.ThursdayColumn.ReadOnly = true;
+            // 
+            // FridayColumn
+            // 
+            this.FridayColumn.HeaderText = "Friday";
+            this.FridayColumn.Name = "FridayColumn";
+            this.FridayColumn.ReadOnly = true;
+            // 
+            // SaturdayColumn
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SaturdayColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.SaturdayColumn.HeaderText = "Saturday";
+            this.SaturdayColumn.Name = "SaturdayColumn";
+            this.SaturdayColumn.ReadOnly = true;
+            // 
+            // SundayColumn
+            // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SundayColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.SundayColumn.HeaderText = "Sunday";
+            this.SundayColumn.Name = "SundayColumn";
+            this.SundayColumn.ReadOnly = true;
             // 
             // CalendarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 549);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.calendarDisplayMenuListBox);
             this.Controls.Add(this.goToCreateEventFormButton);
             this.Controls.Add(this.monthLabel);
@@ -189,6 +208,13 @@
         #endregion
 
         private System.Windows.Forms.DataGridView calendarGridView;
+        private System.Windows.Forms.Button previousTimePeriodButton;
+        private System.Windows.Forms.Button nextTimePeriodButton;
+        private System.Windows.Forms.Button todayButton;
+        private System.Windows.Forms.Label monthLabel;
+        private System.Windows.Forms.Button goToCreateEventFormButton;
+        private System.Windows.Forms.ListBox calendarDisplayMenuListBox;
+        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn MondayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TuesdayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn WednesdayColumn;
@@ -196,12 +222,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FridayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaturdayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SundayColumn;
-        private System.Windows.Forms.Button previousTimePeriodButton;
-        private System.Windows.Forms.Button nextTimePeriodButton;
-        private System.Windows.Forms.Button todayButton;
-        private System.Windows.Forms.Label monthLabel;
-        private System.Windows.Forms.Button goToCreateEventFormButton;
-        private System.Windows.Forms.ListBox calendarDisplayMenuListBox;
     }
 }
 
