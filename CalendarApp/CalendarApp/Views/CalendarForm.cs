@@ -92,7 +92,8 @@ namespace CalendarApp
                     {
                         foreach (string title in eventTitles)
                         {
-                            cellText += Environment.NewLine + title;
+                            //cellText += Environment.NewLine + title;
+                            cellText += " / " + title;
                         }
                     }
                     weekRow.Add(cellText);
