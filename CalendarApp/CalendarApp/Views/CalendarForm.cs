@@ -67,7 +67,7 @@ namespace CalendarApp
             for (int week = Constants.DefaultInitialIndex; week < weeksInSelectedMonth; week++)
             {
                 calendarGridView.Rows.Add(GetWeekRow(week.Equals(Constants.DefaultInitialIndex)));
-                calendarGridView.Rows[week].Height = 50;
+                //calendarGridView.Rows[week].Height = 30;
             }
             
         }
@@ -92,8 +92,8 @@ namespace CalendarApp
                     {
                         foreach (string title in eventTitles)
                         {
-                            //cellText += Environment.NewLine + title;
-                            cellText += " / " + title;
+                            cellText += Environment.NewLine + title;
+                            //cellText += " / " + title;
                         }
                     }
                     weekRow.Add(cellText);
@@ -105,11 +105,13 @@ namespace CalendarApp
 
         private void PaintToday()
         {
+            int cellCounter = Constants.DefaultInitialIndex;
             for (int row = Constants.DefaultInitialIndex; row < calendarGridView.RowCount; row++)
             {
                 for (int column = Constants.DefaultInitialIndex; column < calendarGridView.ColumnCount; column++)
                 {
-                    if (calendarGridView.Rows[row].Cells[column].Value.ToString() == selectedDate.Day.ToString()){
+                    cellCounter++;
+                    if (cellCounter == selectedDate.Day + daysBetweenMondayAndFirstDayOfSelectedMonth){
                         calendarGridView.Rows[row].Cells[column].Style.BackColor = Color.LightCoral;
                     }
                 }
