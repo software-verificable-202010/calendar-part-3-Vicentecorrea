@@ -18,6 +18,7 @@ namespace CalendarApp
         public const int NextTimeInterval = 1;
         public const int PreviousTimeInterval = -1;
         public const string MonthAndYearFormat = "MMMM   yyyy";
+        public const string MonthFormat = "MMMM";
         public const string EnglishLanguageCode = "en-EN";
         public const string DatabaseName = "CalendarDatabase";
         public const int HourSubtractionFactor = -1;
@@ -27,5 +28,7 @@ namespace CalendarApp
         public const string ZerosOfHour = ":00";
         public const bool IsGoingToToday = true;
         public const bool IsNotGoingToToday = false;
+        //public const string HoursColumnHeader = "Hours";
+        public const string HyphenWithSpaces = " - ";
     }
 }

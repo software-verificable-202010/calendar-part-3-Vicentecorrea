@@ -115,7 +115,7 @@
             // 
             // nextTimePeriodButton
             // 
-            this.nextTimePeriodButton.Location = new System.Drawing.Point(774, 40);
+            this.nextTimePeriodButton.Location = new System.Drawing.Point(119, 40);
             this.nextTimePeriodButton.Name = "nextTimePeriodButton";
             this.nextTimePeriodButton.Size = new System.Drawing.Size(101, 23);
             this.nextTimePeriodButton.TabIndex = 3;
@@ -125,7 +125,7 @@
             // 
             // todayButton
             // 
-            this.todayButton.Location = new System.Drawing.Point(144, 40);
+            this.todayButton.Location = new System.Drawing.Point(286, 40);
             this.todayButton.Name = "todayButton";
             this.todayButton.Size = new System.Drawing.Size(75, 23);
             this.todayButton.TabIndex = 4;
@@ -137,7 +137,7 @@
             // 
             this.monthLabel.AutoSize = true;
             this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLabel.Location = new System.Drawing.Point(391, 40);
+            this.monthLabel.Location = new System.Drawing.Point(389, 9);
             this.monthLabel.Name = "monthLabel";
             this.monthLabel.Size = new System.Drawing.Size(107, 25);
             this.monthLabel.TabIndex = 5;
@@ -145,7 +145,7 @@
             // 
             // goToCreateEventFormButton
             // 
-            this.goToCreateEventFormButton.Location = new System.Drawing.Point(607, 39);
+            this.goToCreateEventFormButton.Location = new System.Drawing.Point(597, 40);
             this.goToCreateEventFormButton.Name = "goToCreateEventFormButton";
             this.goToCreateEventFormButton.Size = new System.Drawing.Size(75, 23);
             this.goToCreateEventFormButton.TabIndex = 6;
@@ -159,7 +159,7 @@
             this.calendarDisplayMenuListBox.Items.AddRange(new object[] {
             "Month",
             "Week"});
-            this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(243, 40);
+            this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(778, 40);
             this.calendarDisplayMenuListBox.Name = "calendarDisplayMenuListBox";
             this.calendarDisplayMenuListBox.Size = new System.Drawing.Size(120, 30);
             this.calendarDisplayMenuListBox.TabIndex = 7;

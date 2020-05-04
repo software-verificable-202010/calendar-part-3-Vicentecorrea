@@ -50,6 +50,7 @@ namespace CalendarApp
             for (int dayColumn = Constants.DefaultInitialIndex; dayColumn < calendarGridView.Columns.Count; dayColumn++)
             {
                 calendarGridView.Columns[dayColumn].HeaderText = weekDays[dayColumn].ToString();
+                calendarGridView.Columns[dayColumn].HeaderCell.Style.BackColor = Color.White;
             }
             monthLabel.Text = selectedDate.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
             daysInSelectedMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
@@ -160,26 +161,68 @@ namespace CalendarApp
         private void ShowWeek()
         {
             calendarGridView.Rows.Clear();
+            AddHoursColumn();
+            UpdateBasicWeekInformation();
+            AddHourlyRows();
+        }
+
+        private void AddHoursColumn()
+        {
             if (calendarGridView.Columns.Count == Constants.DaysInWeek)
             {
                 DataGridViewTextBoxColumn columnOfHours = new DataGridViewTextBoxColumn();
+                //columnOfHours.HeaderText = Constants.HoursColumnHeader;
                 calendarGridView.Columns.Insert(Constants.DefaultInitialIndex, columnOfHours);
             }
-            UpdateColumnsHeaders();
         }
 
-        private void UpdateColumnsHeaders()
+        private void UpdateBasicWeekInformation()
         {
             DateTime iteratorDayOfWeek = selectedDate;
             while (iteratorDayOfWeek.DayOfWeek != DayOfWeek.Monday)
             {
                 iteratorDayOfWeek = iteratorDayOfWeek.AddDays(Constants.PreviousTimeInterval);
             }
+            DateTime firstDateOfWeek = iteratorDayOfWeek;
             for (int dayColumn = Constants.GapBetweenHoursColumnAndMondayColumn; dayColumn < calendarGridView.Columns.Count; dayColumn++)
             {
-                calendarGridView.Columns[dayColumn].HeaderText = weekDays[dayColumn - Constants.GapBetweenHoursColumnAndMondayColumn].ToString() + Constants.Space + iteratorDayOfWeek.Day.ToString();
+                calendarGridView.Columns[dayColumn].HeaderText = iteratorDayOfWeek.DayOfWeek.ToString() + Constants.Space + iteratorDayOfWeek.Day.ToString();
+                if (iteratorDayOfWeek == DateTime.Today)
+                {
+                    calendarGridView.EnableHeadersVisualStyles = true;
+                    calendarGridView.Columns[dayColumn].HeaderCell.Style.BackColor = Color.LightCoral;
+                    calendarGridView.EnableHeadersVisualStyles = false;
+                }
+                else
+                {
+                    calendarGridView.Columns[dayColumn].HeaderCell.Style.BackColor = Color.White;
+                }
                 iteratorDayOfWeek = iteratorDayOfWeek.AddDays(Constants.NextTimeInterval);
             }
+            DateTime lastDateOfWeek = iteratorDayOfWeek;
+            UpdateMonthLabel(firstDateOfWeek, lastDateOfWeek);
+        }
+
+        private void UpdateMonthLabel(DateTime firstDateOfWeek, DateTime lastDateOfWeek)
+        {
+            if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year != lastDateOfWeek.Year)
+            {
+                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
+                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            }
+            else if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year == lastDateOfWeek.Year)
+            {
+                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
+                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            }
+            else if (firstDateOfWeek.Month == lastDateOfWeek.Month)
+            {
+                monthLabel.Text = lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            }
+        }
+
+        private void AddHourlyRows()
+        {
             for (int hour = Constants.DefaultInitialIndex; hour < Constants.HoursInDay; hour++)
             {
                 calendarGridView.Rows.Add(GetHourlyRow(hour));
