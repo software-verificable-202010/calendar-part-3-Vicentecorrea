@@ -29,5 +29,30 @@ namespace CalendarApp
             sqlCommand.ExecuteNonQuery();
             connection.Close();
         }
+
+        public static List<Event> GetEventsInMonth(DateTime date)
+        {
+            SqlConnection connection = new SqlConnection(GetConnectionValue(Constants.DatabaseName));
+            connection.Open();
+            string query = "select * from Event where EndDate >= @FirstDayOfMonth and StartDate < @FirstDayOfNextMonth";
+            SqlCommand sqlCommand = new SqlCommand(query, connection);
+            DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, Constants.DefaultFirstDay);
+            DateTime firstDayOfNextMonth = firstDayOfMonth.AddMonths(Constants.NextTimeInterval);
+            sqlCommand.Parameters.AddWithValue("@FirstDayOfMonth", firstDayOfMonth);
+            sqlCommand.Parameters.AddWithValue("@FirstDayOfNextMonth", firstDayOfNextMonth);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            List<Event> eventsInMonth = new List<Event>();
+            while (sqlDataReader.Read())
+            {
+                string title = sqlDataReader.GetValue(1).ToString();
+                string description = sqlDataReader.GetValue(2).ToString();
+                DateTime startDate = (DateTime)sqlDataReader.GetValue(3);
+                DateTime endDate = (DateTime)sqlDataReader.GetValue(4);
+                Event eventInMonth = new Event(title, description, startDate, endDate);
+                eventsInMonth.Add(eventInMonth);
+            }
+            connection.Close();
+            return eventsInMonth;
+        }
     }
 }

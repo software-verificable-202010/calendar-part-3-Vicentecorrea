@@ -45,10 +45,10 @@ namespace CalendarApp.Views
 
         private DateTime GetDateWithSelectedTime(DateTime selectedDate, int selectedTime)
         {
-            DateTime dateWithSelectedTime = selectedDate.AddHours(selectedDate.Hour * Constants.HourSubtractionFactor);
-            dateWithSelectedTime = selectedDate.AddMinutes(selectedDate.Minute * Constants.HourSubtractionFactor);
-            dateWithSelectedTime = selectedDate.AddSeconds(selectedDate.Second * Constants.HourSubtractionFactor);
-            dateWithSelectedTime = selectedDate.AddHours(selectedTime);
+            DateTime temporaryDate = selectedDate.AddHours(selectedDate.Hour * Constants.HourSubtractionFactor);
+            temporaryDate = temporaryDate.AddMinutes(selectedDate.Minute * Constants.HourSubtractionFactor);
+            temporaryDate = temporaryDate.AddSeconds(selectedDate.Second * Constants.HourSubtractionFactor);
+            DateTime dateWithSelectedTime = temporaryDate.AddHours(selectedTime);
             return dateWithSelectedTime;
         }
     }

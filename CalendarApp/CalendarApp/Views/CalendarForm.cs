@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Data.SqlClient;
 using CalendarApp.Models;
 using CalendarApp.Views;
+using CalendarApp.Controllers;
 
 namespace CalendarApp
 {
@@ -23,10 +24,12 @@ namespace CalendarApp
         int iteratorDay;
         private readonly DayOfWeek[] weekDays = {DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday,
                                                  DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday};
+        List<Event> eventsInMonth = new List<Event>();
         public CalendarForm()
         {
             InitializeComponent();
             selectedDate = DateTime.Today;
+            eventsInMonth = EventController.GetEventsInMonth(selectedDate);
             ShowCalendar();
         }
 
@@ -64,7 +67,9 @@ namespace CalendarApp
             for (int week = Constants.DefaultInitialIndex; week < weeksInSelectedMonth; week++)
             {
                 calendarGridView.Rows.Add(GetWeekRow(week.Equals(Constants.DefaultInitialIndex)));
+                calendarGridView.Rows[week].Height = 50;
             }
+            
         }
         private string[] GetWeekRow(bool isFirstWeek)
         {
@@ -77,7 +82,20 @@ namespace CalendarApp
                 }
                 else
                 {
-                    weekRow.Add(iteratorDay.ToString());
+                    DateTime day = new DateTime(selectedDate.Year, selectedDate.Month, iteratorDay);
+                    IEnumerable<string> eventNamesObtained = from eventInMonth in eventsInMonth
+                                                             where EventController.IsEventOnThisDay(eventInMonth, day) == true
+                                                             select eventInMonth.Title;
+                    List<string> eventTitles = new List<string>(eventNamesObtained);
+                    string cellText = iteratorDay.ToString();
+                    if (eventTitles.Count > 0)
+                    {
+                        foreach (string title in eventTitles)
+                        {
+                            cellText += Environment.NewLine + title;
+                        }
+                    }
+                    weekRow.Add(cellText);
                     iteratorDay++;
                 }
             }
