@@ -18,6 +18,6 @@ C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\
 C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.csproj.CoreCompileInputs.cache
 C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.exe
 C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.pdb
-C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.CreateEventForm.resources
-C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.EventsInTimePeriodForm.resources
-C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.EventInformationForm.resources
+C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.CreateappointmentForm.resources
+C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.appointmentInformationForm.resources
+C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-2-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.AppointmentsInDayForm.resources

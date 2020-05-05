@@ -16,44 +16,44 @@ namespace CalendarApp
             return  ConfigurationManager.ConnectionStrings[databaseName].ConnectionString;
         }
 
-        public static void SaveEvent(Event newEvent)
+        public static void SaveAppointment(Appointment appointment)
         {
             SqlConnection connection = new SqlConnection(GetConnectionValue(Constants.DatabaseName));
             connection.Open();
-            string query = "insert into Event (Title, Description, StartDate, EndDate) values (@Title, @Description, @StartDate, @EndDate)";
+            string query = "insert into Appointment (Title, Description, StartDate, EndDate) values (@Title, @Description, @StartDate, @EndDate)";
             SqlCommand sqlCommand = new SqlCommand(query, connection);
-            sqlCommand.Parameters.AddWithValue("@Title", newEvent.Title);
-            sqlCommand.Parameters.AddWithValue("@Description", newEvent.Description);
-            sqlCommand.Parameters.AddWithValue("@StartDate", newEvent.StartDate);
-            sqlCommand.Parameters.AddWithValue("@EndDate", newEvent.EndDate);
+            sqlCommand.Parameters.AddWithValue("@Title", appointment.Title);
+            sqlCommand.Parameters.AddWithValue("@Description", appointment.Description);
+            sqlCommand.Parameters.AddWithValue("@StartDate", appointment.StartDate);
+            sqlCommand.Parameters.AddWithValue("@EndDate", appointment.EndDate);
             sqlCommand.ExecuteNonQuery();
             connection.Close();
         }
 
-        public static List<Event> GetEventsInMonth(DateTime date)
+        public static List<Appointment> GetAppointmentsInMonth(DateTime date)
         {
             SqlConnection connection = new SqlConnection(GetConnectionValue(Constants.DatabaseName));
             connection.Open();
-            string query = "select * from Event where EndDate >= @FirstDayOfMonth and StartDate < @FirstDayOfNextMonth";
+            string query = "select * from appointment where EndDate >= @FirstDayOfMonth and StartDate < @FirstDayOfNextMonth";
             SqlCommand sqlCommand = new SqlCommand(query, connection);
             DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, Constants.DefaultFirstDay);
             DateTime firstDayOfNextMonth = firstDayOfMonth.AddMonths(Constants.NextTimeInterval);
             sqlCommand.Parameters.AddWithValue("@FirstDayOfMonth", firstDayOfMonth);
             sqlCommand.Parameters.AddWithValue("@FirstDayOfNextMonth", firstDayOfNextMonth);
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-            List<Event> eventsInMonth = new List<Event>();
+            List<Appointment> appointmentsInMonth = new List<Appointment>();
             while (sqlDataReader.Read())
             {
                 string title = sqlDataReader.GetValue(1).ToString();
                 string description = sqlDataReader.GetValue(2).ToString();
                 DateTime startDate = (DateTime)sqlDataReader.GetValue(3);
                 DateTime endDate = (DateTime)sqlDataReader.GetValue(4);
-                Event eventInMonth = new Event(title, description, startDate, endDate);
-                //eventInMonth.Id = (int)sqlDataReader.GetValue(0);
-                eventsInMonth.Add(eventInMonth);
+                Appointment appointment = new Appointment(title, description, startDate, endDate);
+                //appointmentInMonth.Id = (int)sqlDataReader.GetValue(0);
+                appointmentsInMonth.Add(appointment);
             }
             connection.Close();
-            return eventsInMonth;
+            return appointmentsInMonth;
         }
     }
 }

@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Views\CalendarForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,26 +56,26 @@
       <DependentUpon>CalendarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
-    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\CreateEventForm.cs">
+    <Compile Include="Views\CreateAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\CreateEventForm.Designer.cs">
-      <DependentUpon>CreateEventForm.cs</DependentUpon>
+    <Compile Include="Views\CreateAppointmentForm.Designer.cs">
+      <DependentUpon>CreateAppointmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\EventInformationForm.cs">
+    <Compile Include="Views\AppointmentInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\EventInformationForm.Designer.cs">
-      <DependentUpon>EventInformationForm.cs</DependentUpon>
+    <Compile Include="Views\AppointmentInformationForm.Designer.cs">
+      <DependentUpon>AppointmentInformationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\EventsInTimePeriodForm.cs">
+    <Compile Include="Views\AppointmentsInDayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\EventsInTimePeriodForm.Designer.cs">
-      <DependentUpon>EventsInTimePeriodForm.cs</DependentUpon>
+    <Compile Include="Views\AppointmentsInDayForm.Designer.cs">
+      <DependentUpon>AppointmentsInDayForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Views\CalendarForm.resx">
       <DependentUpon>CalendarForm.cs</DependentUpon>
@@ -89,14 +89,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\CreateEventForm.resx">
-      <DependentUpon>CreateEventForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\CreateAppointmentForm.resx">
+      <DependentUpon>CreateAppointmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\EventInformationForm.resx">
-      <DependentUpon>EventInformationForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AppointmentInformationForm.resx">
+      <DependentUpon>AppointmentInformationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\EventsInTimePeriodForm.resx">
-      <DependentUpon>EventsInTimePeriodForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AppointmentsInDayForm.resx">
+      <DependentUpon>AppointmentsInDayForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

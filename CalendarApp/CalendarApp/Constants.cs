@@ -21,6 +21,7 @@ namespace CalendarApp
         public const string MonthFormat = "MMMM";
         public const string EnglishLanguageCode = "en-EN";
         public const string DatabaseName = "CalendarDatabase";
+        public const int HeaderRowIndex = -1;
         public const int HourSubtractionFactor = -1;
         public const string MonthOption = "Month";
         public const string WeekOption = "Week";
@@ -31,8 +32,10 @@ namespace CalendarApp
         //public const string HoursColumnHeader = "Hours";
         public const string HyphenWithSpaces = " - ";
         public const int CellHeightInMonthView = 50;
-        public const bool TheEventCouldBeCreated = true;
+        public const bool TheAppointmentCouldBeCreated = true;
         public const int OneItemInList = 1;
         public const int ZeroItemsInList = 0;
+        public const string FormatDateInAppointmentInformation = "dddd, dd MMMM yyyy, HH:mm";
+        public const string DayAndMonthFormat = "dd MMMM";
     }
 }

@@ -36,7 +36,7 @@
             this.nextTimePeriodButton = new System.Windows.Forms.Button();
             this.todayButton = new System.Windows.Forms.Button();
             this.monthLabel = new System.Windows.Forms.Label();
-            this.goToCreateEventFormButton = new System.Windows.Forms.Button();
+            this.goToCreateAppointmentFormButton = new System.Windows.Forms.Button();
             this.calendarDisplayMenuListBox = new System.Windows.Forms.ListBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.MondayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,15 +115,15 @@
             this.monthLabel.TabIndex = 5;
             this.monthLabel.Text = "dateLabel";
             // 
-            // goToCreateEventFormButton
+            // goToCreateAppointmentFormButton
             // 
-            this.goToCreateEventFormButton.Location = new System.Drawing.Point(597, 40);
-            this.goToCreateEventFormButton.Name = "goToCreateEventFormButton";
-            this.goToCreateEventFormButton.Size = new System.Drawing.Size(75, 23);
-            this.goToCreateEventFormButton.TabIndex = 6;
-            this.goToCreateEventFormButton.Text = "create event";
-            this.goToCreateEventFormButton.UseVisualStyleBackColor = true;
-            this.goToCreateEventFormButton.Click += new System.EventHandler(this.GoToCreateEventFormButton_Click);
+            this.goToCreateAppointmentFormButton.Location = new System.Drawing.Point(597, 40);
+            this.goToCreateAppointmentFormButton.Name = "goToCreateAppointmentFormButton";
+            this.goToCreateAppointmentFormButton.Size = new System.Drawing.Size(110, 23);
+            this.goToCreateAppointmentFormButton.TabIndex = 6;
+            this.goToCreateAppointmentFormButton.Text = "create appointment";
+            this.goToCreateAppointmentFormButton.UseVisualStyleBackColor = true;
+            this.goToCreateAppointmentFormButton.Click += new System.EventHandler(this.GoToCreateAppointmentFormButton_Click);
             // 
             // calendarDisplayMenuListBox
             // 
@@ -131,42 +131,53 @@
             this.calendarDisplayMenuListBox.Items.AddRange(new object[] {
             "Month",
             "Week"});
-            this.calendarDisplayMenuListBox.SetSelected(0, true);
             this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(778, 40);
             this.calendarDisplayMenuListBox.Name = "calendarDisplayMenuListBox";
             this.calendarDisplayMenuListBox.Size = new System.Drawing.Size(120, 30);
             this.calendarDisplayMenuListBox.TabIndex = 7;
             this.calendarDisplayMenuListBox.SelectedIndexChanged += new System.EventHandler(this.CalendarDisplayMenuListBox_SelectedIndexChanged);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Location = new System.Drawing.Point(0, 0);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(100, 23);
+            this.linkLabel1.TabIndex = 0;
+            // 
             // MondayColumn
             // 
             this.MondayColumn.HeaderText = "Monday";
             this.MondayColumn.Name = "MondayColumn";
             this.MondayColumn.ReadOnly = true;
+            this.MondayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // TuesdayColumn
             // 
             this.TuesdayColumn.HeaderText = "Tuesday";
             this.TuesdayColumn.Name = "TuesdayColumn";
             this.TuesdayColumn.ReadOnly = true;
+            this.TuesdayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // WednesdayColumn
             // 
             this.WednesdayColumn.HeaderText = "Wednesday";
             this.WednesdayColumn.Name = "WednesdayColumn";
             this.WednesdayColumn.ReadOnly = true;
+            this.WednesdayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ThursdayColumn
             // 
             this.ThursdayColumn.HeaderText = "Thursday";
             this.ThursdayColumn.Name = "ThursdayColumn";
             this.ThursdayColumn.ReadOnly = true;
+            this.ThursdayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FridayColumn
             // 
             this.FridayColumn.HeaderText = "Friday";
             this.FridayColumn.Name = "FridayColumn";
             this.FridayColumn.ReadOnly = true;
+            this.FridayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // SaturdayColumn
             // 
@@ -175,6 +186,7 @@
             this.SaturdayColumn.HeaderText = "Saturday";
             this.SaturdayColumn.Name = "SaturdayColumn";
             this.SaturdayColumn.ReadOnly = true;
+            this.SaturdayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // SundayColumn
             // 
@@ -183,6 +195,7 @@
             this.SundayColumn.HeaderText = "Sunday";
             this.SundayColumn.Name = "SundayColumn";
             this.SundayColumn.ReadOnly = true;
+            this.SundayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // CalendarForm
             // 
@@ -191,7 +204,7 @@
             this.ClientSize = new System.Drawing.Size(940, 549);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.calendarDisplayMenuListBox);
-            this.Controls.Add(this.goToCreateEventFormButton);
+            this.Controls.Add(this.goToCreateAppointmentFormButton);
             this.Controls.Add(this.monthLabel);
             this.Controls.Add(this.todayButton);
             this.Controls.Add(this.nextTimePeriodButton);
@@ -212,7 +225,7 @@
         private System.Windows.Forms.Button nextTimePeriodButton;
         private System.Windows.Forms.Button todayButton;
         private System.Windows.Forms.Label monthLabel;
-        private System.Windows.Forms.Button goToCreateEventFormButton;
+        private System.Windows.Forms.Button goToCreateAppointmentFormButton;
         private System.Windows.Forms.ListBox calendarDisplayMenuListBox;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn MondayColumn;

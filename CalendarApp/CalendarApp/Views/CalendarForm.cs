@@ -25,7 +25,7 @@ namespace CalendarApp
         int iteratorDay;
         private readonly DayOfWeek[] weekDays = {DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday,
                                                  DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday};
-        List<Event> eventsInMonth = new List<Event>();
+        List<Appointment> appointmentsInMonth = new List<Appointment>();
         #endregion
 
         #region Methods
@@ -33,12 +33,13 @@ namespace CalendarApp
         {
             InitializeComponent();
             selectedDate = DateTime.Today;
-            eventsInMonth = EventController.GetEventsInMonth(selectedDate);
+            calendarDisplayMenuListBox.SelectedItem = Constants.MonthOption;
             ShowCalendar();
         }
 
         private void ShowCalendar()
         {
+            appointmentsInMonth = AppointmentController.GetAppointmentsInMonth(selectedDate);
             calendarGridView.Rows.Clear();
             UpdateBasicCalendarInformation();
             MakeCalendarTable();
@@ -87,15 +88,21 @@ namespace CalendarApp
                 else
                 {
                     DateTime day = new DateTime(selectedDate.Year, selectedDate.Month, iteratorDay);
-                    List<Event> eventsInThisDay = EventController.GetEventsInThisTimePeriod(eventsInMonth, day, calendarDisplayMenuListBox.SelectedItem.ToString());
+                    List<Appointment> appointmentsInThisDay = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, day, calendarDisplayMenuListBox.SelectedItem.ToString());
                     
                     string cellText = iteratorDay.ToString();
-                    foreach (Event eventInThisDay in eventsInThisDay)
+                    foreach (Appointment appointment in appointmentsInThisDay)
                     {
-                        cellText += Environment.NewLine + eventInThisDay.StartDate.Hour.ToString() + Constants.ZerosOfHour + eventInThisDay.Title;
+                        cellText += Environment.NewLine;
+                        if (appointment.StartDate.Date == day.Date)
+                        {
+                            cellText += appointment.StartDate.Hour.ToString() + Constants.ZerosOfHour;
+                        }
+                        cellText += appointment.Title;
+                        
                     }
                     cell.Value = cellText;
-                    cell.Tag = eventsInThisDay;
+                    cell.Tag = appointmentsInThisDay;
                     iteratorDay++;
                 }
                 row.Cells.Add(cell);
@@ -126,7 +133,7 @@ namespace CalendarApp
             return ((int)firstDateOfMonth.DayOfWeek) - Constants.GapBetweenIndexAndNumber;
         }
 
-        private void ShowSelectedDisplay()
+        public void ShowSelectedDisplay()
         {
             if (calendarDisplayMenuListBox.SelectedItem.ToString() == Constants.MonthOption)
             {
@@ -153,6 +160,7 @@ namespace CalendarApp
         private void ShowWeek()
         {
             calendarGridView.Rows.Clear();
+            appointmentsInMonth = AppointmentController.GetAppointmentsInMonth(selectedDate);
             AddHoursColumn();
             UpdateBasicWeekInformation();
             AddHourlyRows();
@@ -163,6 +171,7 @@ namespace CalendarApp
             if (calendarGridView.Columns.Count == Constants.DaysInWeek)
             {
                 DataGridViewTextBoxColumn columnOfHours = new DataGridViewTextBoxColumn();
+                columnOfHours.SortMode = DataGridViewColumnSortMode.NotSortable;
                 calendarGridView.Columns.Insert(Constants.DefaultInitialIndex, columnOfHours);
             }
         }
@@ -241,24 +250,31 @@ namespace CalendarApp
                 }
                 else
                 {
-                    List<Event> eventsInThisDayAtThisHour = EventController.GetEventsInThisTimePeriod(eventsInMonth, iteratorDayInWeek, calendarDisplayMenuListBox.SelectedItem.ToString());
+                    List<Appointment> appointmentsInThisDayAtThisHour = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, iteratorDayInWeek, calendarDisplayMenuListBox.SelectedItem.ToString());
                     string cellText = Constants.Empty;
-                    foreach (Event eventAtThisTime in eventsInThisDayAtThisHour)
+                    foreach (Appointment appointmentAtThisTime in appointmentsInThisDayAtThisHour)
                     {
-                        cellText += eventAtThisTime.Title + Environment.NewLine;
+                        cellText += appointmentAtThisTime.Title + Environment.NewLine;
                     }
-                    if (eventsInThisDayAtThisHour.Count > Constants.ZeroItemsInList)
+                    if (appointmentsInThisDayAtThisHour.Count > Constants.ZeroItemsInList)
                     {
                         cell.Style.BackColor = Color.LightGreen;
                     }
                     cell.Value = cellText;
-                    cell.Tag = eventsInThisDayAtThisHour;
+                    cell.Tag = appointmentsInThisDayAtThisHour;
                     iteratorDayInWeek = iteratorDayInWeek.AddDays(Constants.NextTimeInterval);
                 }
                 row.Cells.Add(cell);
             }
             return row;
         }
+
+        private bool WasHeaderOrColumnOfHoursClicked(int rowIndex, int columnIndex)
+        {
+            bool selectedViewIsWeekly = calendarDisplayMenuListBox.SelectedItem.ToString() == Constants.WeekOption;
+            return rowIndex == Constants.HeaderRowIndex || (columnIndex == Constants.DefaultInitialIndex && selectedViewIsWeekly);
+        }
+
         #endregion
 
         #region ButtonActions
@@ -280,10 +296,10 @@ namespace CalendarApp
             ShowSelectedDisplay();
         }
 
-        private void GoToCreateEventFormButton_Click(object sender, EventArgs e)
+        private void GoToCreateAppointmentFormButton_Click(object sender, EventArgs e)
         {
-            CreateEventForm createEventForm = new CreateEventForm();
-            createEventForm.Show();
+            CreateAppointmentForm createAppointmentForm = new CreateAppointmentForm(this);
+            createAppointmentForm.Show();
         }
 
         private void CalendarDisplayMenuListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -293,18 +309,22 @@ namespace CalendarApp
 
         private void CalendarGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            List<Event> events = (List<Event>)calendarGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
-            if (events.Count > Constants.OneItemInList)
+            if (!WasHeaderOrColumnOfHoursClicked(e.RowIndex, e.ColumnIndex))
             {
-                EventsInTimePeriodForm eventsInTimePeriodForm = new EventsInTimePeriodForm(events);
-                eventsInTimePeriodForm.Show();
-            }
-            else
-            {
-                EventInformationForm eventInformationForm = new EventInformationForm(events[Constants.DefaultInitialIndex]);
-                eventInformationForm.Show();
-            }
-            
+                List<Appointment> appointments = (List<Appointment>)calendarGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+                if (appointments.Count > Constants.OneItemInList)
+                {
+                    int day = e.RowIndex * Constants.DaysInWeek + e.ColumnIndex + Constants.GapBetweenIndexAndNumber - daysBetweenMondayAndFirstDayOfSelectedMonth;
+                    DateTime clickedDay = new DateTime(selectedDate.Year, selectedDate.Month, day);
+                    AppointmentsInDayForm appointmentsInDayForm = new AppointmentsInDayForm(appointments, clickedDay);
+                    appointmentsInDayForm.Show();
+                }
+                else if (appointments.Count == Constants.OneItemInList)
+                {
+                    AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(appointments[Constants.DefaultInitialIndex]);
+                    appointmentInformationForm.Show();
+                }
+            } 
         }
         #endregion
     }

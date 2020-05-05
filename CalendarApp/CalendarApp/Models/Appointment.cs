@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalendarApp.Models
 {
-    public class Event
+    public class Appointment
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -14,7 +14,7 @@ namespace CalendarApp.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public Event(string title, string description, DateTime startDate, DateTime endDate)
+        public Appointment(string title, string description, DateTime startDate, DateTime endDate)
         {
             this.Title = title;
             this.Description = description;
