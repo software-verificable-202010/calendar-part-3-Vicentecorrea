@@ -49,6 +49,7 @@ namespace CalendarApp
                 DateTime startDate = (DateTime)sqlDataReader.GetValue(3);
                 DateTime endDate = (DateTime)sqlDataReader.GetValue(4);
                 Event eventInMonth = new Event(title, description, startDate, endDate);
+                //eventInMonth.Id = (int)sqlDataReader.GetValue(0);
                 eventsInMonth.Add(eventInMonth);
             }
             connection.Close();

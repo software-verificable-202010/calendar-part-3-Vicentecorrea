@@ -32,5 +32,7 @@ namespace CalendarApp
         public const string HyphenWithSpaces = " - ";
         public const int CellHeightInMonthView = 50;
         public const bool TheEventCouldBeCreated = true;
+        public const int OneItemInList = 1;
+        public const int ZeroItemsInList = 0;
     }
 }

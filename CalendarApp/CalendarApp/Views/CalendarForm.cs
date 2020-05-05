@@ -17,6 +17,7 @@ namespace CalendarApp
 {
     public partial class CalendarForm : Form
     {
+        #region Fields
         DateTime selectedDate;
         int daysInSelectedMonth;
         int daysBetweenMondayAndFirstDayOfSelectedMonth;
@@ -25,6 +26,9 @@ namespace CalendarApp
         private readonly DayOfWeek[] weekDays = {DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday,
                                                  DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday};
         List<Event> eventsInMonth = new List<Event>();
+        #endregion
+
+        #region Methods
         public CalendarForm()
         {
             InitializeComponent();
@@ -72,14 +76,12 @@ namespace CalendarApp
         }
         private DataGridViewRow GetWeekRow(bool isFirstWeek)
         {
-            //List<string> weekRow = new List<string>();
             DataGridViewRow row = new DataGridViewRow();
             for (int weekDay = Constants.DefaultInitialIndex; weekDay < Constants.DaysInWeek; weekDay++)
             {
                 DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
                 if ((weekDay < daysBetweenMondayAndFirstDayOfSelectedMonth && isFirstWeek) || (iteratorDay > daysInSelectedMonth))
                 {
-                    //weekRow.Add(Constants.Empty);
                     cell.Value = Constants.Empty;
                 }
                 else
@@ -92,7 +94,6 @@ namespace CalendarApp
                     {
                         cellText += Environment.NewLine + eventInThisDay.StartDate.Hour.ToString() + Constants.ZerosOfHour + eventInThisDay.Title;
                     }
-                    //weekRow.Add(cellText);
                     cell.Value = cellText;
                     cell.Tag = eventsInThisDay;
                     iteratorDay++;
@@ -100,7 +101,6 @@ namespace CalendarApp
                 row.Cells.Add(cell);
             }
             row.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
-            //return weekRow.ToArray();
             row.Height = Constants.CellHeightInMonthView;
             return row;
         }
@@ -124,35 +124,6 @@ namespace CalendarApp
         {
             DateTime firstDateOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, Constants.DefaultFirstDay);
             return ((int)firstDateOfMonth.DayOfWeek) - Constants.GapBetweenIndexAndNumber;
-        }
-
-        private void NextTimePeriodButton_Click(object sender, EventArgs e)
-        {
-            MoveToSelectedPeriod(Constants.NextTimeInterval);
-            ShowSelectedDisplay();
-        }
-
-        private void PreviousTimePeriodButton_Click(object sender, EventArgs e)
-        {
-            MoveToSelectedPeriod(Constants.PreviousTimeInterval);
-            ShowSelectedDisplay();
-        }
-
-        private void TodayButton_Click(object sender, EventArgs e)
-        {
-            selectedDate = DateTime.Today;
-            ShowSelectedDisplay();
-        }
-
-        private void GoToCreateEventFormButton_Click(object sender, EventArgs e)
-        {
-            CreateEventForm createEventForm = new CreateEventForm();
-            createEventForm.Show();
-        }
-
-        private void CalendarDisplayMenuListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ShowSelectedDisplay();
         }
 
         private void ShowSelectedDisplay()
@@ -192,7 +163,6 @@ namespace CalendarApp
             if (calendarGridView.Columns.Count == Constants.DaysInWeek)
             {
                 DataGridViewTextBoxColumn columnOfHours = new DataGridViewTextBoxColumn();
-                //columnOfHours.HeaderText = Constants.HoursColumnHeader;
                 calendarGridView.Columns.Insert(Constants.DefaultInitialIndex, columnOfHours);
             }
         }
@@ -217,7 +187,6 @@ namespace CalendarApp
                 iteratorDayOfWeek = iteratorDayOfWeek.AddDays(Constants.NextTimeInterval);
             }
             DateTime lastDateOfWeek = iteratorDayOfWeek;
-            //eventsInWeek = EventController.GetEventsInWeek(eventsInMonth, firstDateOfWeek, lastDateOfWeek);
             UpdateMonthLabel(firstDateOfWeek, lastDateOfWeek);
         }
 
@@ -259,7 +228,6 @@ namespace CalendarApp
         
         private DataGridViewRow GetHourlyRow(int hour)
         {
-            //List<string> hourlyRow = new List<string>();
             DateTime iteratorDayInWeek = GetMondayOfWeek(selectedDate);
             iteratorDayInWeek = iteratorDayInWeek.AddHours(iteratorDayInWeek.Hour * Constants.PreviousTimeInterval);
             iteratorDayInWeek = iteratorDayInWeek.AddHours(hour);
@@ -269,18 +237,19 @@ namespace CalendarApp
                 DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
                 if (column.Index == Constants.DefaultInitialIndex)
                 {
-                    //hourlyRow.Add(hour.ToString() + Constants.ZerosOfHour);
                     cell.Value = hour.ToString() + Constants.ZerosOfHour;
                 }
                 else
                 {
-                    //hourlyRow.Add(Constants.Empty);
-
                     List<Event> eventsInThisDayAtThisHour = EventController.GetEventsInThisTimePeriod(eventsInMonth, iteratorDayInWeek, calendarDisplayMenuListBox.SelectedItem.ToString());
                     string cellText = Constants.Empty;
                     foreach (Event eventAtThisTime in eventsInThisDayAtThisHour)
                     {
                         cellText += eventAtThisTime.Title + Environment.NewLine;
+                    }
+                    if (eventsInThisDayAtThisHour.Count > Constants.ZeroItemsInList)
+                    {
+                        cell.Style.BackColor = Color.LightGreen;
                     }
                     cell.Value = cellText;
                     cell.Tag = eventsInThisDayAtThisHour;
@@ -288,17 +257,55 @@ namespace CalendarApp
                 }
                 row.Cells.Add(cell);
             }
-            //return hourlyRow.ToArray();
             return row;
+        }
+        #endregion
+
+        #region ButtonActions
+        private void NextTimePeriodButton_Click(object sender, EventArgs e)
+        {
+            MoveToSelectedPeriod(Constants.NextTimeInterval);
+            ShowSelectedDisplay();
+        }
+
+        private void PreviousTimePeriodButton_Click(object sender, EventArgs e)
+        {
+            MoveToSelectedPeriod(Constants.PreviousTimeInterval);
+            ShowSelectedDisplay();
+        }
+
+        private void TodayButton_Click(object sender, EventArgs e)
+        {
+            selectedDate = DateTime.Today;
+            ShowSelectedDisplay();
+        }
+
+        private void GoToCreateEventFormButton_Click(object sender, EventArgs e)
+        {
+            CreateEventForm createEventForm = new CreateEventForm();
+            createEventForm.Show();
+        }
+
+        private void CalendarDisplayMenuListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowSelectedDisplay();
         }
 
         private void CalendarGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            List<Event> hola = (List<Event>)calendarGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
-            foreach (Event s in hola)
+            List<Event> events = (List<Event>)calendarGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+            if (events.Count > Constants.OneItemInList)
             {
-                MessageBox.Show(s.Description);
+                EventsInTimePeriodForm eventsInTimePeriodForm = new EventsInTimePeriodForm(events);
+                eventsInTimePeriodForm.Show();
             }
+            else
+            {
+                EventInformationForm eventInformationForm = new EventInformationForm(events[Constants.DefaultInitialIndex]);
+                eventInformationForm.Show();
+            }
+            
         }
+        #endregion
     }
 }
