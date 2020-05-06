@@ -37,7 +37,7 @@
             this.appointmentsListBox.FormattingEnabled = true;
             this.appointmentsListBox.Location = new System.Drawing.Point(12, 50);
             this.appointmentsListBox.Name = "appointmentsListBox";
-            this.appointmentsListBox.Size = new System.Drawing.Size(273, 238);
+            this.appointmentsListBox.Size = new System.Drawing.Size(329, 238);
             this.appointmentsListBox.TabIndex = 0;
             this.appointmentsListBox.SelectedIndexChanged += new System.EventHandler(this.appointmentslistBox_SelectedIndexChanged);
             // 
@@ -47,15 +47,15 @@
             this.appointmentSelectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.appointmentSelectionLabel.Location = new System.Drawing.Point(9, 19);
             this.appointmentSelectionLabel.Name = "appointmentSelectionLabel";
-            this.appointmentSelectionLabel.Size = new System.Drawing.Size(276, 18);
+            this.appointmentSelectionLabel.Size = new System.Drawing.Size(332, 18);
             this.appointmentSelectionLabel.TabIndex = 1;
-            this.appointmentSelectionLabel.Text = "Select one of the events of December 20";
+            this.appointmentSelectionLabel.Text = "Select one of the events of December 20 at 23:00";
             // 
             // AppointmentsInDayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 301);
+            this.ClientSize = new System.Drawing.Size(353, 301);
             this.Controls.Add(this.appointmentSelectionLabel);
             this.Controls.Add(this.appointmentsListBox);
             this.Name = "AppointmentsInDayForm";

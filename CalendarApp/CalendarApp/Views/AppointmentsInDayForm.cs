@@ -15,11 +15,19 @@ namespace CalendarApp.Views
     public partial class AppointmentsInDayForm : Form
     {
         List<Appointment> appointments = new List<Appointment>();
-        public AppointmentsInDayForm(List<Appointment> appointmentsInDay, DateTime day)
+        public AppointmentsInDayForm(List<Appointment> appointmentsInDay, DateTime dayAndTime)
         {
             InitializeComponent();
             appointments = appointmentsInDay;
-            appointmentSelectionLabel.Text = "Select one of the events of " + day.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            if (dayAndTime == dayAndTime.Date)
+            {
+                appointmentSelectionLabel.Text = "Select one of the events of " + dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            }
+            else
+            {
+                appointmentSelectionLabel.Text = "Select one of the events of " + dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + " at " + dayAndTime.Hour + Constants.ZerosOfHour;
+            }
+            
             AddappointmentsToListBox();
             //appointmentsListBox.SelectedIndex = Constants.DefaultInitialIndex;
         }

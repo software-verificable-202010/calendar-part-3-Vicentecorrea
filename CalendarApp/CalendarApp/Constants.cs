@@ -36,6 +36,6 @@ namespace CalendarApp
         public const int OneItemInList = 1;
         public const int ZeroItemsInList = 0;
         public const string FormatDateInAppointmentInformation = "dddd, dd MMMM yyyy, HH:mm";
-        public const string DayAndMonthFormat = "dd MMMM";
+        public const string DayAndMonthFormat = "d MMMM";
     }
 }
