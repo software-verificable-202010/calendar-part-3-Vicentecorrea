@@ -41,7 +41,7 @@
             // appointmentNameLabel
             // 
             this.appointmentNameLabel.AutoSize = true;
-            this.appointmentNameLabel.Location = new System.Drawing.Point(263, 91);
+            this.appointmentNameLabel.Location = new System.Drawing.Point(37, 22);
             this.appointmentNameLabel.Name = "appointmentNameLabel";
             this.appointmentNameLabel.Size = new System.Drawing.Size(35, 13);
             this.appointmentNameLabel.TabIndex = 0;
@@ -50,7 +50,7 @@
             // appointmentNameValue
             // 
             this.appointmentNameValue.AutoSize = true;
-            this.appointmentNameValue.Location = new System.Drawing.Point(306, 91);
+            this.appointmentNameValue.Location = new System.Drawing.Point(78, 22);
             this.appointmentNameValue.Name = "appointmentNameValue";
             this.appointmentNameValue.Size = new System.Drawing.Size(35, 13);
             this.appointmentNameValue.TabIndex = 1;
@@ -59,7 +59,7 @@
             // appointmentDescriptionLabel
             // 
             this.appointmentDescriptionLabel.AutoSize = true;
-            this.appointmentDescriptionLabel.Location = new System.Drawing.Point(238, 117);
+            this.appointmentDescriptionLabel.Location = new System.Drawing.Point(12, 44);
             this.appointmentDescriptionLabel.Name = "appointmentDescriptionLabel";
             this.appointmentDescriptionLabel.Size = new System.Drawing.Size(60, 13);
             this.appointmentDescriptionLabel.TabIndex = 2;
@@ -67,17 +67,18 @@
             // 
             // appointmentDescriptionRichTextBox
             // 
-            this.appointmentDescriptionRichTextBox.Location = new System.Drawing.Point(309, 117);
+            this.appointmentDescriptionRichTextBox.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.appointmentDescriptionRichTextBox.Location = new System.Drawing.Point(78, 44);
             this.appointmentDescriptionRichTextBox.Name = "appointmentDescriptionRichTextBox";
             this.appointmentDescriptionRichTextBox.ReadOnly = true;
-            this.appointmentDescriptionRichTextBox.Size = new System.Drawing.Size(229, 96);
+            this.appointmentDescriptionRichTextBox.Size = new System.Drawing.Size(213, 96);
             this.appointmentDescriptionRichTextBox.TabIndex = 3;
             this.appointmentDescriptionRichTextBox.Text = "";
             // 
             // appointmentStartDateLabel
             // 
             this.appointmentStartDateLabel.AutoSize = true;
-            this.appointmentStartDateLabel.Location = new System.Drawing.Point(245, 228);
+            this.appointmentStartDateLabel.Location = new System.Drawing.Point(19, 151);
             this.appointmentStartDateLabel.Name = "appointmentStartDateLabel";
             this.appointmentStartDateLabel.Size = new System.Drawing.Size(53, 13);
             this.appointmentStartDateLabel.TabIndex = 4;
@@ -86,7 +87,7 @@
             // appointmentStartDateValue
             // 
             this.appointmentStartDateValue.AutoSize = true;
-            this.appointmentStartDateValue.Location = new System.Drawing.Point(306, 228);
+            this.appointmentStartDateValue.Location = new System.Drawing.Point(78, 151);
             this.appointmentStartDateValue.Name = "appointmentStartDateValue";
             this.appointmentStartDateValue.Size = new System.Drawing.Size(35, 13);
             this.appointmentStartDateValue.TabIndex = 5;
@@ -95,7 +96,7 @@
             // appointmentEndDateLabel
             // 
             this.appointmentEndDateLabel.AutoSize = true;
-            this.appointmentEndDateLabel.Location = new System.Drawing.Point(248, 258);
+            this.appointmentEndDateLabel.Location = new System.Drawing.Point(22, 177);
             this.appointmentEndDateLabel.Name = "appointmentEndDateLabel";
             this.appointmentEndDateLabel.Size = new System.Drawing.Size(50, 13);
             this.appointmentEndDateLabel.TabIndex = 6;
@@ -104,7 +105,7 @@
             // appointmentEndDateValue
             // 
             this.appointmentEndDateValue.AutoSize = true;
-            this.appointmentEndDateValue.Location = new System.Drawing.Point(306, 258);
+            this.appointmentEndDateValue.Location = new System.Drawing.Point(78, 177);
             this.appointmentEndDateValue.Name = "appointmentEndDateValue";
             this.appointmentEndDateValue.Size = new System.Drawing.Size(35, 13);
             this.appointmentEndDateValue.TabIndex = 7;
@@ -114,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(321, 257);
             this.Controls.Add(this.appointmentEndDateValue);
             this.Controls.Add(this.appointmentEndDateLabel);
             this.Controls.Add(this.appointmentStartDateValue);

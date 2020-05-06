@@ -18,15 +18,15 @@ namespace CalendarApp
     public partial class CalendarForm : Form
     {
         #region Fields
-        DateTime selectedDate;
-        int daysInSelectedMonth;
-        int daysBetweenMondayAndFirstDayOfSelectedMonth;
-        int weeksInSelectedMonth;
-        int iteratorDay;
+        private DateTime selectedDate;
+        private int daysInSelectedMonth;
+        private int daysBetweenMondayAndFirstDayOfSelectedMonth;
+        private int weeksInSelectedMonth;
+        private int iteratorDay;
         private readonly DayOfWeek[] weekDays = {DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday,
                                                  DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday};
-        List<Appointment> appointmentsInMonth = new List<Appointment>();
-        DateTime iteratorDayInWeek;
+        private List<Appointment> appointmentsInMonth = new List<Appointment>();
+        private DateTime iteratorDayInWeek;
         #endregion
 
         #region Methods
@@ -107,22 +107,26 @@ namespace CalendarApp
             DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
             DateTime day = new DateTime(selectedDate.Year, selectedDate.Month, iteratorDay);
             List<Appointment> appointmentsInThisDay = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, day, calendarDisplayMenuListBox.SelectedItem.ToString());
+            string cellText = GetCellTextInWeekView(appointmentsInThisDay, day);
+            cell.Value = cellText;
+            cell.Tag = appointmentsInThisDay;
+            iteratorDay++;
+            return cell;
+        }
 
+        private string GetCellTextInWeekView(List<Appointment> appointmentsInThisDay, DateTime day)
+        {
             string cellText = iteratorDay.ToString();
             foreach (Appointment appointment in appointmentsInThisDay)
             {
                 cellText += Environment.NewLine;
                 if (appointment.StartDate.Date == day.Date)
                 {
-                    cellText += appointment.StartDate.Hour.ToString() + Constants.ZerosOfHour;
+                    cellText += appointment.StartDate.ToString(Constants.HourAndMinuteFormat);
                 }
                 cellText += appointment.Title;
-
             }
-            cell.Value = cellText;
-            cell.Tag = appointmentsInThisDay;
-            iteratorDay++;
-            return cell;
+            return cellText;
         }
 
         private void PaintToday()
@@ -198,9 +202,9 @@ namespace CalendarApp
                 calendarGridView.Columns[dayColumn].HeaderText = iteratorDayOfWeek.DayOfWeek.ToString() + Constants.Space + iteratorDayOfWeek.Day.ToString();
                 if (iteratorDayOfWeek == DateTime.Today)
                 {
-                    calendarGridView.EnableHeadersVisualStyles = true;
+                    calendarGridView.EnableHeadersVisualStyles = Constants.EnabledVisualStyles;
                     calendarGridView.Columns[dayColumn].HeaderCell.Style.BackColor = Color.LightCoral;
-                    calendarGridView.EnableHeadersVisualStyles = false;
+                    calendarGridView.EnableHeadersVisualStyles = !Constants.EnabledVisualStyles;
                 }
                 else
                 {
@@ -256,9 +260,9 @@ namespace CalendarApp
             DataGridViewRow row = new DataGridViewRow();
             foreach (DataGridViewColumn column in calendarGridView.Columns)
             {
-                
                 row.Cells.Add(GetHourCellInWeekView(hour, column));
             }
+            row.Height = Constants.CellHeightInWeekView;
             return row;
         }
 
@@ -272,11 +276,7 @@ namespace CalendarApp
             else
             {
                 List<Appointment> appointmentsInThisDayAtThisHour = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, iteratorDayInWeek, calendarDisplayMenuListBox.SelectedItem.ToString());
-                string cellText = Constants.Empty;
-                foreach (Appointment appointmentAtThisTime in appointmentsInThisDayAtThisHour)
-                {
-                    cellText += appointmentAtThisTime.Title + Environment.NewLine;
-                }
+                string cellText = GetCellTextInWeekView(appointmentsInThisDayAtThisHour, hour);
                 if (appointmentsInThisDayAtThisHour.Count > Constants.ZeroItemsInList)
                 {
                     cell.Style.BackColor = Color.LightGreen;
@@ -286,6 +286,20 @@ namespace CalendarApp
                 iteratorDayInWeek = iteratorDayInWeek.AddDays(Constants.NextTimeInterval);
             }
             return cell;
+        }
+
+        private string GetCellTextInWeekView(List<Appointment> appointmentsInThisDayAtThisHour, int hour)
+        {
+            string cellText = Constants.Empty;
+            foreach (Appointment appointment in appointmentsInThisDayAtThisHour)
+            {
+                if (appointment.StartDate.Hour == hour && appointment.StartDate.Day == iteratorDayInWeek.Day)
+                {
+                    cellText += appointment.StartDate.ToString(Constants.HourAndMinuteFormat);
+                }
+                cellText += appointment.Title + Environment.NewLine;
+            }
+            return cellText;
         }
 
         private bool WasHeaderOrColumnOfHoursClicked(int rowIndex, int columnIndex)

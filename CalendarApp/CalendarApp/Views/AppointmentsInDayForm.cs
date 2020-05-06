@@ -21,11 +21,11 @@ namespace CalendarApp.Views
             appointments = appointmentsInDay;
             if (dayAndTime == dayAndTime.Date)
             {
-                appointmentSelectionLabel.Text = "Select one of the events of " + dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode));
+                dateAndTimeLabel.Text = dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode));
             }
             else
             {
-                appointmentSelectionLabel.Text = "Select one of the events of " + dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + " at " + dayAndTime.Hour + Constants.ZerosOfHour;
+                dateAndTimeLabel.Text = dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + " at " + dayAndTime.Hour + Constants.ZerosOfHour;
             }
             
             AddappointmentsToListBox();

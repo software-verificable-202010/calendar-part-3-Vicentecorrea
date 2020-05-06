@@ -65,7 +65,7 @@ namespace CalendarApp.Controllers
             else
             {
                 DateTime previousHour = appointment.StartDate.AddHours(Constants.PreviousTimeInterval);
-                IsAppointmentInThisTimePeriod = previousHour <= timePeriod && timePeriod <= appointment.EndDate;
+                IsAppointmentInThisTimePeriod = previousHour < timePeriod && timePeriod < appointment.EndDate;
             }
             return IsAppointmentInThisTimePeriod;
         }

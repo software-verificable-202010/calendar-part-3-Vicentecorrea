@@ -32,13 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.calendarGridView = new System.Windows.Forms.DataGridView();
-            this.previousTimePeriodButton = new System.Windows.Forms.Button();
-            this.nextTimePeriodButton = new System.Windows.Forms.Button();
-            this.todayButton = new System.Windows.Forms.Button();
-            this.monthLabel = new System.Windows.Forms.Label();
-            this.goToCreateAppointmentFormButton = new System.Windows.Forms.Button();
-            this.calendarDisplayMenuListBox = new System.Windows.Forms.ListBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.MondayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TuesdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WednesdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +39,13 @@
             this.FridayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaturdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SundayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.previousTimePeriodButton = new System.Windows.Forms.Button();
+            this.nextTimePeriodButton = new System.Windows.Forms.Button();
+            this.todayButton = new System.Windows.Forms.Button();
+            this.monthLabel = new System.Windows.Forms.Label();
+            this.goToCreateAppointmentFormButton = new System.Windows.Forms.Button();
+            this.calendarDisplayMenuListBox = new System.Windows.Forms.ListBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.calendarGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,75 +74,6 @@
             this.calendarGridView.Size = new System.Drawing.Size(886, 384);
             this.calendarGridView.TabIndex = 1;
             this.calendarGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CalendarGridView_CellContentClick);
-            // 
-            // previousTimePeriodButton
-            // 
-            this.previousTimePeriodButton.Location = new System.Drawing.Point(12, 40);
-            this.previousTimePeriodButton.Name = "previousTimePeriodButton";
-            this.previousTimePeriodButton.Size = new System.Drawing.Size(101, 23);
-            this.previousTimePeriodButton.TabIndex = 2;
-            this.previousTimePeriodButton.Text = "previous";
-            this.previousTimePeriodButton.UseVisualStyleBackColor = true;
-            this.previousTimePeriodButton.Click += new System.EventHandler(this.PreviousTimePeriodButton_Click);
-            // 
-            // nextTimePeriodButton
-            // 
-            this.nextTimePeriodButton.Location = new System.Drawing.Point(119, 40);
-            this.nextTimePeriodButton.Name = "nextTimePeriodButton";
-            this.nextTimePeriodButton.Size = new System.Drawing.Size(101, 23);
-            this.nextTimePeriodButton.TabIndex = 3;
-            this.nextTimePeriodButton.Text = "next";
-            this.nextTimePeriodButton.UseVisualStyleBackColor = true;
-            this.nextTimePeriodButton.Click += new System.EventHandler(this.NextTimePeriodButton_Click);
-            // 
-            // todayButton
-            // 
-            this.todayButton.Location = new System.Drawing.Point(286, 40);
-            this.todayButton.Name = "todayButton";
-            this.todayButton.Size = new System.Drawing.Size(75, 23);
-            this.todayButton.TabIndex = 4;
-            this.todayButton.Text = "today";
-            this.todayButton.UseVisualStyleBackColor = true;
-            this.todayButton.Click += new System.EventHandler(this.TodayButton_Click);
-            // 
-            // monthLabel
-            // 
-            this.monthLabel.AutoSize = true;
-            this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLabel.Location = new System.Drawing.Point(389, 9);
-            this.monthLabel.Name = "monthLabel";
-            this.monthLabel.Size = new System.Drawing.Size(107, 25);
-            this.monthLabel.TabIndex = 5;
-            this.monthLabel.Text = "dateLabel";
-            // 
-            // goToCreateAppointmentFormButton
-            // 
-            this.goToCreateAppointmentFormButton.Location = new System.Drawing.Point(597, 40);
-            this.goToCreateAppointmentFormButton.Name = "goToCreateAppointmentFormButton";
-            this.goToCreateAppointmentFormButton.Size = new System.Drawing.Size(110, 23);
-            this.goToCreateAppointmentFormButton.TabIndex = 6;
-            this.goToCreateAppointmentFormButton.Text = "create appointment";
-            this.goToCreateAppointmentFormButton.UseVisualStyleBackColor = true;
-            this.goToCreateAppointmentFormButton.Click += new System.EventHandler(this.GoToCreateAppointmentFormButton_Click);
-            // 
-            // calendarDisplayMenuListBox
-            // 
-            this.calendarDisplayMenuListBox.FormattingEnabled = true;
-            this.calendarDisplayMenuListBox.Items.AddRange(new object[] {
-            "Month",
-            "Week"});
-            this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(778, 40);
-            this.calendarDisplayMenuListBox.Name = "calendarDisplayMenuListBox";
-            this.calendarDisplayMenuListBox.Size = new System.Drawing.Size(120, 30);
-            this.calendarDisplayMenuListBox.TabIndex = 7;
-            this.calendarDisplayMenuListBox.SelectedIndexChanged += new System.EventHandler(this.CalendarDisplayMenuListBox_SelectedIndexChanged);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Location = new System.Drawing.Point(0, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(100, 23);
-            this.linkLabel1.TabIndex = 0;
             // 
             // MondayColumn
             // 
@@ -196,6 +127,75 @@
             this.SundayColumn.Name = "SundayColumn";
             this.SundayColumn.ReadOnly = true;
             this.SundayColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // previousTimePeriodButton
+            // 
+            this.previousTimePeriodButton.Location = new System.Drawing.Point(12, 40);
+            this.previousTimePeriodButton.Name = "previousTimePeriodButton";
+            this.previousTimePeriodButton.Size = new System.Drawing.Size(101, 23);
+            this.previousTimePeriodButton.TabIndex = 2;
+            this.previousTimePeriodButton.Text = "Previous";
+            this.previousTimePeriodButton.UseVisualStyleBackColor = true;
+            this.previousTimePeriodButton.Click += new System.EventHandler(this.PreviousTimePeriodButton_Click);
+            // 
+            // nextTimePeriodButton
+            // 
+            this.nextTimePeriodButton.Location = new System.Drawing.Point(119, 40);
+            this.nextTimePeriodButton.Name = "nextTimePeriodButton";
+            this.nextTimePeriodButton.Size = new System.Drawing.Size(101, 23);
+            this.nextTimePeriodButton.TabIndex = 3;
+            this.nextTimePeriodButton.Text = "Next";
+            this.nextTimePeriodButton.UseVisualStyleBackColor = true;
+            this.nextTimePeriodButton.Click += new System.EventHandler(this.NextTimePeriodButton_Click);
+            // 
+            // todayButton
+            // 
+            this.todayButton.Location = new System.Drawing.Point(286, 40);
+            this.todayButton.Name = "todayButton";
+            this.todayButton.Size = new System.Drawing.Size(75, 23);
+            this.todayButton.TabIndex = 4;
+            this.todayButton.Text = "Today";
+            this.todayButton.UseVisualStyleBackColor = true;
+            this.todayButton.Click += new System.EventHandler(this.TodayButton_Click);
+            // 
+            // monthLabel
+            // 
+            this.monthLabel.AutoSize = true;
+            this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthLabel.Location = new System.Drawing.Point(389, 9);
+            this.monthLabel.Name = "monthLabel";
+            this.monthLabel.Size = new System.Drawing.Size(107, 25);
+            this.monthLabel.TabIndex = 5;
+            this.monthLabel.Text = "dateLabel";
+            // 
+            // goToCreateAppointmentFormButton
+            // 
+            this.goToCreateAppointmentFormButton.Location = new System.Drawing.Point(597, 40);
+            this.goToCreateAppointmentFormButton.Name = "goToCreateAppointmentFormButton";
+            this.goToCreateAppointmentFormButton.Size = new System.Drawing.Size(110, 23);
+            this.goToCreateAppointmentFormButton.TabIndex = 6;
+            this.goToCreateAppointmentFormButton.Text = "Create appointment";
+            this.goToCreateAppointmentFormButton.UseVisualStyleBackColor = true;
+            this.goToCreateAppointmentFormButton.Click += new System.EventHandler(this.GoToCreateAppointmentFormButton_Click);
+            // 
+            // calendarDisplayMenuListBox
+            // 
+            this.calendarDisplayMenuListBox.FormattingEnabled = true;
+            this.calendarDisplayMenuListBox.Items.AddRange(new object[] {
+            "Month",
+            "Week"});
+            this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(778, 40);
+            this.calendarDisplayMenuListBox.Name = "calendarDisplayMenuListBox";
+            this.calendarDisplayMenuListBox.Size = new System.Drawing.Size(120, 30);
+            this.calendarDisplayMenuListBox.TabIndex = 7;
+            this.calendarDisplayMenuListBox.SelectedIndexChanged += new System.EventHandler(this.CalendarDisplayMenuListBox_SelectedIndexChanged);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Location = new System.Drawing.Point(0, 0);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(100, 23);
+            this.linkLabel1.TabIndex = 0;
             // 
             // CalendarForm
             // 

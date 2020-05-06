@@ -14,7 +14,7 @@ namespace CalendarApp.Views
 {
     public partial class CreateAppointmentForm : Form
     {
-        CalendarForm calendar;
+        private CalendarForm calendar;
         public CreateAppointmentForm(CalendarForm calendarForm)
         {
             InitializeComponent();
@@ -27,11 +27,7 @@ namespace CalendarApp.Views
             string appointmentDescription = appointmentDescriptionRichTextBox.Text;
             DateTime appointmentStartDate = appointmentStartDateDateTimePicker.Value;
             DateTime appointmentEndDate = appointmentEndDateDateTimePicker.Value;
-            int appointmentStartTime = (int)appointmentStartTimeNumericUpDown.Value;
-            int appointmentEndTime = (int)appointmentEndTimeNumericUpDown.Value;
-            DateTime definitiveappointmentStartDate = GetDateWithSelectedTime(appointmentStartDate, appointmentStartTime);
-            DateTime definitiveappointmentEndDate = GetDateWithSelectedTime(appointmentEndDate, appointmentEndTime);
-            Appointment newappointment = new Appointment(appointmentName, appointmentDescription, definitiveappointmentStartDate, definitiveappointmentEndDate);
+            Appointment newappointment = new Appointment(appointmentName, appointmentDescription, appointmentStartDate, appointmentEndDate);
             bool couldTheappointmentBeCreated;
             string feedbackText;
             (couldTheappointmentBeCreated, feedbackText) = AppointmentController.CreateAppointment(newappointment);
@@ -42,15 +38,6 @@ namespace CalendarApp.Views
                 calendar.ShowSelectedDisplay();
             }
             MessageBox.Show(feedbackText);
-        }
-
-        private DateTime GetDateWithSelectedTime(DateTime selectedDate, int selectedTime)
-        {
-            DateTime temporaryDate = selectedDate.AddHours(selectedDate.Hour * Constants.HourSubtractionFactor);
-            temporaryDate = temporaryDate.AddMinutes(selectedDate.Minute * Constants.HourSubtractionFactor);
-            temporaryDate = temporaryDate.AddSeconds(selectedDate.Second * Constants.HourSubtractionFactor);
-            DateTime dateWithSelectedTime = temporaryDate.AddHours(selectedTime);
-            return dateWithSelectedTime;
         }
     }
 }
