@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CalendarApp.Models
 {
     public class Appointment
     {
-        private int id { get; set; }
-        private string title { get; set; }
-        private string description { get; set; }
-        private DateTime startDate { get; set; }
-        private DateTime endDate { get; set; }
+        private string title;
+        private string description;
+        private DateTime startDate;
+        private DateTime endDate;
 
         public Appointment(string title, string description, DateTime startDate, DateTime endDate)
         {
@@ -22,6 +17,7 @@ namespace CalendarApp.Models
             EndDate = endDate;
         }
 
+        /// <summary>Public property for accessing the title field.</summary>
         public string Title
         {
             get
@@ -34,6 +30,7 @@ namespace CalendarApp.Models
             }
         }
 
+        /// <summary>Public property for accessing the description field.</summary>
         public string Description
         {
             get
@@ -46,6 +43,7 @@ namespace CalendarApp.Models
             }
         }
 
+        /// <summary>Public property for accessing the startDate field.</summary>
         public DateTime StartDate
         {
             get
@@ -58,6 +56,7 @@ namespace CalendarApp.Models
             }
         }
 
+        /// <summary>Public property for accessing the endDate field.</summary>
         public DateTime EndDate
         {
             get

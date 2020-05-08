@@ -52,9 +52,9 @@
             this.appointmentNameValue.AutoSize = true;
             this.appointmentNameValue.Location = new System.Drawing.Point(78, 22);
             this.appointmentNameValue.Name = "appointmentNameValue";
-            this.appointmentNameValue.Size = new System.Drawing.Size(35, 13);
+            this.appointmentNameValue.Size = new System.Drawing.Size(93, 13);
             this.appointmentNameValue.TabIndex = 1;
-            this.appointmentNameValue.Text = "label1";
+            this.appointmentNameValue.Text = "appointmentName";
             // 
             // appointmentDescriptionLabel
             // 
@@ -89,9 +89,9 @@
             this.appointmentStartDateValue.AutoSize = true;
             this.appointmentStartDateValue.Location = new System.Drawing.Point(78, 151);
             this.appointmentStartDateValue.Name = "appointmentStartDateValue";
-            this.appointmentStartDateValue.Size = new System.Drawing.Size(35, 13);
+            this.appointmentStartDateValue.Size = new System.Drawing.Size(110, 13);
             this.appointmentStartDateValue.TabIndex = 5;
-            this.appointmentStartDateValue.Text = "label1";
+            this.appointmentStartDateValue.Text = "appointmentStartDate";
             // 
             // appointmentEndDateLabel
             // 
@@ -107,9 +107,9 @@
             this.appointmentEndDateValue.AutoSize = true;
             this.appointmentEndDateValue.Location = new System.Drawing.Point(78, 177);
             this.appointmentEndDateValue.Name = "appointmentEndDateValue";
-            this.appointmentEndDateValue.Size = new System.Drawing.Size(35, 13);
+            this.appointmentEndDateValue.Size = new System.Drawing.Size(107, 13);
             this.appointmentEndDateValue.TabIndex = 7;
-            this.appointmentEndDateValue.Text = "label1";
+            this.appointmentEndDateValue.Text = "appointmentEndDate";
             // 
             // AppointmentInformationForm
             // 

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using CalendarApp.Models;
 using System.Data.SqlClient;
@@ -13,7 +10,7 @@ namespace CalendarApp
     {
         public static string GetConnectionValue(string databaseName)
         {
-            return  ConfigurationManager.ConnectionStrings[databaseName].ConnectionString;
+            return ConfigurationManager.ConnectionStrings[databaseName].ConnectionString;
         }
 
         public static void SaveAppointment(Appointment appointment)
@@ -42,15 +39,20 @@ namespace CalendarApp
             sqlCommand.Parameters.AddWithValue("@FirstDayOfNextMonth", firstDayOfNextMonth);
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             List<Appointment> appointmentsInMonth = new List<Appointment>();
+            int sqlDataReaderValue = Constants.DefaultInitialIndex;
             while (sqlDataReader.Read())
             {
-                string title = sqlDataReader.GetValue(1).ToString();
-                string description = sqlDataReader.GetValue(2).ToString();
-                DateTime startDate = (DateTime)sqlDataReader.GetValue(3);
-                DateTime endDate = (DateTime)sqlDataReader.GetValue(4);
+                sqlDataReaderValue++;
+                string title = sqlDataReader.GetValue(sqlDataReaderValue).ToString();
+                sqlDataReaderValue++;
+                string description = sqlDataReader.GetValue(sqlDataReaderValue).ToString();
+                sqlDataReaderValue++;
+                DateTime startDate = (DateTime)sqlDataReader.GetValue(sqlDataReaderValue);
+                sqlDataReaderValue++;
+                DateTime endDate = (DateTime)sqlDataReader.GetValue(sqlDataReaderValue);
                 Appointment appointment = new Appointment(title, description, startDate, endDate);
-                //appointmentInMonth.Id = (int)sqlDataReader.GetValue(0);
                 appointmentsInMonth.Add(appointment);
+                sqlDataReaderValue = Constants.DefaultInitialIndex;
             }
             connection.Close();
             return appointmentsInMonth;

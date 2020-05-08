@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Globalization;
 using System.Windows.Forms;
 using CalendarApp.Models;
@@ -14,7 +8,7 @@ namespace CalendarApp.Views
 {
     public partial class AppointmentsInDayForm : Form
     {
-        List<Appointment> appointments = new List<Appointment>();
+        private readonly List<Appointment> appointments = new List<Appointment>();
         public AppointmentsInDayForm(List<Appointment> appointmentsInDay, DateTime dayAndTime)
         {
             InitializeComponent();
@@ -28,11 +22,10 @@ namespace CalendarApp.Views
                 dateAndTimeLabel.Text = dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + " at " + dayAndTime.Hour + Constants.ZerosOfHour;
             }
             
-            AddappointmentsToListBox();
-            //appointmentsListBox.SelectedIndex = Constants.DefaultInitialIndex;
+            AddAppointmentsToListBox();
         }
 
-        private void AddappointmentsToListBox()
+        private void AddAppointmentsToListBox()
         {
             foreach (Appointment appointment in appointments)
             {
@@ -43,7 +36,7 @@ namespace CalendarApp.Views
             }
         }
 
-        private void appointmentslistBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void AppointmentslistBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Constants.DefaultInitialIndex <= appointmentsListBox.SelectedIndex && appointmentsListBox.SelectedIndex < appointments.Count)
             {

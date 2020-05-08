@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CalendarApp
+﻿namespace CalendarApp
 {
     public static class Constants
     {
@@ -26,7 +20,7 @@ namespace CalendarApp
         public const string Space = " ";
         public const string MonthAndYearFormat = "MMMM   yyyy";
         public const string MonthFormat = "MMMM";
-        public const string EnglishLanguageCode = "en-EN";
+        public const string EnglishLanguageCode = "en-GB";
         public const string DatabaseName = "CalendarDatabase";
         public const string MonthOption = "Month";
         public const string WeekOption = "Week";

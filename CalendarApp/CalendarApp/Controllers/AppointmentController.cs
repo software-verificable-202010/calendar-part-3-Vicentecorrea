@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CalendarApp.Controllers
 {
@@ -12,25 +10,25 @@ namespace CalendarApp.Controllers
         public static (bool, string) CreateAppointment(Appointment appointment)
         {
             bool couldTheAppointmentBeCreated = Constants.TheAppointmentCouldBeCreated;
-            bool hasTitle = !String.IsNullOrWhiteSpace(appointment.Title);
-            bool hasDescription = !String.IsNullOrWhiteSpace(appointment.Description);
-            bool endDateIsLaterThanStartDate = appointment.StartDate < appointment.EndDate;
+            bool appointmentHasTitle = !String.IsNullOrWhiteSpace(appointment.Title);
+            bool appointmentHasDescription = !String.IsNullOrWhiteSpace(appointment.Description);
+            bool appointmentEndDateIsLaterThanStartDate = appointment.StartDate < appointment.EndDate;
             string feedbackText = "Successfully created appointment";
-            if (!hasTitle || !hasDescription || !endDateIsLaterThanStartDate)
+            if (!appointmentHasTitle || !appointmentHasDescription || !appointmentEndDateIsLaterThanStartDate)
             {
                 feedbackText = "Error" + Environment.NewLine;
                 couldTheAppointmentBeCreated = !Constants.TheAppointmentCouldBeCreated;
-                if (!hasTitle)
+                if (!appointmentHasTitle)
                 {
                     feedbackText += "The appointment must have a title" + Environment.NewLine;
 
                 }
-                if (!hasDescription)
+                if (!appointmentHasDescription)
                 {
                     feedbackText += "The appointment must have a description" + Environment.NewLine;
 
                 }
-                if (!endDateIsLaterThanStartDate)
+                if (!appointmentEndDateIsLaterThanStartDate)
                 {
                     feedbackText += "The end date must be later than the start date";
                 }

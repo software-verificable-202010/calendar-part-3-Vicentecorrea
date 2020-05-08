@@ -40,7 +40,7 @@
             this.appointmentsListBox.Name = "appointmentsListBox";
             this.appointmentsListBox.Size = new System.Drawing.Size(246, 199);
             this.appointmentsListBox.TabIndex = 0;
-            this.appointmentsListBox.SelectedIndexChanged += new System.EventHandler(this.appointmentslistBox_SelectedIndexChanged);
+            this.appointmentsListBox.SelectedIndexChanged += new System.EventHandler(this.AppointmentslistBox_SelectedIndexChanged);
             // 
             // appointmentSelectionLabel
             // 

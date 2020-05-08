@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CalendarApp.Models;
 using CalendarApp.Controllers;
@@ -14,14 +7,14 @@ namespace CalendarApp.Views
 {
     public partial class CreateAppointmentForm : Form
     {
-        private CalendarForm calendar;
+        private readonly CalendarForm calendar;
         public CreateAppointmentForm(CalendarForm calendarForm)
         {
             InitializeComponent();
             calendar = calendarForm;
         }
 
-        private void CreateappointmentButton_Click(object sender, EventArgs e)
+        private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
             string appointmentName = appointmentNameTextBox.Text;
             string appointmentDescription = appointmentDescriptionRichTextBox.Text;
