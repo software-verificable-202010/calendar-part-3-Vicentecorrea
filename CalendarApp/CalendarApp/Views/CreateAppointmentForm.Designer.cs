@@ -133,6 +133,7 @@
             this.Controls.Add(this.appointmentNameLabel);
             this.Controls.Add(this.appointmentNameTextBox);
             this.Name = "CreateAppointmentForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create appointment";
             this.ResumeLayout(false);
             this.PerformLayout();

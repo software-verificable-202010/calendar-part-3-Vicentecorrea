@@ -211,6 +211,7 @@
             this.Controls.Add(this.previousTimePeriodButton);
             this.Controls.Add(this.calendarGridView);
             this.Name = "CalendarForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calendar";
             ((System.ComponentModel.ISupportInitialize)(this.calendarGridView)).EndInit();
             this.ResumeLayout(false);

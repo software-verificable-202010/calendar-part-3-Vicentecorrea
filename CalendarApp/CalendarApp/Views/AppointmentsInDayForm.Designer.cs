@@ -71,6 +71,7 @@
             this.Controls.Add(this.appointmentSelectionLabel);
             this.Controls.Add(this.appointmentsListBox);
             this.Name = "AppointmentsInDayForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointments";
             this.ResumeLayout(false);
             this.PerformLayout();

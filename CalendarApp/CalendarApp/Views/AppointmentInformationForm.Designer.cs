@@ -125,6 +125,7 @@
             this.Controls.Add(this.appointmentNameValue);
             this.Controls.Add(this.appointmentNameLabel);
             this.Name = "AppointmentInformationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment Information";
             this.ResumeLayout(false);
             this.PerformLayout();
