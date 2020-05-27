@@ -19,7 +19,6 @@ namespace CalendarApp
         private int iteratorDayInMonth;
         private readonly DayOfWeek[] weekDays = {DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday,
                                                  DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday};
-        private List<Appointment> appointmentsInMonth = new List<Appointment>();
         private DateTime iteratorDateInWeek;
         #endregion
 
@@ -68,7 +67,6 @@ namespace CalendarApp
         private void ShowMonth()
         {
             calendarGridView.Rows.Clear();
-            AppointmentController.GetAppointmentsInMonth(selectedDate);
             UpdateBasicMonthInformation();
             MakeMonthTable();
             if (selectedDate == DateTime.Today)
@@ -132,7 +130,7 @@ namespace CalendarApp
         {
             DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
             DateTime day = new DateTime(selectedDate.Year, selectedDate.Month, iteratorDayInMonth);
-            List<Appointment> appointmentsInThisDay = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, day, calendarDisplayMenuListBox.SelectedItem.ToString());
+            List<Appointment> appointmentsInThisDay = AppointmentController.GetAppointmentsInThisDay(day);
             string cellText = GetCellTextInMonthView(appointmentsInThisDay, day);
             cell.Value = cellText;
             cell.Tag = appointmentsInThisDay;
@@ -192,7 +190,6 @@ namespace CalendarApp
         private void ShowWeek()
         {
             calendarGridView.Rows.Clear();
-            appointmentsInMonth = AppointmentController.GetAppointmentsInMonth(selectedDate);
             AddHoursColumn();
             UpdateBasicWeekInformation();
             MakeWeekTable();
@@ -290,7 +287,7 @@ namespace CalendarApp
             }
             else
             {
-                List<Appointment> appointmentsInThisDayAtThisHour = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, iteratorDateInWeek, calendarDisplayMenuListBox.SelectedItem.ToString());
+                List<Appointment> appointmentsInThisDayAtThisHour = AppointmentController.GetAppointmentsInThisDayAndTime(iteratorDateInWeek);
                 string cellText = GetCellTextInWeekView(appointmentsInThisDayAtThisHour, hour);
                 if (appointmentsInThisDayAtThisHour.Count > Constants.ZeroItemsInList)
                 {

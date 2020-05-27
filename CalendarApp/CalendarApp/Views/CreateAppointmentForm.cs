@@ -13,7 +13,6 @@ namespace CalendarApp.Views
             InitializeComponent();
             calendar = calendarForm;
         }
-
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
             string appointmentTitle = appointmentNameTextBox.Text;

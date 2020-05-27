@@ -46,42 +46,35 @@ namespace CalendarApp.Controllers
             stream.Close();
         }
 
-        public static List<Appointment> GetAppointmentsInMonth(DateTime date)
+        public static bool IsAppointmentInThisDay(Appointment appointment, DateTime day)
         {
-            DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, Constants.DefaultFirstDay);
-            DateTime firstDayOfNextMonth = firstDayOfMonth.AddMonths(Constants.NextTimeInterval);
+            bool IsAppointmentInThisDay = appointment.StartDate.Date <= day && day <= appointment.EndDate.Date;
+            return IsAppointmentInThisDay;
+        }
+
+        public static List<Appointment> GetAppointmentsInThisDay(DateTime day)
+        {
             IEnumerable<Appointment> appointments = from appointment in Appointments
-                                                    where appointment.EndDate >= firstDayOfMonth && appointment.StartDate < firstDayOfNextMonth
+                                                    where IsAppointmentInThisDay(appointment, day)
                                                     select appointment;
-            List<Appointment> appointmentsInMonth = new List<Appointment>(appointments);
-            return appointmentsInMonth;
+            List<Appointment> appointmentsInThisDay = new List<Appointment>(appointments);
+            return appointmentsInThisDay;
         }
 
-        public static bool IsAppointmentInThisTimePeriod(Appointment appointment, DateTime timePeriod, string selectedCalendarView)
+        public static bool IsAppointmentInThisDayAndTime(Appointment appointment, DateTime time)
         {
-            bool IsAppointmentInThisTimePeriod;
-            if (selectedCalendarView == Constants.MonthOption)
-            {
-                IsAppointmentInThisTimePeriod = appointment.StartDate.Date <= timePeriod && timePeriod <= appointment.EndDate.Date;
-            }
-            else
-            {
-                DateTime previousHour = appointment.StartDate.AddHours(Constants.PreviousTimeInterval);
-                IsAppointmentInThisTimePeriod = previousHour < timePeriod && timePeriod < appointment.EndDate;
-            }
-            return IsAppointmentInThisTimePeriod;
+            DateTime previousHour = appointment.StartDate.AddHours(Constants.PreviousTimeInterval);
+            bool IsAppointmentInThisDay = previousHour < time && time< appointment.EndDate;
+            return IsAppointmentInThisDay;
         }
 
-        public static List<Appointment> GetAppointmentsInThisTimePeriod(List<Appointment> appointments, DateTime timePeriod, string selectedCalendarView)
+        public static List<Appointment> GetAppointmentsInThisDayAndTime(DateTime time)
         {
-            IEnumerable<Appointment> appointmentsObtained = from appointment in appointments
-                                                where IsAppointmentInThisTimePeriod(appointment, timePeriod, selectedCalendarView)
-                                                     orderby appointment.StartDate
-                                                     select appointment;
-            List<Appointment> appointmentsInTimePeriod = new List<Appointment>(appointmentsObtained);
-            return appointmentsInTimePeriod;
+            IEnumerable<Appointment> appointments = from appointment in Appointments
+                                                    where IsAppointmentInThisDayAndTime(appointment, time)
+                                                    select appointment;
+            List<Appointment> appointmentsInThisDayAndTime = new List<Appointment>(appointments);
+            return appointmentsInThisDayAndTime;
         }
-
-        //public static List<Appointment> GetAppointmentsInThisDay(Date)
     }
 }
