@@ -72,7 +72,6 @@ namespace CalendarApp.Controllers
             return IsAppointmentInThisTimePeriod;
         }
 
-
         public static List<Appointment> GetAppointmentsInThisTimePeriod(List<Appointment> appointments, DateTime timePeriod, string selectedCalendarView)
         {
             IEnumerable<Appointment> appointmentsObtained = from appointment in appointments
@@ -82,5 +81,7 @@ namespace CalendarApp.Controllers
             List<Appointment> appointmentsInTimePeriod = new List<Appointment>(appointmentsObtained);
             return appointmentsInTimePeriod;
         }
+
+        //public static List<Appointment> GetAppointmentsInThisDay(Date)
     }
 }

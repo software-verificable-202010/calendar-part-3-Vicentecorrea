@@ -16,11 +16,11 @@ namespace CalendarApp
         private int daysInSelectedMonth;
         private int daysBetweenMondayAndFirstDayOfSelectedMonth;
         private int weeksInSelectedMonth;
-        private int iteratorDay;
+        private int iteratorDayInMonth;
         private readonly DayOfWeek[] weekDays = {DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday,
                                                  DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday};
         private List<Appointment> appointmentsInMonth = new List<Appointment>();
-        private DateTime iteratorDayInWeek;
+        private DateTime iteratorDateInWeek;
         #endregion
 
         #region General Methods
@@ -57,45 +57,10 @@ namespace CalendarApp
             }
         }
 
-        private void UpdateCalendarLabel(DateTime firstDateOfWeek, DateTime lastDateOfWeek)
-        {
-            if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year != lastDateOfWeek.Year)
-            {
-                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
-                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
-            }
-            else if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year == lastDateOfWeek.Year)
-            {
-                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
-                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
-            }
-            else if (firstDateOfWeek.Month == lastDateOfWeek.Month)
-            {
-                monthLabel.Text = lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
-            }
-        }
-
         private bool WasHeaderOrColumnOfHoursClicked(int rowIndex, int columnIndex)
         {
             bool selectedViewIsWeekly = calendarDisplayMenuListBox.SelectedItem.ToString() == Constants.WeekOption;
             return rowIndex == Constants.HeaderRowIndex || (columnIndex == Constants.DefaultInitialIndex && selectedViewIsWeekly);
-        }
-
-        private DateTime GetClickedDateAndTime(DataGridViewCellEventArgs e)
-        {
-            DateTime clickedDateAndTime;
-            if (calendarDisplayMenuListBox.SelectedItem.ToString() == Constants.MonthOption)
-            {
-                int day = e.RowIndex * Constants.DaysInWeek + e.ColumnIndex + Constants.GapBetweenIndexAndNumber - daysBetweenMondayAndFirstDayOfSelectedMonth;
-                clickedDateAndTime = new DateTime(selectedDate.Year, selectedDate.Month, day);
-            }
-            else
-            {
-                clickedDateAndTime = GetMondayOfWeek(selectedDate);
-                clickedDateAndTime = clickedDateAndTime.AddDays(e.ColumnIndex - Constants.GapBetweenHoursColumnAndMondayColumn);
-                clickedDateAndTime = clickedDateAndTime.AddHours(e.RowIndex);
-            }
-            return clickedDateAndTime;
         }
         #endregion
 
@@ -103,7 +68,7 @@ namespace CalendarApp
         private void ShowMonth()
         {
             calendarGridView.Rows.Clear();
-            appointmentsInMonth = AppointmentController.GetAppointmentsInMonth(selectedDate);
+            AppointmentController.GetAppointmentsInMonth(selectedDate);
             UpdateBasicMonthInformation();
             MakeMonthTable();
             if (selectedDate == DateTime.Today)
@@ -127,7 +92,7 @@ namespace CalendarApp
             daysInSelectedMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
             daysBetweenMondayAndFirstDayOfSelectedMonth = GetDaysBetweenMondayAndFirstDayOfSelectedMonth();
             weeksInSelectedMonth = (int)Math.Ceiling((daysInSelectedMonth + daysBetweenMondayAndFirstDayOfSelectedMonth) / (float)Constants.DaysInWeek);
-            iteratorDay = Constants.DefaultFirstDay;
+            iteratorDayInMonth = Constants.DefaultFirstDay;
         }
 
         private void MakeMonthTable()
@@ -136,7 +101,6 @@ namespace CalendarApp
             {
                 calendarGridView.Rows.Add(GetWeekRow(week.Equals(Constants.DefaultInitialIndex)));
             }
-            
         }
         private DataGridViewRow GetWeekRow(bool isFirstWeek)
         {
@@ -153,7 +117,7 @@ namespace CalendarApp
         private DataGridViewTextBoxCell GetDayCellInMonthView(int weekDay, bool isFirstWeek)
         {
             DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
-            if ((weekDay < daysBetweenMondayAndFirstDayOfSelectedMonth && isFirstWeek) || (iteratorDay > daysInSelectedMonth))
+            if ((weekDay < daysBetweenMondayAndFirstDayOfSelectedMonth && isFirstWeek) || (iteratorDayInMonth > daysInSelectedMonth))
             {
                 cell.Value = Constants.Empty;
             }
@@ -167,12 +131,12 @@ namespace CalendarApp
         private DataGridViewTextBoxCell GetDayCellNonEmptyInMonthView()
         {
             DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
-            DateTime day = new DateTime(selectedDate.Year, selectedDate.Month, iteratorDay);
+            DateTime day = new DateTime(selectedDate.Year, selectedDate.Month, iteratorDayInMonth);
             List<Appointment> appointmentsInThisDay = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, day, calendarDisplayMenuListBox.SelectedItem.ToString());
-            string cellText = GetCellTextInWeekView(appointmentsInThisDay, day);
+            string cellText = GetCellTextInMonthView(appointmentsInThisDay, day);
             cell.Value = cellText;
             cell.Tag = appointmentsInThisDay;
-            iteratorDay++;
+            iteratorDayInMonth++;
             return cell;
         }
 
@@ -195,14 +159,21 @@ namespace CalendarApp
         private int GetDaysBetweenMondayAndFirstDayOfSelectedMonth()
         {
             DateTime firstDateOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, Constants.DefaultFirstDay);
-            return ((int)firstDateOfMonth.DayOfWeek) - Constants.GapBetweenIndexAndNumber;
+            int firstDayOfMonth;
+            if (firstDateOfMonth.DayOfWeek.Equals(DayOfWeek.Sunday))
+            {
+                firstDayOfMonth = Constants.DaysInWeek;
+            }
+            else
+            {
+                firstDayOfMonth = (int)firstDateOfMonth.DayOfWeek;
+            }
+            return firstDayOfMonth - Constants.GapBetweenIndexAndNumber;
         }
-        #endregion
 
-        #region Weekly View Mothods
-        private string GetCellTextInWeekView(List<Appointment> appointmentsInThisDay, DateTime day)
+        private string GetCellTextInMonthView(List<Appointment> appointmentsInThisDay, DateTime day)
         {
-            string cellText = iteratorDay.ToString();
+            string cellText = iteratorDayInMonth.ToString();
             foreach (Appointment appointment in appointmentsInThisDay)
             {
                 cellText += Environment.NewLine;
@@ -214,6 +185,9 @@ namespace CalendarApp
             }
             return cellText;
         }
+        #endregion
+
+        #region Weekly View Methods
 
         private void ShowWeek()
         {
@@ -222,6 +196,24 @@ namespace CalendarApp
             AddHoursColumn();
             UpdateBasicWeekInformation();
             MakeWeekTable();
+        }
+
+        private void UpdateCalendarLabelInWeekView(DateTime firstDateOfWeek, DateTime lastDateOfWeek)
+        {
+            if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year != lastDateOfWeek.Year)
+            {
+                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
+                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            }
+            else if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year == lastDateOfWeek.Year)
+            {
+                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
+                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            }
+            else if (firstDateOfWeek.Month == lastDateOfWeek.Month)
+            {
+                monthLabel.Text = lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+            }
         }
 
         private void AddHoursColumn()
@@ -254,7 +246,7 @@ namespace CalendarApp
                 iteratorDayOfWeek = iteratorDayOfWeek.AddDays(Constants.NextTimeInterval);
             }
             DateTime lastDateOfWeek = iteratorDayOfWeek;
-            UpdateCalendarLabel(firstDateOfWeek, lastDateOfWeek);
+            UpdateCalendarLabelInWeekView(firstDateOfWeek, lastDateOfWeek);
         }
 
         private DateTime GetMondayOfWeek(DateTime date)
@@ -277,9 +269,9 @@ namespace CalendarApp
         
         private DataGridViewRow GetHourlyRow(int hour)
         {
-            iteratorDayInWeek = GetMondayOfWeek(selectedDate);
-            iteratorDayInWeek = iteratorDayInWeek.AddHours(iteratorDayInWeek.Hour * Constants.PreviousTimeInterval);
-            iteratorDayInWeek = iteratorDayInWeek.AddHours(hour);
+            iteratorDateInWeek = GetMondayOfWeek(selectedDate);
+            iteratorDateInWeek = iteratorDateInWeek.AddHours(iteratorDateInWeek.Hour * Constants.PreviousTimeInterval);
+            iteratorDateInWeek = iteratorDateInWeek.AddHours(hour);
             DataGridViewRow row = new DataGridViewRow();
             foreach (DataGridViewColumn column in calendarGridView.Columns)
             {
@@ -298,7 +290,7 @@ namespace CalendarApp
             }
             else
             {
-                List<Appointment> appointmentsInThisDayAtThisHour = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, iteratorDayInWeek, calendarDisplayMenuListBox.SelectedItem.ToString());
+                List<Appointment> appointmentsInThisDayAtThisHour = AppointmentController.GetAppointmentsInThisTimePeriod(appointmentsInMonth, iteratorDateInWeek, calendarDisplayMenuListBox.SelectedItem.ToString());
                 string cellText = GetCellTextInWeekView(appointmentsInThisDayAtThisHour, hour);
                 if (appointmentsInThisDayAtThisHour.Count > Constants.ZeroItemsInList)
                 {
@@ -306,7 +298,7 @@ namespace CalendarApp
                 }
                 cell.Value = cellText;
                 cell.Tag = appointmentsInThisDayAtThisHour;
-                iteratorDayInWeek = iteratorDayInWeek.AddDays(Constants.NextTimeInterval);
+                iteratorDateInWeek = iteratorDateInWeek.AddDays(Constants.NextTimeInterval);
             }
             return cell;
         }
@@ -316,13 +308,30 @@ namespace CalendarApp
             string cellText = Constants.Empty;
             foreach (Appointment appointment in appointmentsInThisDayAtThisHour)
             {
-                if (appointment.StartDate.Hour == hour && appointment.StartDate.Day == iteratorDayInWeek.Day)
+                if (appointment.StartDate.Hour == hour && appointment.StartDate.Day == iteratorDateInWeek.Day)
                 {
                     cellText += appointment.StartDate.ToString(Constants.HourAndMinuteFormat);
                 }
                 cellText += appointment.Title + Environment.NewLine;
             }
             return cellText;
+        }
+
+        private DateTime GetClickedDateAndTime(DataGridViewCellEventArgs e)
+        {
+            DateTime clickedDateAndTime;
+            if (calendarDisplayMenuListBox.SelectedItem.ToString() == Constants.MonthOption)
+            {
+                int day = e.RowIndex * Constants.DaysInWeek + e.ColumnIndex + Constants.GapBetweenIndexAndNumber - daysBetweenMondayAndFirstDayOfSelectedMonth;
+                clickedDateAndTime = new DateTime(selectedDate.Year, selectedDate.Month, day);
+            }
+            else
+            {
+                clickedDateAndTime = GetMondayOfWeek(selectedDate);
+                clickedDateAndTime = clickedDateAndTime.AddDays(e.ColumnIndex - Constants.GapBetweenHoursColumnAndMondayColumn);
+                clickedDateAndTime = clickedDateAndTime.AddHours(e.RowIndex);
+            }
+            return clickedDateAndTime;
         }
         #endregion
 
