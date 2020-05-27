@@ -1,56 +1,60 @@
 ﻿using CalendarApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CalendarApp.Controllers
 {
-    public static class AppointmentController
+    public class AppointmentController
     {
-        public static (bool, string) CreateAppointment(Appointment appointment)
+        private static List<Appointment> appointments;
+
+        /// <summary>Public property for accessing the appointments.</summary>
+        public static List<Appointment> Appointments
         {
-            bool couldTheAppointmentBeCreated = Constants.TheAppointmentCouldBeCreated;
-            bool appointmentHasTitle = !String.IsNullOrWhiteSpace(appointment.Title);
-            bool appointmentHasDescription = !String.IsNullOrWhiteSpace(appointment.Description);
-            bool appointmentEndDateIsLaterThanStartDate = appointment.StartDate < appointment.EndDate;
-            string feedbackText = "Successfully created appointment";
-            if (!appointmentHasTitle || !appointmentHasDescription || !appointmentEndDateIsLaterThanStartDate)
+            get
             {
-                feedbackText = "Error" + Environment.NewLine;
-                couldTheAppointmentBeCreated = !Constants.TheAppointmentCouldBeCreated;
-                if (!appointmentHasTitle)
-                {
-                    feedbackText += "The appointment must have a title" + Environment.NewLine;
-
-                }
-                if (!appointmentHasDescription)
-                {
-                    feedbackText += "The appointment must have a description" + Environment.NewLine;
-
-                }
-                if (!appointmentEndDateIsLaterThanStartDate)
-                {
-                    feedbackText += "The end date must be later than the start date";
-                }
+                return appointments;
             }
-            else
+            set
             {
-                try
-                {
-                    DatabaseHelper.SaveAppointment(appointment);
-                }
-                catch
-                {
-                    couldTheAppointmentBeCreated = !Constants.TheAppointmentCouldBeCreated;
-                    feedbackText = "Error, the appointment could not be created";
-                }
+                appointments = value;
             }
-            return (couldTheAppointmentBeCreated, feedbackText);
+        }
+        
+        public static void SaveAppointment(Appointment appointment)
+        {
+            Appointments.Add(appointment);
+            SerializeAppointments();
+        }
+
+        private static void SerializeAppointments()
+        {
+            Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            binaryFormatter.Serialize(stream, Appointments);
+            stream.Close();
+        }
+
+        public static void LoadAppointments()
+        {
+            Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.Open);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            Appointments = (List<Appointment>)binaryFormatter.Deserialize(stream);
+            stream.Close();
         }
 
         public static List<Appointment> GetAppointmentsInMonth(DateTime date)
         {
-            return DatabaseHelper.GetAppointmentsInMonth(date);
+            DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, Constants.DefaultFirstDay);
+            DateTime firstDayOfNextMonth = firstDayOfMonth.AddMonths(Constants.NextTimeInterval);
+            IEnumerable<Appointment> appointments = from appointment in Appointments
+                                                    where appointment.EndDate >= firstDayOfMonth && appointment.StartDate < firstDayOfNextMonth
+                                                    select appointment;
+            List<Appointment> appointmentsInMonth = new List<Appointment>(appointments);
+            return appointmentsInMonth;
         }
 
         public static bool IsAppointmentInThisTimePeriod(Appointment appointment, DateTime timePeriod, string selectedCalendarView)

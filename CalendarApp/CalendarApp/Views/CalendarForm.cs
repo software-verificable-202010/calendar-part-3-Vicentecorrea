@@ -27,6 +27,7 @@ namespace CalendarApp
         public CalendarForm()
         {
             InitializeComponent();
+            AppointmentController.LoadAppointments();
             selectedDate = DateTime.Today;
             calendarDisplayMenuListBox.SelectedItem = Constants.MonthOption;
             ShowMonth();

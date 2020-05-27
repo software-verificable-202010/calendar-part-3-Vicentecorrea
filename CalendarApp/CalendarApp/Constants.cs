@@ -21,7 +21,6 @@
         public const string MonthAndYearFormat = "MMMM   yyyy";
         public const string MonthFormat = "MMMM";
         public const string EnglishLanguageCode = "en-GB";
-        public const string DatabaseName = "CalendarDatabase";
         public const string MonthOption = "Month";
         public const string WeekOption = "Week";
         public const string ZerosOfHour = ":00";
@@ -29,7 +28,7 @@
         public const string FormatDateInAppointmentInformation = "dddd, dd MMMM yyyy, HH:mm";
         public const string DayAndMonthFormat = "d MMMM";
         public const string HourAndMinuteFormat = "HH:mm   ";
-        public const bool TheAppointmentCouldBeCreated = true;
+        public const string PathToAppointmentsSerializationFile = "..\\db\\appointments.bin";
         public const bool EnabledVisualStyles = true;
     }
 }

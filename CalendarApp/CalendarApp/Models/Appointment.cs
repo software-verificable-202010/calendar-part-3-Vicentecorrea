@@ -2,6 +2,7 @@
 
 namespace CalendarApp.Models
 {
+    [Serializable]
     public class Appointment
     {
         private string title;
