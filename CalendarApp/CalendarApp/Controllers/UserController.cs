@@ -56,7 +56,7 @@ namespace CalendarApp.Controllers
 
         public static void LoadUsers()
         {
-            Stream stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.Open);
+            Stream stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.OpenOrCreate);
             if (stream.Length > Constants.ZeroItemsInList)
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();

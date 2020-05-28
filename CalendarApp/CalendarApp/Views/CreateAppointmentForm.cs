@@ -90,16 +90,22 @@ namespace CalendarApp.Views
 
         private void AllUsernamesListBox_Click(object sender, EventArgs e)
         {
-            string usernameToMove = allUsernamesListBox.SelectedItem.ToString();
-            invitedUsernames.Add(usernameToMove);
-            allUsernames.Remove(usernameToMove);
+            if (allUsernames.Count > Constants.ZeroItemsInList)
+            {
+                string usernameToMove = allUsernamesListBox.SelectedItem.ToString();
+                invitedUsernames.Add(usernameToMove);
+                allUsernames.Remove(usernameToMove);
+            }
         }
 
         private void InvitedUsernamesListBox_Click(object sender, EventArgs e)
         {
-            string usernameToMove = invitedUsernamesListBox.SelectedItem.ToString();
-            allUsernames.Add(usernameToMove);
-            invitedUsernames.Remove(usernameToMove);
+            if (invitedUsernames.Count > Constants.ZeroItemsInList)
+            {
+                string usernameToMove = invitedUsernamesListBox.SelectedItem.ToString();
+                allUsernames.Add(usernameToMove);
+                invitedUsernames.Remove(usernameToMove);
+            }
         }
     }   
 }

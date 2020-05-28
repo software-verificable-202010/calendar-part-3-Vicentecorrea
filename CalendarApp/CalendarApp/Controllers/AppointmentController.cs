@@ -40,7 +40,7 @@ namespace CalendarApp.Controllers
 
         public static void LoadAppointments()
         {
-            Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.Open);
+            Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
             if (stream.Length > Constants.ZeroItemsInList)
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
