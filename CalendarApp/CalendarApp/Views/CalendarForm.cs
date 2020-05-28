@@ -29,6 +29,7 @@ namespace CalendarApp
             AppointmentController.LoadAppointments();
             selectedDate = DateTime.Today;
             calendarDisplayMenuListBox.SelectedItem = Constants.MonthOption;
+            loggedInUserValue.Text = UserController.LoggedUsername;
             ShowMonth();
         }
 
@@ -379,6 +380,15 @@ namespace CalendarApp
                     appointmentInformationForm.Show();
                 }
             } 
+        }
+
+        private void LogOutButton_Click(object sender, EventArgs e)
+        {
+            UserController.LoggedUsername = Constants.Empty;
+            this.Hide();
+            LoginForm loginForm = new LoginForm();
+            loginForm.ShowDialog();
+            this.Close();
         }
         #endregion
     }

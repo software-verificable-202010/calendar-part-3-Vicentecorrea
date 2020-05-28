@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalendarApp.Views;
+using System;
 using System.Windows.Forms;
 
 namespace CalendarApp
@@ -13,7 +14,7 @@ namespace CalendarApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CalendarForm());
+            Application.Run(new LoginForm());
         }
     }
 }

@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Views\CalendarForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +80,12 @@
     <Compile Include="Views\AppointmentsInDayForm.Designer.cs">
       <DependentUpon>AppointmentsInDayForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\CalendarForm.resx">
       <DependentUpon>CalendarForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AppointmentsInDayForm.resx">
       <DependentUpon>AppointmentsInDayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

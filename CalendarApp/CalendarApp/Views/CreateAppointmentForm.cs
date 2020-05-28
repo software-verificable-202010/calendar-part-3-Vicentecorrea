@@ -2,17 +2,36 @@
 using System.Windows.Forms;
 using CalendarApp.Models;
 using CalendarApp.Controllers;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace CalendarApp.Views
 {
     public partial class CreateAppointmentForm : Form
     {
         private readonly CalendarForm calendar;
+        private BindingList<string> allUsernames = new BindingList<string>();
+        private BindingList<string> invitedUsernames = new BindingList<string>();
         public CreateAppointmentForm(CalendarForm calendarForm)
         {
             InitializeComponent();
             calendar = calendarForm;
+            AddAllUsernamesToListBox();
+            allUsernamesListBox.DataSource = allUsernames;
+            invitedUsernamesListBox.DataSource = invitedUsernames;
         }
+
+        private void AddAllUsernamesToListBox()
+        {
+            foreach (User user in UserController.Users)
+            {
+                if (user.Username != UserController.LoggedUsername)
+                {
+                    allUsernames.Add(user.Username);
+                }
+            }
+        }
+
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
             string appointmentTitle = appointmentNameTextBox.Text;
@@ -26,12 +45,23 @@ namespace CalendarApp.Views
             MessageBox.Show(GetFeedbackText(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate));
             if (couldTheAppointmentBeCreated)
             {
-                Appointment newAppointment = new Appointment(appointmentTitle, appointmentDescription, appointmentStartDate, appointmentEndDate);
+                List<string> appointmentGuests = GetAppointmentGuests();
+                Appointment newAppointment = new Appointment(appointmentTitle, appointmentDescription, appointmentStartDate, appointmentEndDate, UserController.LoggedUsername, appointmentGuests);
                 AppointmentController.SaveAppointment(newAppointment);
                 appointmentNameTextBox.Clear();
                 appointmentDescriptionRichTextBox.Clear();
                 calendar.ShowSelectedDisplay();
             }
+        }
+
+        private List<string> GetAppointmentGuests()
+        {
+            List<string> guestsUsernames = new List<string>();
+            foreach(string invitedUsername in invitedUsernames)
+            {
+                guestsUsernames.Add(invitedUsername);
+            }
+            return guestsUsernames;
         }
 
         private string GetFeedbackText(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
@@ -56,6 +86,20 @@ namespace CalendarApp.Views
                 }
             }
             return feedbackText;
+        }
+
+        private void AllUsernamesListBox_Click(object sender, EventArgs e)
+        {
+            string usernameToMove = allUsernamesListBox.SelectedItem.ToString();
+            invitedUsernames.Add(usernameToMove);
+            allUsernames.Remove(usernameToMove);
+        }
+
+        private void InvitedUsernamesListBox_Click(object sender, EventArgs e)
+        {
+            string usernameToMove = invitedUsernamesListBox.SelectedItem.ToString();
+            allUsernames.Add(usernameToMove);
+            invitedUsernames.Remove(usernameToMove);
         }
     }   
 }

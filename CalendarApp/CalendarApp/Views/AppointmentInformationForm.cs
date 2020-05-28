@@ -13,6 +13,8 @@ namespace CalendarApp.Views
             appointmentDescriptionRichTextBox.Text = appointment.Description;
             appointmentStartDateValue.Text = appointment.StartDate.ToString(Constants.FormatDateInAppointmentInformation, new CultureInfo(Constants.EnglishLanguageCode));
             appointmentEndDateValue.Text = appointment.EndDate.ToString(Constants.FormatDateInAppointmentInformation, new CultureInfo(Constants.EnglishLanguageCode));
+            appointmentOwnerValue.Text = appointment.OwnerUsername;
+            guestsListBox.DataSource = appointment.GuestUsernames;
         }
     }
 }

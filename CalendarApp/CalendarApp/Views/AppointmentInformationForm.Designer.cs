@@ -36,6 +36,10 @@
             this.appointmentStartDateValue = new System.Windows.Forms.Label();
             this.appointmentEndDateLabel = new System.Windows.Forms.Label();
             this.appointmentEndDateValue = new System.Windows.Forms.Label();
+            this.appointmentOwnerValue = new System.Windows.Forms.Label();
+            this.appointmentOwnerLabel = new System.Windows.Forms.Label();
+            this.guestsListBox = new System.Windows.Forms.ListBox();
+            this.guestsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // appointmentNameLabel
@@ -111,11 +115,50 @@
             this.appointmentEndDateValue.TabIndex = 7;
             this.appointmentEndDateValue.Text = "appointmentEndDate";
             // 
+            // appointmentOwnerValue
+            // 
+            this.appointmentOwnerValue.AutoSize = true;
+            this.appointmentOwnerValue.Location = new System.Drawing.Point(78, 205);
+            this.appointmentOwnerValue.Name = "appointmentOwnerValue";
+            this.appointmentOwnerValue.Size = new System.Drawing.Size(96, 13);
+            this.appointmentOwnerValue.TabIndex = 8;
+            this.appointmentOwnerValue.Text = "appointmentOwner";
+            // 
+            // appointmentOwnerLabel
+            // 
+            this.appointmentOwnerLabel.AutoSize = true;
+            this.appointmentOwnerLabel.Location = new System.Drawing.Point(34, 205);
+            this.appointmentOwnerLabel.Name = "appointmentOwnerLabel";
+            this.appointmentOwnerLabel.Size = new System.Drawing.Size(38, 13);
+            this.appointmentOwnerLabel.TabIndex = 9;
+            this.appointmentOwnerLabel.Text = "Owner";
+            // 
+            // guestsListBox
+            // 
+            this.guestsListBox.FormattingEnabled = true;
+            this.guestsListBox.Location = new System.Drawing.Point(322, 44);
+            this.guestsListBox.Name = "guestsListBox";
+            this.guestsListBox.Size = new System.Drawing.Size(193, 173);
+            this.guestsListBox.TabIndex = 10;
+            // 
+            // guestsLabel
+            // 
+            this.guestsLabel.AutoSize = true;
+            this.guestsLabel.Location = new System.Drawing.Point(322, 21);
+            this.guestsLabel.Name = "guestsLabel";
+            this.guestsLabel.Size = new System.Drawing.Size(40, 13);
+            this.guestsLabel.TabIndex = 11;
+            this.guestsLabel.Text = "Guests";
+            // 
             // AppointmentInformationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 257);
+            this.ClientSize = new System.Drawing.Size(549, 257);
+            this.Controls.Add(this.guestsLabel);
+            this.Controls.Add(this.guestsListBox);
+            this.Controls.Add(this.appointmentOwnerLabel);
+            this.Controls.Add(this.appointmentOwnerValue);
             this.Controls.Add(this.appointmentEndDateValue);
             this.Controls.Add(this.appointmentEndDateLabel);
             this.Controls.Add(this.appointmentStartDateValue);
@@ -142,5 +185,9 @@
         private System.Windows.Forms.Label appointmentStartDateValue;
         private System.Windows.Forms.Label appointmentEndDateLabel;
         private System.Windows.Forms.Label appointmentEndDateValue;
+        private System.Windows.Forms.Label appointmentOwnerValue;
+        private System.Windows.Forms.Label appointmentOwnerLabel;
+        private System.Windows.Forms.ListBox guestsListBox;
+        private System.Windows.Forms.Label guestsLabel;
     }
 }

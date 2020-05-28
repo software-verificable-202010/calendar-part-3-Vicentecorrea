@@ -9,7 +9,7 @@ namespace CalendarApp.Controllers
 {
     public class AppointmentController
     {
-        private static List<Appointment> appointments;
+        private static List<Appointment> appointments = new List<Appointment>();
 
         /// <summary>Public property for accessing the appointments.</summary>
         public static List<Appointment> Appointments
@@ -41,8 +41,11 @@ namespace CalendarApp.Controllers
         public static void LoadAppointments()
         {
             Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.Open);
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            Appointments = (List<Appointment>)binaryFormatter.Deserialize(stream);
+            if (stream.Length > Constants.ZeroItemsInList)
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                Appointments = (List<Appointment>)binaryFormatter.Deserialize(stream);
+            }
             stream.Close();
         }
 
@@ -55,7 +58,7 @@ namespace CalendarApp.Controllers
         public static List<Appointment> GetAppointmentsInThisDay(DateTime day)
         {
             IEnumerable<Appointment> appointments = from appointment in Appointments
-                                                    where IsAppointmentInThisDay(appointment, day)
+                                                    where IsAppointmentInThisDay(appointment, day) && LoggedUserCanSeeThisAppointment(appointment)
                                                     select appointment;
             List<Appointment> appointmentsInThisDay = new List<Appointment>(appointments);
             return appointmentsInThisDay;
@@ -71,10 +74,17 @@ namespace CalendarApp.Controllers
         public static List<Appointment> GetAppointmentsInThisDayAndTime(DateTime time)
         {
             IEnumerable<Appointment> appointments = from appointment in Appointments
-                                                    where IsAppointmentInThisDayAndTime(appointment, time)
+                                                    where IsAppointmentInThisDayAndTime(appointment, time) && LoggedUserCanSeeThisAppointment(appointment)
                                                     select appointment;
             List<Appointment> appointmentsInThisDayAndTime = new List<Appointment>(appointments);
             return appointmentsInThisDayAndTime;
+        }
+
+        public static bool LoggedUserCanSeeThisAppointment(Appointment appointment)
+        {
+            bool appointmentOwnerIsLoggedUser = appointment.OwnerUsername.Equals(UserController.LoggedUsername);
+            bool loggedUserIsInvitedToThisAppointment = appointment.GuestUsernames.Contains(UserController.LoggedUsername);
+            return appointmentOwnerIsLoggedUser || loggedUserIsInvitedToThisAppointment;
         }
     }
 }

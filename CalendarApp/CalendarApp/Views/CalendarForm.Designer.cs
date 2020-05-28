@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.calendarGridView = new System.Windows.Forms.DataGridView();
             this.MondayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TuesdayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +46,9 @@
             this.goToCreateAppointmentFormButton = new System.Windows.Forms.Button();
             this.calendarDisplayMenuListBox = new System.Windows.Forms.ListBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.logOutButton = new System.Windows.Forms.Button();
+            this.loggedInUserValue = new System.Windows.Forms.Label();
+            this.loggedInUserlabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.calendarGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,14 +64,14 @@
             this.FridayColumn,
             this.SaturdayColumn,
             this.SundayColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.calendarGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.calendarGridView.Location = new System.Drawing.Point(12, 91);
             this.calendarGridView.Name = "calendarGridView";
             this.calendarGridView.Size = new System.Drawing.Size(886, 384);
@@ -112,8 +115,8 @@
             // 
             // SaturdayColumn
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.SaturdayColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SaturdayColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.SaturdayColumn.HeaderText = "Saturday";
             this.SaturdayColumn.Name = "SaturdayColumn";
             this.SaturdayColumn.ReadOnly = true;
@@ -121,8 +124,8 @@
             // 
             // SundayColumn
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.SundayColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SundayColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.SundayColumn.HeaderText = "Sunday";
             this.SundayColumn.Name = "SundayColumn";
             this.SundayColumn.ReadOnly = true;
@@ -170,7 +173,7 @@
             // 
             // goToCreateAppointmentFormButton
             // 
-            this.goToCreateAppointmentFormButton.Location = new System.Drawing.Point(597, 40);
+            this.goToCreateAppointmentFormButton.Location = new System.Drawing.Point(434, 40);
             this.goToCreateAppointmentFormButton.Name = "goToCreateAppointmentFormButton";
             this.goToCreateAppointmentFormButton.Size = new System.Drawing.Size(110, 23);
             this.goToCreateAppointmentFormButton.TabIndex = 6;
@@ -184,7 +187,7 @@
             this.calendarDisplayMenuListBox.Items.AddRange(new object[] {
             "Month",
             "Week"});
-            this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(778, 40);
+            this.calendarDisplayMenuListBox.Location = new System.Drawing.Point(599, 40);
             this.calendarDisplayMenuListBox.Name = "calendarDisplayMenuListBox";
             this.calendarDisplayMenuListBox.Size = new System.Drawing.Size(120, 30);
             this.calendarDisplayMenuListBox.TabIndex = 7;
@@ -197,11 +200,43 @@
             this.linkLabel1.Size = new System.Drawing.Size(100, 23);
             this.linkLabel1.TabIndex = 0;
             // 
+            // logOutButton
+            // 
+            this.logOutButton.Location = new System.Drawing.Point(853, 9);
+            this.logOutButton.Name = "logOutButton";
+            this.logOutButton.Size = new System.Drawing.Size(75, 23);
+            this.logOutButton.TabIndex = 8;
+            this.logOutButton.Text = "Log out";
+            this.logOutButton.UseVisualStyleBackColor = true;
+            this.logOutButton.Click += new System.EventHandler(this.LogOutButton_Click);
+            // 
+            // loggedInUserValue
+            // 
+            this.loggedInUserValue.AutoSize = true;
+            this.loggedInUserValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loggedInUserValue.Location = new System.Drawing.Point(776, 57);
+            this.loggedInUserValue.Name = "loggedInUserValue";
+            this.loggedInUserValue.Size = new System.Drawing.Size(35, 13);
+            this.loggedInUserValue.TabIndex = 9;
+            this.loggedInUserValue.Text = "Boby";
+            // 
+            // loggedInUserlabel
+            // 
+            this.loggedInUserlabel.AutoSize = true;
+            this.loggedInUserlabel.Location = new System.Drawing.Point(776, 40);
+            this.loggedInUserlabel.Name = "loggedInUserlabel";
+            this.loggedInUserlabel.Size = new System.Drawing.Size(55, 13);
+            this.loggedInUserlabel.TabIndex = 10;
+            this.loggedInUserlabel.Text = "Username";
+            // 
             // CalendarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 549);
+            this.Controls.Add(this.loggedInUserlabel);
+            this.Controls.Add(this.loggedInUserValue);
+            this.Controls.Add(this.logOutButton);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.calendarDisplayMenuListBox);
             this.Controls.Add(this.goToCreateAppointmentFormButton);
@@ -236,6 +271,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FridayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaturdayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SundayColumn;
+        private System.Windows.Forms.Button logOutButton;
+        private System.Windows.Forms.Label loggedInUserValue;
+        private System.Windows.Forms.Label loggedInUserlabel;
     }
 }
 

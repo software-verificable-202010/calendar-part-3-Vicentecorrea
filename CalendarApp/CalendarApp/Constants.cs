@@ -29,6 +29,7 @@
         public const string DayAndMonthFormat = "d MMMM";
         public const string HourAndMinuteFormat = "HH:mm   ";
         public const string PathToAppointmentsSerializationFile = "..\\db\\appointments.bin";
+        public const string PathToUsersSerializationFile = "..\\db\\users.bin";
         public const bool EnabledVisualStyles = true;
     }
 }

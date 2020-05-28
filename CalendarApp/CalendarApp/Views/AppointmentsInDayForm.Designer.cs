@@ -28,19 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.appointmentsListBox = new System.Windows.Forms.ListBox();
+            this.myAppointmentsListBox = new System.Windows.Forms.ListBox();
             this.appointmentSelectionLabel = new System.Windows.Forms.Label();
             this.dateAndTimeLabel = new System.Windows.Forms.Label();
+            this.invitedAppointmentsListBox = new System.Windows.Forms.ListBox();
+            this.yourAppointmentLabel = new System.Windows.Forms.Label();
+            this.invitedAppointmentsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // appointmentsListBox
+            // myAppointmentsListBox
             // 
-            this.appointmentsListBox.FormattingEnabled = true;
-            this.appointmentsListBox.Location = new System.Drawing.Point(12, 62);
-            this.appointmentsListBox.Name = "appointmentsListBox";
-            this.appointmentsListBox.Size = new System.Drawing.Size(246, 199);
-            this.appointmentsListBox.TabIndex = 0;
-            this.appointmentsListBox.SelectedIndexChanged += new System.EventHandler(this.AppointmentslistBox_SelectedIndexChanged);
+            this.myAppointmentsListBox.FormattingEnabled = true;
+            this.myAppointmentsListBox.Location = new System.Drawing.Point(13, 82);
+            this.myAppointmentsListBox.Name = "myAppointmentsListBox";
+            this.myAppointmentsListBox.Size = new System.Drawing.Size(246, 199);
+            this.myAppointmentsListBox.TabIndex = 0;
+            this.myAppointmentsListBox.SelectedIndexChanged += new System.EventHandler(this.MyAppointmentslistBox_SelectedIndexChanged);
             // 
             // appointmentSelectionLabel
             // 
@@ -56,20 +59,50 @@
             // 
             this.dateAndTimeLabel.AutoSize = true;
             this.dateAndTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.dateAndTimeLabel.Location = new System.Drawing.Point(12, 39);
+            this.dateAndTimeLabel.Location = new System.Drawing.Point(253, 19);
             this.dateAndTimeLabel.Name = "dateAndTimeLabel";
             this.dateAndTimeLabel.Size = new System.Drawing.Size(167, 20);
             this.dateAndTimeLabel.TabIndex = 2;
             this.dateAndTimeLabel.Text = "December 20 at 23:00";
             // 
+            // invitedAppointmentsListBox
+            // 
+            this.invitedAppointmentsListBox.FormattingEnabled = true;
+            this.invitedAppointmentsListBox.Location = new System.Drawing.Point(289, 82);
+            this.invitedAppointmentsListBox.Name = "invitedAppointmentsListBox";
+            this.invitedAppointmentsListBox.Size = new System.Drawing.Size(246, 199);
+            this.invitedAppointmentsListBox.TabIndex = 3;
+            this.invitedAppointmentsListBox.SelectedIndexChanged += new System.EventHandler(this.InvitedAppointmentsListBox_SelectedIndexChanged);
+            // 
+            // yourAppointmentLabel
+            // 
+            this.yourAppointmentLabel.AutoSize = true;
+            this.yourAppointmentLabel.Location = new System.Drawing.Point(13, 63);
+            this.yourAppointmentLabel.Name = "yourAppointmentLabel";
+            this.yourAppointmentLabel.Size = new System.Drawing.Size(95, 13);
+            this.yourAppointmentLabel.TabIndex = 4;
+            this.yourAppointmentLabel.Text = "Your appointments";
+            // 
+            // invitedAppointmentsLabel
+            // 
+            this.invitedAppointmentsLabel.AutoSize = true;
+            this.invitedAppointmentsLabel.Location = new System.Drawing.Point(289, 62);
+            this.invitedAppointmentsLabel.Name = "invitedAppointmentsLabel";
+            this.invitedAppointmentsLabel.Size = new System.Drawing.Size(191, 13);
+            this.invitedAppointmentsLabel.TabIndex = 5;
+            this.invitedAppointmentsLabel.Text = "Appointments you have been invited to";
+            // 
             // AppointmentsInDayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(277, 279);
+            this.ClientSize = new System.Drawing.Size(551, 298);
+            this.Controls.Add(this.invitedAppointmentsLabel);
+            this.Controls.Add(this.yourAppointmentLabel);
+            this.Controls.Add(this.invitedAppointmentsListBox);
             this.Controls.Add(this.dateAndTimeLabel);
             this.Controls.Add(this.appointmentSelectionLabel);
-            this.Controls.Add(this.appointmentsListBox);
+            this.Controls.Add(this.myAppointmentsListBox);
             this.Name = "AppointmentsInDayForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointments";
@@ -80,8 +113,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox appointmentsListBox;
+        private System.Windows.Forms.ListBox myAppointmentsListBox;
         private System.Windows.Forms.Label appointmentSelectionLabel;
         private System.Windows.Forms.Label dateAndTimeLabel;
+        private System.Windows.Forms.ListBox invitedAppointmentsListBox;
+        private System.Windows.Forms.Label yourAppointmentLabel;
+        private System.Windows.Forms.Label invitedAppointmentsLabel;
     }
 }
