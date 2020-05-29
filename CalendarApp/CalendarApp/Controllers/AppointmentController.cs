@@ -30,6 +30,12 @@ namespace CalendarApp.Controllers
             SerializeAppointments();
         }
 
+        public static void DeleteAppointment(Appointment appointment)
+        {
+            Appointments.Remove(appointment);
+            SerializeAppointments();
+        }
+
         private static void SerializeAppointments()
         {
             Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
@@ -85,6 +91,26 @@ namespace CalendarApp.Controllers
             bool appointmentOwnerIsLoggedUser = appointment.OwnerUsername.Equals(UserController.LoggedUsername);
             bool loggedUserIsInvitedToThisAppointment = appointment.GuestUsernames.Contains(UserController.LoggedUsername);
             return appointmentOwnerIsLoggedUser || loggedUserIsInvitedToThisAppointment;
+        }
+
+        public static string GetErrorFeedbackTextCreatingAppointment(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
+        {
+            string feedbackText = "Error" + Environment.NewLine;
+            if (!appointmentHasTitle)
+            {
+                feedbackText += "The appointment must have a title" + Environment.NewLine;
+
+            }
+            if (!appointmentHasDescription)
+            {
+                feedbackText += "The appointment must have a description" + Environment.NewLine;
+
+            }
+            if (!appointmentEndDateIsLaterThanStartDate)
+            {
+                feedbackText += "The end date must be later than the start date";
+            }
+            return feedbackText;
         }
     }
 }

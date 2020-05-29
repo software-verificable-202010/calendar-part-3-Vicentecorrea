@@ -40,6 +40,8 @@
             this.appointmentOwnerLabel = new System.Windows.Forms.Label();
             this.guestsListBox = new System.Windows.Forms.ListBox();
             this.guestsLabel = new System.Windows.Forms.Label();
+            this.deleteAppointmentButton = new System.Windows.Forms.Button();
+            this.editAppointmentButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // appointmentNameLabel
@@ -138,7 +140,7 @@
             this.guestsListBox.FormattingEnabled = true;
             this.guestsListBox.Location = new System.Drawing.Point(322, 44);
             this.guestsListBox.Name = "guestsListBox";
-            this.guestsListBox.Size = new System.Drawing.Size(193, 173);
+            this.guestsListBox.Size = new System.Drawing.Size(193, 147);
             this.guestsListBox.TabIndex = 10;
             // 
             // guestsLabel
@@ -150,11 +152,33 @@
             this.guestsLabel.TabIndex = 11;
             this.guestsLabel.Text = "Guests";
             // 
+            // deleteAppointmentButton
+            // 
+            this.deleteAppointmentButton.Location = new System.Drawing.Point(402, 222);
+            this.deleteAppointmentButton.Name = "deleteAppointmentButton";
+            this.deleteAppointmentButton.Size = new System.Drawing.Size(113, 23);
+            this.deleteAppointmentButton.TabIndex = 12;
+            this.deleteAppointmentButton.Text = "Delete appointment";
+            this.deleteAppointmentButton.UseVisualStyleBackColor = true;
+            this.deleteAppointmentButton.Click += new System.EventHandler(this.DeleteAppointmentButton_Click);
+            // 
+            // editAppointmentButton
+            // 
+            this.editAppointmentButton.Location = new System.Drawing.Point(249, 222);
+            this.editAppointmentButton.Name = "editAppointmentButton";
+            this.editAppointmentButton.Size = new System.Drawing.Size(113, 23);
+            this.editAppointmentButton.TabIndex = 13;
+            this.editAppointmentButton.Text = "Edit appointment";
+            this.editAppointmentButton.UseVisualStyleBackColor = true;
+            this.editAppointmentButton.Click += new System.EventHandler(this.EditAppointmentButton_Click);
+            // 
             // AppointmentInformationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 257);
+            this.Controls.Add(this.editAppointmentButton);
+            this.Controls.Add(this.deleteAppointmentButton);
             this.Controls.Add(this.guestsLabel);
             this.Controls.Add(this.guestsListBox);
             this.Controls.Add(this.appointmentOwnerLabel);
@@ -189,5 +213,7 @@
         private System.Windows.Forms.Label appointmentOwnerLabel;
         private System.Windows.Forms.ListBox guestsListBox;
         private System.Windows.Forms.Label guestsLabel;
+        private System.Windows.Forms.Button deleteAppointmentButton;
+        private System.Windows.Forms.Button editAppointmentButton;
     }
 }

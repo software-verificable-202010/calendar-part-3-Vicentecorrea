@@ -16,12 +16,12 @@ namespace CalendarApp.Views
         {
             InitializeComponent();
             calendar = calendarForm;
-            AddAllUsernamesToListBox();
+            AddUsernamesToAllUsernamesList();
             allUsernamesListBox.DataSource = allUsernames;
             invitedUsernamesListBox.DataSource = invitedUsernames;
         }
 
-        private void AddAllUsernamesToListBox()
+        private void AddUsernamesToAllUsernamesList()
         {
             foreach (User user in UserController.Users)
             {
@@ -34,7 +34,7 @@ namespace CalendarApp.Views
 
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
-            string appointmentTitle = appointmentNameTextBox.Text;
+            string appointmentTitle = appointmentTitleTextBox.Text;
             string appointmentDescription = appointmentDescriptionRichTextBox.Text;
             DateTime appointmentStartDate = appointmentStartDateDateTimePicker.Value;
             DateTime appointmentEndDate = appointmentEndDateDateTimePicker.Value;
@@ -42,15 +42,19 @@ namespace CalendarApp.Views
             bool appointmentHasDescription = !String.IsNullOrWhiteSpace(appointmentDescription);
             bool appointmentEndDateIsLaterThanStartDate = appointmentStartDate < appointmentEndDate;
             bool couldTheAppointmentBeCreated = appointmentHasTitle && appointmentHasDescription && appointmentEndDateIsLaterThanStartDate;
-            MessageBox.Show(GetFeedbackText(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate));
             if (couldTheAppointmentBeCreated)
             {
+                MessageBox.Show("Successfully created appointment");
                 List<string> appointmentGuests = GetAppointmentGuests();
                 Appointment newAppointment = new Appointment(appointmentTitle, appointmentDescription, appointmentStartDate, appointmentEndDate, UserController.LoggedUsername, appointmentGuests);
                 AppointmentController.SaveAppointment(newAppointment);
-                appointmentNameTextBox.Clear();
-                appointmentDescriptionRichTextBox.Clear();
                 calendar.ShowSelectedDisplay();
+                this.Close();
+            }
+            else
+            {
+                string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointment(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
+                MessageBox.Show(errorFeedbackText);
             }
         }
 
@@ -62,30 +66,6 @@ namespace CalendarApp.Views
                 guestsUsernames.Add(invitedUsername);
             }
             return guestsUsernames;
-        }
-
-        private string GetFeedbackText(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
-        {
-            string feedbackText = "Successfully created appointment";
-            if (!appointmentHasTitle || !appointmentHasDescription || !appointmentEndDateIsLaterThanStartDate)
-            {
-                feedbackText = "Error" + Environment.NewLine;
-                if (!appointmentHasTitle)
-                {
-                    feedbackText += "The appointment must have a title" + Environment.NewLine;
-
-                }
-                if (!appointmentHasDescription)
-                {
-                    feedbackText += "The appointment must have a description" + Environment.NewLine;
-
-                }
-                if (!appointmentEndDateIsLaterThanStartDate)
-                {
-                    feedbackText += "The end date must be later than the start date";
-                }
-            }
-            return feedbackText;
         }
 
         private void AllUsernamesListBox_Click(object sender, EventArgs e)

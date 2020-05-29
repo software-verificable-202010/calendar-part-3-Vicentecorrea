@@ -11,9 +11,11 @@ namespace CalendarApp.Views
     {
         private readonly List<Appointment> myAppointments = new List<Appointment>();
         private readonly List<Appointment> invitedAppointments = new List<Appointment>();
-        public AppointmentsInDayForm(List<Appointment> appointmentsInDay, DateTime dayAndTime)
+        private readonly CalendarForm calendar;
+        public AppointmentsInDayForm(List<Appointment> appointmentsInDay, DateTime dayAndTime, CalendarForm calendarForm)
         {
             InitializeComponent();
+            this.calendar = calendarForm;
             SeparateAppointments(appointmentsInDay);
             SetDateAndTimeLabel(dayAndTime);
             AddMyAppointmentsToListBox();
@@ -73,7 +75,7 @@ namespace CalendarApp.Views
         {
             if (Constants.DefaultInitialIndex <= myAppointmentsListBox.SelectedIndex && myAppointmentsListBox.SelectedIndex < myAppointments.Count)
             {
-                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(myAppointments[myAppointmentsListBox.SelectedIndex]);
+                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(myAppointments[myAppointmentsListBox.SelectedIndex], calendar, this);
                 appointmentInformationForm.Show();
             }
         }
@@ -82,7 +84,7 @@ namespace CalendarApp.Views
         {
             if (Constants.DefaultInitialIndex <= invitedAppointmentsListBox.SelectedIndex && invitedAppointmentsListBox.SelectedIndex < invitedAppointments.Count)
             {
-                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(invitedAppointments[invitedAppointmentsListBox.SelectedIndex]);
+                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(invitedAppointments[invitedAppointmentsListBox.SelectedIndex], calendar, this);
                 appointmentInformationForm.Show();
             }
         }

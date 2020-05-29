@@ -35,3 +35,4 @@ C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\
 C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-3-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.exe
 C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-3-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.pdb
 C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-3-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.LoginForm.resources
+C:\Users\vicen\OneDrive\Escritorio\Vicente\U\Este semestre\Software Verificable\calendar-part-3-Vicentecorrea\CalendarApp\CalendarApp\obj\Debug\CalendarApp.Views.EditAppointmentForm.resources

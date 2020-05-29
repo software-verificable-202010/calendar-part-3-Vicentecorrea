@@ -371,12 +371,12 @@ namespace CalendarApp
                 if (appointments.Count > Constants.OneItemInList)
                 {
                     DateTime clickedDateAndTime = GetClickedDateAndTime(e);
-                    AppointmentsInDayForm appointmentsInDayForm = new AppointmentsInDayForm(appointments, clickedDateAndTime);
+                    AppointmentsInDayForm appointmentsInDayForm = new AppointmentsInDayForm(appointments, clickedDateAndTime, this);
                     appointmentsInDayForm.Show();
                 }
                 else if (appointments.Count == Constants.OneItemInList)
                 {
-                    AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(appointments[Constants.DefaultInitialIndex]);
+                    AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(appointments[Constants.DefaultInitialIndex], this);
                     appointmentInformationForm.Show();
                 }
             } 

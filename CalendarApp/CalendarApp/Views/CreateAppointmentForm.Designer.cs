@@ -28,36 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.appointmentNameTextBox = new System.Windows.Forms.TextBox();
-            this.appointmentNameLabel = new System.Windows.Forms.Label();
+            this.appointmentTitleTextBox = new System.Windows.Forms.TextBox();
+            this.appointmentTitleLabel = new System.Windows.Forms.Label();
             this.appointmentDescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.appointmentDescriptionLabel = new System.Windows.Forms.Label();
             this.appointmentStartDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.appointmentStartDateLabel = new System.Windows.Forms.Label();
             this.appointmentEndDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.appointmentEndDateLabel = new System.Windows.Forms.Label();
-            this.createappointmentButton = new System.Windows.Forms.Button();
+            this.createAppointmentButton = new System.Windows.Forms.Button();
             this.allUsernamesListBox = new System.Windows.Forms.ListBox();
             this.invitedUsernamesListBox = new System.Windows.Forms.ListBox();
             this.allUsersLabel = new System.Windows.Forms.Label();
             this.invitedUsersLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // appointmentNameTextBox
+            // appointmentTitleTextBox
             // 
-            this.appointmentNameTextBox.Location = new System.Drawing.Point(78, 18);
-            this.appointmentNameTextBox.Name = "appointmentNameTextBox";
-            this.appointmentNameTextBox.Size = new System.Drawing.Size(214, 20);
-            this.appointmentNameTextBox.TabIndex = 0;
+            this.appointmentTitleTextBox.Location = new System.Drawing.Point(78, 18);
+            this.appointmentTitleTextBox.Name = "appointmentTitleTextBox";
+            this.appointmentTitleTextBox.Size = new System.Drawing.Size(214, 20);
+            this.appointmentTitleTextBox.TabIndex = 0;
             // 
-            // appointmentNameLabel
+            // appointmentTitleLabel
             // 
-            this.appointmentNameLabel.AutoSize = true;
-            this.appointmentNameLabel.Location = new System.Drawing.Point(37, 18);
-            this.appointmentNameLabel.Name = "appointmentNameLabel";
-            this.appointmentNameLabel.Size = new System.Drawing.Size(35, 13);
-            this.appointmentNameLabel.TabIndex = 1;
-            this.appointmentNameLabel.Text = "Name";
+            this.appointmentTitleLabel.AutoSize = true;
+            this.appointmentTitleLabel.Location = new System.Drawing.Point(45, 21);
+            this.appointmentTitleLabel.Name = "appointmentTitleLabel";
+            this.appointmentTitleLabel.Size = new System.Drawing.Size(27, 13);
+            this.appointmentTitleLabel.TabIndex = 1;
+            this.appointmentTitleLabel.Text = "Title";
             // 
             // appointmentDescriptionRichTextBox
             // 
@@ -112,18 +112,19 @@
             this.appointmentEndDateLabel.TabIndex = 7;
             this.appointmentEndDateLabel.Text = "End date";
             // 
-            // createappointmentButton
+            // createAppointmentButton
             // 
-            this.createappointmentButton.Location = new System.Drawing.Point(323, 229);
-            this.createappointmentButton.Name = "createappointmentButton";
-            this.createappointmentButton.Size = new System.Drawing.Size(132, 23);
-            this.createappointmentButton.TabIndex = 8;
-            this.createappointmentButton.Text = "Create appointment";
-            this.createappointmentButton.UseVisualStyleBackColor = true;
-            this.createappointmentButton.Click += new System.EventHandler(this.CreateAppointmentButton_Click);
+            this.createAppointmentButton.Location = new System.Drawing.Point(323, 229);
+            this.createAppointmentButton.Name = "createAppointmentButton";
+            this.createAppointmentButton.Size = new System.Drawing.Size(132, 23);
+            this.createAppointmentButton.TabIndex = 8;
+            this.createAppointmentButton.Text = "Create appointment";
+            this.createAppointmentButton.UseVisualStyleBackColor = true;
+            this.createAppointmentButton.Click += new System.EventHandler(this.CreateAppointmentButton_Click);
             // 
             // allUsernamesListBox
             // 
+            this.allUsernamesListBox.BackColor = System.Drawing.Color.LightPink;
             this.allUsernamesListBox.FormattingEnabled = true;
             this.allUsernamesListBox.Location = new System.Drawing.Point(323, 44);
             this.allUsernamesListBox.Name = "allUsernamesListBox";
@@ -133,8 +134,9 @@
             // 
             // invitedUsernamesListBox
             // 
+            this.invitedUsernamesListBox.BackColor = System.Drawing.Color.LightGreen;
             this.invitedUsernamesListBox.FormattingEnabled = true;
-            this.invitedUsernamesListBox.Location = new System.Drawing.Point(562, 47);
+            this.invitedUsernamesListBox.Location = new System.Drawing.Point(562, 44);
             this.invitedUsernamesListBox.Name = "invitedUsernamesListBox";
             this.invitedUsernamesListBox.Size = new System.Drawing.Size(171, 134);
             this.invitedUsernamesListBox.TabIndex = 10;
@@ -167,15 +169,15 @@
             this.Controls.Add(this.allUsersLabel);
             this.Controls.Add(this.invitedUsernamesListBox);
             this.Controls.Add(this.allUsernamesListBox);
-            this.Controls.Add(this.createappointmentButton);
+            this.Controls.Add(this.createAppointmentButton);
             this.Controls.Add(this.appointmentEndDateLabel);
             this.Controls.Add(this.appointmentEndDateDateTimePicker);
             this.Controls.Add(this.appointmentStartDateLabel);
             this.Controls.Add(this.appointmentStartDateDateTimePicker);
             this.Controls.Add(this.appointmentDescriptionLabel);
             this.Controls.Add(this.appointmentDescriptionRichTextBox);
-            this.Controls.Add(this.appointmentNameLabel);
-            this.Controls.Add(this.appointmentNameTextBox);
+            this.Controls.Add(this.appointmentTitleLabel);
+            this.Controls.Add(this.appointmentTitleTextBox);
             this.Name = "CreateAppointmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create appointment";
@@ -186,15 +188,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox appointmentNameTextBox;
-        private System.Windows.Forms.Label appointmentNameLabel;
+        private System.Windows.Forms.TextBox appointmentTitleTextBox;
+        private System.Windows.Forms.Label appointmentTitleLabel;
         private System.Windows.Forms.RichTextBox appointmentDescriptionRichTextBox;
         private System.Windows.Forms.Label appointmentDescriptionLabel;
         private System.Windows.Forms.DateTimePicker appointmentStartDateDateTimePicker;
         private System.Windows.Forms.Label appointmentStartDateLabel;
         private System.Windows.Forms.DateTimePicker appointmentEndDateDateTimePicker;
         private System.Windows.Forms.Label appointmentEndDateLabel;
-        private System.Windows.Forms.Button createappointmentButton;
+        private System.Windows.Forms.Button createAppointmentButton;
         private System.Windows.Forms.ListBox allUsernamesListBox;
         private System.Windows.Forms.ListBox invitedUsernamesListBox;
         private System.Windows.Forms.Label allUsersLabel;

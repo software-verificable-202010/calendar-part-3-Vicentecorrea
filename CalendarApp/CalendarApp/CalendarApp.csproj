@@ -80,6 +80,12 @@
     <Compile Include="Views\AppointmentsInDayForm.Designer.cs">
       <DependentUpon>AppointmentsInDayForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditAppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EditAppointmentForm.Designer.cs">
+      <DependentUpon>EditAppointmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AppointmentsInDayForm.resx">
       <DependentUpon>AppointmentsInDayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\EditAppointmentForm.resx">
+      <DependentUpon>EditAppointmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
