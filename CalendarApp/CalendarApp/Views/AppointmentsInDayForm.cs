@@ -30,7 +30,7 @@ namespace CalendarApp.Views
             }
             else
             {
-                dateAndTimeLabel.Text = dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + " at " + dayAndTime.Hour + Constants.ZerosOfHour;
+                dateAndTimeLabel.Text = string.Format("{0} at {1}:00", dayAndTime.ToString(Constants.DayAndMonthFormat, new CultureInfo(Constants.EnglishLanguageCode)), dayAndTime.Hour);
             }
         }
 

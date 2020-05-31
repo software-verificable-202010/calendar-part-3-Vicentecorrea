@@ -17,14 +17,11 @@
         public const int OneItemInList = 1;
         public const int ZeroItemsInList = 0;
         public const string Empty = "";
-        public const string Space = " ";
         public const string MonthAndYearFormat = "MMMM   yyyy";
         public const string MonthFormat = "MMMM";
         public const string EnglishLanguageCode = "en-GB";
         public const string MonthOption = "Month";
         public const string WeekOption = "Week";
-        public const string ZerosOfHour = ":00";
-        public const string HyphenWithSpaces = " - ";
         public const string FormatDateInAppointmentInformation = "dddd, dd MMMM yyyy, HH:mm";
         public const string DayAndMonthFormat = "d MMMM";
         public const string HourAndMinuteFormat = "HH:mm   ";

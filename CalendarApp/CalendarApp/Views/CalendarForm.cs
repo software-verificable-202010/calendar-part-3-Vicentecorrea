@@ -175,12 +175,12 @@ namespace CalendarApp
             string cellText = iteratorDayInMonth.ToString();
             foreach (Appointment appointment in appointmentsInThisDay)
             {
-                cellText += Environment.NewLine;
+                cellText = string.Format("{0}{1}", cellText, Environment.NewLine);
                 if (appointment.StartDate.Date == day.Date)
                 {
-                    cellText += appointment.StartDate.ToString(Constants.HourAndMinuteFormat);
+                    cellText = string.Format("{0}{1}", cellText, appointment.StartDate.ToString(Constants.HourAndMinuteFormat));
                 }
-                cellText += appointment.Title;
+                cellText = string.Format("{0}{1}", cellText, appointment.Title);
             }
             return cellText;
         }
@@ -200,13 +200,13 @@ namespace CalendarApp
         {
             if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year != lastDateOfWeek.Year)
             {
-                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
-                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+                monthLabel.Text = string.Format("{0} - {1}", firstDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode)),
+                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode)));
             }
             else if (firstDateOfWeek.Month != lastDateOfWeek.Month && firstDateOfWeek.Year == lastDateOfWeek.Year)
             {
-                monthLabel.Text = firstDateOfWeek.ToString(Constants.MonthFormat, new CultureInfo(Constants.EnglishLanguageCode)) + Constants.HyphenWithSpaces +
-                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode));
+                monthLabel.Text = string.Format("{0} - {1}", firstDateOfWeek.ToString(Constants.MonthFormat, new CultureInfo(Constants.EnglishLanguageCode)),
+                    lastDateOfWeek.ToString(Constants.MonthAndYearFormat, new CultureInfo(Constants.EnglishLanguageCode)));
             }
             else if (firstDateOfWeek.Month == lastDateOfWeek.Month)
             {
@@ -230,7 +230,7 @@ namespace CalendarApp
             DateTime firstDateOfWeek = iteratorDayOfWeek;
             for (int dayColumn = Constants.GapBetweenHoursColumnAndMondayColumn; dayColumn < calendarGridView.Columns.Count; dayColumn++)
             {
-                calendarGridView.Columns[dayColumn].HeaderText = iteratorDayOfWeek.DayOfWeek.ToString() + Constants.Space + iteratorDayOfWeek.Day.ToString();
+                calendarGridView.Columns[dayColumn].HeaderText = string.Format("{0} {1}", iteratorDayOfWeek.DayOfWeek.ToString(), iteratorDayOfWeek.Day.ToString());
                 if (iteratorDayOfWeek == DateTime.Today)
                 {
                     calendarGridView.EnableHeadersVisualStyles = Constants.EnabledVisualStyles;
@@ -284,7 +284,7 @@ namespace CalendarApp
             DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
             if (column.Index == Constants.DefaultInitialIndex)
             {
-                cell.Value = hour.ToString() + Constants.ZerosOfHour;
+                cell.Value = string.Format("{0}:00", hour.ToString());
             }
             else
             {
@@ -308,9 +308,9 @@ namespace CalendarApp
             {
                 if (appointment.StartDate.Hour == hour && appointment.StartDate.Day == iteratorDateInWeek.Day)
                 {
-                    cellText += appointment.StartDate.ToString(Constants.HourAndMinuteFormat);
+                    cellText = string.Format("{0}{1}", cellText, appointment.StartDate.ToString(Constants.HourAndMinuteFormat));
                 }
-                cellText += appointment.Title + Environment.NewLine;
+                cellText = string.Format("{0}{1}{2}", cellText, appointment.Title, Environment.NewLine);
             }
             return cellText;
         }

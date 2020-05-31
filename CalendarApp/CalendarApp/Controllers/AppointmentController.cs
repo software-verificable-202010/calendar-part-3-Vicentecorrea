@@ -95,20 +95,20 @@ namespace CalendarApp.Controllers
 
         public static string GetErrorFeedbackTextCreatingAppointment(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
         {
-            string feedbackText = "Error" + Environment.NewLine;
+            string feedbackText = string.Format("Error{0}", Environment.NewLine);
             if (!appointmentHasTitle)
             {
-                feedbackText += "The appointment must have a title" + Environment.NewLine;
+                feedbackText = string.Format("{0}The appointment must have a title{1}", feedbackText, Environment.NewLine);
 
             }
             if (!appointmentHasDescription)
             {
-                feedbackText += "The appointment must have a description" + Environment.NewLine;
+                feedbackText = string.Format("{0}The appointment must have a description{1}", feedbackText, Environment.NewLine);
 
             }
             if (!appointmentEndDateIsLaterThanStartDate)
             {
-                feedbackText += "The end date must be later than the start date";
+                feedbackText = string.Format("{0}The end date must be later than the start date", feedbackText);
             }
             return feedbackText;
         }
