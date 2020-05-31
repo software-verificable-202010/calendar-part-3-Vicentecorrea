@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CalendarApp.Controllers
 {
-    class UserController
+    public static class UserController
     {
         #region Fields
         private static List<User> users = new List<User>();
