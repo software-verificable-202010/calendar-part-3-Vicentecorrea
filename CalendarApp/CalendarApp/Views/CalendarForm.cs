@@ -187,7 +187,6 @@ namespace CalendarApp
         #endregion
 
         #region Weekly View Methods
-
         private void ShowWeek()
         {
             calendarGridView.Rows.Clear();

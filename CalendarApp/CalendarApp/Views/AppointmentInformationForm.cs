@@ -7,8 +7,12 @@ namespace CalendarApp.Views
 {
     public partial class AppointmentInformationForm : Form
     {
+        #region Fields
         private readonly Appointment appointment;
         private readonly CalendarForm calendar;
+        #endregion
+
+        #region Methods
         public AppointmentInformationForm(Appointment appointment, CalendarForm calendarForm, AppointmentsInDayForm appointmentsInDayForm = null)
         {
             InitializeComponent();
@@ -65,5 +69,6 @@ namespace CalendarApp.Views
             EditAppointmentForm editAppointmentForm = new EditAppointmentForm(appointment, this, calendar);
             editAppointmentForm.Show();
         }
+        #endregion
     }
 }

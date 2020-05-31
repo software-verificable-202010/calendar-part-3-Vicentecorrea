@@ -9,9 +9,13 @@ namespace CalendarApp.Views
 {
     public partial class CreateAppointmentForm : Form
     {
+        #region Fields
         private readonly CalendarForm calendar;
         private BindingList<string> allUsernames = new BindingList<string>();
         private BindingList<string> invitedUsernames = new BindingList<string>();
+        #endregion
+
+        #region Methods
         public CreateAppointmentForm(CalendarForm calendarForm)
         {
             InitializeComponent();
@@ -87,5 +91,6 @@ namespace CalendarApp.Views
                 invitedUsernames.Remove(usernameToMove);
             }
         }
-    }   
+        #endregion
+    }
 }

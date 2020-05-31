@@ -2,6 +2,7 @@
 {
     public static class Constants
     {
+        #region Constants
         public const int DaysInWeek = 7;
         public const int DefaultFirstDay = 1;
         public const int GapBetweenIndexAndNumber = 1;
@@ -28,5 +29,6 @@
         public const string PathToAppointmentsSerializationFile = "..\\..\\appointments.bin";
         public const string PathToUsersSerializationFile = "..\\..\\users.bin";
         public const bool EnabledVisualStyles = true;
+        #endregion
     }
 }

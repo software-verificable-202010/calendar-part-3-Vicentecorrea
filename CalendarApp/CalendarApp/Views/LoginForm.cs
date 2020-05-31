@@ -15,6 +15,7 @@ namespace CalendarApp.Views
 {
     public partial class LoginForm : Form
     {
+        #region Methods
         public LoginForm()
         {
             InitializeComponent();
@@ -93,5 +94,6 @@ namespace CalendarApp.Views
                 MessageBox.Show("You should enter a username");
             }
         }
+        #endregion
     }
 }

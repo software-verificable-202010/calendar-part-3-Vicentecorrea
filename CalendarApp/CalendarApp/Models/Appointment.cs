@@ -6,30 +6,16 @@ namespace CalendarApp.Models
     [Serializable]
     public class Appointment
     {
+        #region Fields
         private string title;
         private string description;
         private DateTime startDate;
         private DateTime endDate;
         private string ownerUsername;
         private List<string> guestUsernames;
+        #endregion
 
-        public Appointment(string title, string description, DateTime startDate, DateTime endDate, string ownerUsername, List<string> guestUsernames = null)
-        {
-            Title = title;
-            Description = description;
-            StartDate = startDate;
-            EndDate = endDate;
-            OwnerUsername = ownerUsername;
-            if (guestUsernames == null)
-            {
-                GuestUsernames = new List<string>();
-            }
-            else
-            {
-                GuestUsernames = guestUsernames;
-            }
-        }
-
+        #region Properties
         /// <summary>Public property for accessing the title field.</summary>
         public string Title
         {
@@ -106,5 +92,25 @@ namespace CalendarApp.Models
                 guestUsernames = value;
             }
         }
+        #endregion
+
+        #region Methods
+        public Appointment(string title, string description, DateTime startDate, DateTime endDate, string ownerUsername, List<string> guestUsernames = null)
+        {
+            Title = title;
+            Description = description;
+            StartDate = startDate;
+            EndDate = endDate;
+            OwnerUsername = ownerUsername;
+            if (guestUsernames == null)
+            {
+                GuestUsernames = new List<string>();
+            }
+            else
+            {
+                GuestUsernames = guestUsernames;
+            }
+        }
+        #endregion
     }
 }

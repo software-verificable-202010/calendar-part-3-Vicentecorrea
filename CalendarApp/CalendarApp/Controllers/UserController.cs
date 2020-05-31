@@ -11,9 +11,12 @@ namespace CalendarApp.Controllers
 {
     class UserController
     {
+        #region Fields
         private static List<User> users = new List<User>();
         private static string loggedUsername;
+        #endregion
 
+        #region Properties
         /// <summary>Public property for accessing the users.</summary>
         public static List<User> Users
         {
@@ -39,7 +42,9 @@ namespace CalendarApp.Controllers
                 loggedUsername = value;
             }
         }
+        #endregion
 
+        #region Methods
         public static void SaveUser(User user)
         {
             Users.Add(user);
@@ -64,5 +69,6 @@ namespace CalendarApp.Controllers
             }
             stream.Close();
         }
+        #endregion
     }
 }

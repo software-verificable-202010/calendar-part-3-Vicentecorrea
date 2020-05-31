@@ -9,8 +9,11 @@ namespace CalendarApp.Controllers
 {
     public class AppointmentController
     {
+        #region Fields
         private static List<Appointment> appointments = new List<Appointment>();
+        #endregion
 
+        #region Properties
         /// <summary>Public property for accessing the appointments.</summary>
         public static List<Appointment> Appointments
         {
@@ -23,7 +26,9 @@ namespace CalendarApp.Controllers
                 appointments = value;
             }
         }
-        
+        #endregion
+
+        #region Methods
         public static void SaveAppointment(Appointment appointment)
         {
             Appointments.Add(appointment);
@@ -112,5 +117,6 @@ namespace CalendarApp.Controllers
             }
             return feedbackText;
         }
+        #endregion
     }
 }

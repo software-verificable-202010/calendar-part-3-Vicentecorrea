@@ -6,6 +6,7 @@ namespace CalendarApp
 {
     static class Program
     {
+        #region Methods
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -16,5 +17,6 @@ namespace CalendarApp
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
         }
+        #endregion
     }
 }

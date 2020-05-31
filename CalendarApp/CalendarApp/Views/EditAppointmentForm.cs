@@ -14,12 +14,16 @@ namespace CalendarApp.Views
 {
     public partial class EditAppointmentForm : Form
     {
+        #region Fields
         private readonly Appointment appointment;
         private readonly AppointmentInformationForm appointmentInformation;
         private readonly CalendarForm calendar;
         private readonly AppointmentsInDayForm appointmentsInDay;
         private BindingList<string> notInvitedUsernames = new BindingList<string>();
         private BindingList<string> invitedUsernames = new BindingList<string>();
+        #endregion
+
+        #region Methods
         public EditAppointmentForm(Appointment appointment, AppointmentInformationForm appointmentInformationForm, CalendarForm calendarForm, AppointmentsInDayForm appointmentsInDayForm = null)
         {
             InitializeComponent();
@@ -67,6 +71,7 @@ namespace CalendarApp.Views
             }
             return guestsUsernames;
         }
+
         private void EditAppointmentButton_Click(object sender, EventArgs e)
         {
             string appointmentTitle = appointmentTitleTextBox.Text;
@@ -118,5 +123,6 @@ namespace CalendarApp.Views
                 invitedUsernames.Remove(usernameToMove);
             }
         }
+        #endregion
     }
 }

@@ -9,13 +9,11 @@ namespace CalendarApp.Models
     [Serializable]
     public class User
     {
+        #region Fields
         private string username;
+        #endregion
 
-        public User(string username)
-        {
-            this.username = username;
-        }
-
+        #region Properties
         /// <summary>Public property for accessing the username field.</summary>
         public string Username
         {
@@ -28,5 +26,13 @@ namespace CalendarApp.Models
                 username = value;
             }
         }
+        #endregion
+
+        #region Methods
+        public User(string username)
+        {
+            this.username = username;
+        }
+        #endregion
     }
 }
