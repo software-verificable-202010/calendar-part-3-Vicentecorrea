@@ -95,7 +95,8 @@ namespace CalendarApp.Controllers
         {
             bool appointmentOwnerIsLoggedUser = appointment.OwnerUsername.Equals(UserController.LoggedUsername);
             bool loggedUserIsInvitedToThisAppointment = appointment.GuestUsernames.Contains(UserController.LoggedUsername);
-            return appointmentOwnerIsLoggedUser || loggedUserIsInvitedToThisAppointment;
+            bool loggedUserCanSeeThisAppointment = appointmentOwnerIsLoggedUser || loggedUserIsInvitedToThisAppointment;
+            return loggedUserCanSeeThisAppointment;
         }
 
         public static string GetErrorFeedbackTextCreatingAppointment(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)

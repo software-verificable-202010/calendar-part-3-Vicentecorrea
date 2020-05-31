@@ -60,7 +60,10 @@ namespace CalendarApp
         private bool WasHeaderOrColumnOfHoursClicked(int rowIndex, int columnIndex)
         {
             bool selectedViewIsWeekly = calendarDisplayMenuListBox.SelectedItem.ToString() == Constants.WeekOption;
-            return rowIndex == Constants.HeaderRowIndex || (columnIndex == Constants.DefaultInitialIndex && selectedViewIsWeekly);
+            bool rowIndexIsHeaderRowIndex = rowIndex == Constants.HeaderRowIndex;
+            bool columnIndexIsDefaultInitialIndex = columnIndex == Constants.DefaultInitialIndex;
+            bool wasHeaderOrColumnOfHoursClicked = rowIndexIsHeaderRowIndex || (columnIndexIsDefaultInitialIndex && selectedViewIsWeekly);
+            return wasHeaderOrColumnOfHoursClicked;
         }
         #endregion
 
@@ -116,7 +119,9 @@ namespace CalendarApp
         private DataGridViewTextBoxCell GetDayCellInMonthView(int weekDay, bool isFirstWeek)
         {
             DataGridViewTextBoxCell cell = new DataGridViewTextBoxCell();
-            if ((weekDay < daysBetweenMondayAndFirstDayOfSelectedMonth && isFirstWeek) || (iteratorDayInMonth > daysInSelectedMonth))
+            bool isDayOfPreviousMonth = weekDay < daysBetweenMondayAndFirstDayOfSelectedMonth && isFirstWeek;
+            bool isDayOfNextMonth = iteratorDayInMonth > daysInSelectedMonth;
+            if (isDayOfPreviousMonth || isDayOfNextMonth)
             {
                 cell.Value = Constants.Empty;
             }
@@ -305,7 +310,9 @@ namespace CalendarApp
             string cellText = Constants.Empty;
             foreach (Appointment appointment in appointmentsInThisDayAtThisHour)
             {
-                if (appointment.StartDate.Hour == hour && appointment.StartDate.Day == iteratorDateInWeek.Day)
+                bool isAppointmentStartsAtThisHour = appointment.StartDate.Hour == hour;
+                bool isAppointmentTheSameDayThatIteratorDate = appointment.StartDate.Day == iteratorDateInWeek.Day;
+                if (isAppointmentStartsAtThisHour && isAppointmentTheSameDayThatIteratorDate)
                 {
                     cellText = string.Format("{0}{1}", cellText, appointment.StartDate.ToString(Constants.HourAndMinuteFormat));
                 }
