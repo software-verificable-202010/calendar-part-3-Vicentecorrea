@@ -74,21 +74,21 @@ namespace CalendarApp.Views
 
         private void EditAppointmentButton_Click(object sender, EventArgs e)
         {
-            string appointmentTitle = appointmentTitleTextBox.Text;
-            string appointmentDescription = appointmentDescriptionRichTextBox.Text;
-            DateTime appointmentStartDate = appointmentStartDateDateTimePicker.Value;
-            DateTime appointmentEndDate = appointmentEndDateDateTimePicker.Value;
-            bool appointmentHasTitle = !String.IsNullOrWhiteSpace(appointmentTitle);
-            bool appointmentHasDescription = !String.IsNullOrWhiteSpace(appointmentDescription);
-            bool appointmentEndDateIsLaterThanStartDate = appointmentStartDate < appointmentEndDate;
-            bool couldTheAppointmentBeCreated = appointmentHasTitle && appointmentHasDescription && appointmentEndDateIsLaterThanStartDate;
+            List<string> appointmentGuests = GetAppointmentGuests();
+            Appointment editedAppointment = new Appointment(appointmentTitleTextBox.Text, appointmentDescriptionRichTextBox.Text,
+                appointmentStartDateDateTimePicker.Value, appointmentEndDateDateTimePicker.Value, UserController.LoggedUsername, appointmentGuests);
+            bool appointmentHasTitle = !String.IsNullOrWhiteSpace(editedAppointment.Title);
+            bool appointmentHasDescription = !String.IsNullOrWhiteSpace(editedAppointment.Description);
+            bool appointmentEndDateIsLaterThanStartDate = editedAppointment.StartDate < editedAppointment.EndDate;
+            List<string> usernamesThatCannotBeInvitedToAppointment = AppointmentController.GetUsernamesThatCannotBeInvitedToAppointment(appointmentGuests, editedAppointment);
+            bool areAllTheGuestsCorrect = usernamesThatCannotBeInvitedToAppointment.Count.Equals(Constants.ZeroItemsInList);
+            bool areTheAppointmentValuesCorrect = appointmentHasTitle && appointmentHasDescription && appointmentEndDateIsLaterThanStartDate;
+            bool couldTheAppointmentBeCreated = areTheAppointmentValuesCorrect && areAllTheGuestsCorrect;
             if (couldTheAppointmentBeCreated)
             {
-                List<string> appointmentGuests = GetAppointmentGuests();
-                Appointment newAppointment = new Appointment(appointmentTitle, appointmentDescription, appointmentStartDate, appointmentEndDate, UserController.LoggedUsername, appointmentGuests);
                 AppointmentController.DeleteAppointment(appointment);
-                AppointmentController.SaveAppointment(newAppointment);
-                appointmentInformation.UpdateFields(newAppointment);
+                AppointmentController.SaveAppointment(editedAppointment);
+                appointmentInformation.UpdateFields(editedAppointment);
                 calendar.ShowSelectedDisplay();
                 MessageBox.Show("Successfully edited appointment");
                 if (appointmentsInDay != null)
@@ -99,8 +99,16 @@ namespace CalendarApp.Views
             }
             else
             {
-                string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointment(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
-                MessageBox.Show(errorFeedbackText);
+                if (!areTheAppointmentValuesCorrect)
+                {
+                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
+                    MessageBox.Show(errorFeedbackText, "Error");
+                }
+                if (!areAllTheGuestsCorrect)
+                {
+                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(usernamesThatCannotBeInvitedToAppointment);
+                    MessageBox.Show(errorFeedbackText, "Error");
+                }
             }
         }
 

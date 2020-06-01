@@ -99,9 +99,9 @@ namespace CalendarApp.Controllers
             return loggedUserCanSeeThisAppointment;
         }
 
-        public static string GetErrorFeedbackTextCreatingAppointment(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
+        public static string GetErrorFeedbackTextCreatingAppointmentWithWrongValues(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
         {
-            string feedbackText = string.Format("Error{0}", Environment.NewLine);
+            string feedbackText = "";
             if (!appointmentHasTitle)
             {
                 feedbackText = string.Format("{0}The appointment must have a title{1}", feedbackText, Environment.NewLine);
@@ -117,6 +117,55 @@ namespace CalendarApp.Controllers
                 feedbackText = string.Format("{0}The end date must be later than the start date", feedbackText);
             }
             return feedbackText;
+        }
+
+        public static string GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(List<string> usernamesThatCannotBeInvitedToAppointment)
+        {
+            string feedbackText = string.Format("The following users cannot be invited to your appointment because they have a time collision with another appointment:{0}", Environment.NewLine);
+            foreach (string username in usernamesThatCannotBeInvitedToAppointment)
+            {
+                feedbackText = string.Format("{0}- {1}{2}", feedbackText, username, Environment.NewLine);
+            }
+            return feedbackText;
+        }
+
+        private static List<Appointment> GetUsernameAppointments(string username)
+        {
+            IEnumerable<Appointment> appointments = from appointment in Appointments
+                                                    where appointment.OwnerUsername.Equals(username) || appointment.GuestUsernames.Contains(username)
+                                                    select appointment;
+            List<Appointment> usernameAppointments = new List<Appointment>(appointments);
+            return usernameAppointments;
+        }
+
+        private static bool CanTheUserBeInvitedToAppointment(string username, Appointment temporaryAppointment)
+        {
+            List<Appointment> appointmentsOfUsernameToMove = GetUsernameAppointments(username);
+            foreach (Appointment appointment in appointmentsOfUsernameToMove)
+            {
+                bool temporaryStartDateCollidesWithAppointment = temporaryAppointment.StartDate < appointment.StartDate && appointment.StartDate < temporaryAppointment.EndDate;
+                bool temporaryEndDateCollidesWithAppointment = temporaryAppointment.StartDate < appointment.EndDate && appointment.EndDate < temporaryAppointment.EndDate;
+                bool bothTemporaryDatesCollidesWithAppointment = temporaryAppointment.StartDate > appointment.StartDate && temporaryAppointment.EndDate < appointment.EndDate;
+                bool isCollisionBetweenAppointments = temporaryStartDateCollidesWithAppointment || temporaryEndDateCollidesWithAppointment || bothTemporaryDatesCollidesWithAppointment;
+                if (isCollisionBetweenAppointments)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static List<string> GetUsernamesThatCannotBeInvitedToAppointment(List<string> possibleGuestUsernames, Appointment temporaryAppointment)
+        {
+            List<string> usernamesThatCannotBeInvitedToAppointment = new List<string>();
+            foreach (string possibleUsernameGuest in possibleGuestUsernames)
+            {
+                if (!CanTheUserBeInvitedToAppointment(possibleUsernameGuest, temporaryAppointment))
+                {
+                    usernamesThatCannotBeInvitedToAppointment.Add(possibleUsernameGuest);
+                }
+            }
+            return usernamesThatCannotBeInvitedToAppointment;
         }
         #endregion
     }
