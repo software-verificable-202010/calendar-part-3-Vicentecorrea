@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CalendarApp.Controllers
 {
-    public static class AppointmentController
+    public class AppointmentController
     {
         #region Fields
         private static List<Appointment> appointments = new List<Appointment>();
