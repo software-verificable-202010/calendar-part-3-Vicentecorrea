@@ -22,11 +22,11 @@ namespace CalendarApp.Views
             UserController.LoadUsers();
         }
 
-        private bool CheckIfUsernameExists(string loginUsername)
+        private static bool CheckIfUserNameExists(string loginUserName)
         {
             foreach (User user in UserController.Users)
             {
-                if (loginUsername.Equals(user.Username))
+                if (loginUserName.Equals(user.UserName))
                 {
                     return true;
                 }
@@ -34,32 +34,32 @@ namespace CalendarApp.Views
             return false;
         }
 
-        private void Login(string loginUsername)
+        private void Login(string loginUserName)
         {
-            UserController.LoggedUsername = loginUsername;
+            UserController.LoggedUserName = loginUserName;
             this.Hide();
             CalendarForm calendarForm = new CalendarForm();
             calendarForm.ShowDialog();
             this.Close();
         }
 
-        private void Register(string loginUsername)
+        private static void Register(string loginUserName)
         {
-            User newUser = new User(loginUsername);
+            User newUser = new User(loginUserName);
             UserController.SaveUser(newUser);
             MessageBox.Show("Successfully created user");
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            bool isValidUsername = !String.IsNullOrWhiteSpace(usernameTextBox.Text);
-            if (isValidUsername)
+            bool isValidUserName = !String.IsNullOrWhiteSpace(userNameTextBox.Text);
+            if (isValidUserName)
             {
-                string loginUsername = usernameTextBox.Text;
-                bool userAlreadyExists = CheckIfUsernameExists(loginUsername);
+                string loginUserName = userNameTextBox.Text;
+                bool userAlreadyExists = CheckIfUserNameExists(loginUserName);
                 if (userAlreadyExists)
                 {
-                    Login(loginUsername);
+                    Login(loginUserName);
                 }
                 else
                 {
@@ -74,19 +74,19 @@ namespace CalendarApp.Views
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            bool isValidUsername = !String.IsNullOrWhiteSpace(usernameTextBox.Text);
-            if (isValidUsername)
+            bool isValidUserName = !String.IsNullOrWhiteSpace(userNameTextBox.Text);
+            if (isValidUserName)
             {
-                string loginUsername = usernameTextBox.Text;
-                bool userAlreadyExists = CheckIfUsernameExists(loginUsername);
+                string loginUserName = userNameTextBox.Text;
+                bool userAlreadyExists = CheckIfUserNameExists(loginUserName);
                 if (!userAlreadyExists)
                 {
-                    Register(loginUsername);
-                    Login(loginUsername);
+                    Register(loginUserName);
+                    Login(loginUserName);
                 }
                 else
                 {
-                    MessageBox.Show("A user already exists with that username, choose another username");
+                    MessageBox.Show("A user already exists with that userName, choose another username");
                 }
             }
             else

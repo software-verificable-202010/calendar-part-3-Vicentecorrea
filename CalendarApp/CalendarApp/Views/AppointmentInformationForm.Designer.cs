@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.appointmentNameLabel = new System.Windows.Forms.Label();
-            this.appointmentNameValue = new System.Windows.Forms.Label();
+            this.appointmentTitleLabel = new System.Windows.Forms.Label();
+            this.appointmentTitleValue = new System.Windows.Forms.Label();
             this.appointmentDescriptionLabel = new System.Windows.Forms.Label();
             this.appointmentDescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.appointmentStartDateLabel = new System.Windows.Forms.Label();
@@ -44,23 +44,23 @@
             this.editAppointmentButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // appointmentNameLabel
+            // appointmentTitleLabel
             // 
-            this.appointmentNameLabel.AutoSize = true;
-            this.appointmentNameLabel.Location = new System.Drawing.Point(37, 22);
-            this.appointmentNameLabel.Name = "appointmentNameLabel";
-            this.appointmentNameLabel.Size = new System.Drawing.Size(35, 13);
-            this.appointmentNameLabel.TabIndex = 0;
-            this.appointmentNameLabel.Text = "Name";
+            this.appointmentTitleLabel.AutoSize = true;
+            this.appointmentTitleLabel.Location = new System.Drawing.Point(37, 22);
+            this.appointmentTitleLabel.Name = "appointmentTitleLabel";
+            this.appointmentTitleLabel.Size = new System.Drawing.Size(27, 13);
+            this.appointmentTitleLabel.TabIndex = 0;
+            this.appointmentTitleLabel.Text = "Title";
             // 
-            // appointmentNameValue
+            // appointmentTitleValue
             // 
-            this.appointmentNameValue.AutoSize = true;
-            this.appointmentNameValue.Location = new System.Drawing.Point(78, 22);
-            this.appointmentNameValue.Name = "appointmentNameValue";
-            this.appointmentNameValue.Size = new System.Drawing.Size(93, 13);
-            this.appointmentNameValue.TabIndex = 1;
-            this.appointmentNameValue.Text = "appointmentName";
+            this.appointmentTitleValue.AutoSize = true;
+            this.appointmentTitleValue.Location = new System.Drawing.Point(78, 22);
+            this.appointmentTitleValue.Name = "appointmentTitleValue";
+            this.appointmentTitleValue.Size = new System.Drawing.Size(85, 13);
+            this.appointmentTitleValue.TabIndex = 1;
+            this.appointmentTitleValue.Text = "appointmentTitle";
             // 
             // appointmentDescriptionLabel
             // 
@@ -189,8 +189,8 @@
             this.Controls.Add(this.appointmentStartDateLabel);
             this.Controls.Add(this.appointmentDescriptionRichTextBox);
             this.Controls.Add(this.appointmentDescriptionLabel);
-            this.Controls.Add(this.appointmentNameValue);
-            this.Controls.Add(this.appointmentNameLabel);
+            this.Controls.Add(this.appointmentTitleValue);
+            this.Controls.Add(this.appointmentTitleLabel);
             this.Name = "AppointmentInformationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment Information";
@@ -201,8 +201,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label appointmentNameLabel;
-        private System.Windows.Forms.Label appointmentNameValue;
+        private System.Windows.Forms.Label appointmentTitleLabel;
+        private System.Windows.Forms.Label appointmentTitleValue;
         private System.Windows.Forms.Label appointmentDescriptionLabel;
         private System.Windows.Forms.RichTextBox appointmentDescriptionRichTextBox;
         private System.Windows.Forms.Label appointmentStartDateLabel;

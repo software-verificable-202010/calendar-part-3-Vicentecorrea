@@ -42,7 +42,7 @@ namespace CalendarApp.Views
         {
             foreach (Appointment appointment in appointmentsInDay)
             {
-                if (appointment.OwnerUsername.Equals(UserController.LoggedUsername))
+                if (appointment.OwnerUserName.Equals(UserController.LoggedUserName))
                 {
                     myAppointments.Add(appointment);
                 }

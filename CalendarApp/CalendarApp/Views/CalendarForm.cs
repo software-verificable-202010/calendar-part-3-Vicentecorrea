@@ -29,7 +29,7 @@ namespace CalendarApp
             AppointmentController.LoadAppointments();
             selectedDate = DateTime.Today;
             calendarDisplayMenuListBox.SelectedItem = Constants.MonthOption;
-            loggedInUserValue.Text = UserController.LoggedUsername;
+            loggedInUserValue.Text = UserController.LoggedUserName;
             ShowMonth();
         }
 
@@ -251,7 +251,7 @@ namespace CalendarApp
             UpdateCalendarLabelInWeekView(firstDateOfWeek, lastDateOfWeek);
         }
 
-        private DateTime GetMondayOfWeek(DateTime date)
+        private static DateTime GetMondayOfWeek(DateTime date)
         {
             DateTime iteratorDayOfWeek = date;
             while (iteratorDayOfWeek.DayOfWeek != DayOfWeek.Monday)
@@ -390,7 +390,7 @@ namespace CalendarApp
 
         private void LogOutButton_Click(object sender, EventArgs e)
         {
-            UserController.LoggedUsername = Constants.Empty;
+            UserController.LoggedUserName = Constants.Empty;
             this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();

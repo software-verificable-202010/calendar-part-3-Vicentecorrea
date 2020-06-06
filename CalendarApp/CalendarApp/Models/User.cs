@@ -10,28 +10,28 @@ namespace CalendarApp.Models
     public class User
     {
         #region Fields
-        private string username;
+        private string userName;
         #endregion
 
         #region Properties
-        /// <summary>Public property for accessing the username field.</summary>
-        public string Username
+        /// <summary>Public property for accessing the userName field.</summary>
+        public string UserName
         {
             get
             {
-                return username;
+                return userName;
             }
             set
             {
-                username = value;
+                userName = value;
             }
         }
         #endregion
 
         #region Methods
-        public User(string username)
+        public User(string userName)
         {
-            this.username = username;
+            this.userName = userName;
         }
         #endregion
     }

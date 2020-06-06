@@ -30,8 +30,8 @@
         {
             this.invitedUsersLabel = new System.Windows.Forms.Label();
             this.allUsersLabel = new System.Windows.Forms.Label();
-            this.invitedUsernamesListBox = new System.Windows.Forms.ListBox();
-            this.notInvitedUsernamesListBox = new System.Windows.Forms.ListBox();
+            this.invitedUserNamesListBox = new System.Windows.Forms.ListBox();
+            this.notInvitedUserNamesListBox = new System.Windows.Forms.ListBox();
             this.editAppointmentButton = new System.Windows.Forms.Button();
             this.appointmentEndDateLabel = new System.Windows.Forms.Label();
             this.appointmentEndDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -61,25 +61,25 @@
             this.allUsersLabel.TabIndex = 24;
             this.allUsersLabel.Text = "Choose users to invite to your appointment";
             // 
-            // invitedUsernamesListBox
+            // invitedUserNamesListBox
             // 
-            this.invitedUsernamesListBox.BackColor = System.Drawing.Color.LightGreen;
-            this.invitedUsernamesListBox.FormattingEnabled = true;
-            this.invitedUsernamesListBox.Location = new System.Drawing.Point(566, 51);
-            this.invitedUsernamesListBox.Name = "invitedUsernamesListBox";
-            this.invitedUsernamesListBox.Size = new System.Drawing.Size(171, 134);
-            this.invitedUsernamesListBox.TabIndex = 23;
-            this.invitedUsernamesListBox.Click += new System.EventHandler(this.InvitedUsernamesListBox_Click);
+            this.invitedUserNamesListBox.BackColor = System.Drawing.Color.LightGreen;
+            this.invitedUserNamesListBox.FormattingEnabled = true;
+            this.invitedUserNamesListBox.Location = new System.Drawing.Point(566, 51);
+            this.invitedUserNamesListBox.Name = "invitedUserNamesListBox";
+            this.invitedUserNamesListBox.Size = new System.Drawing.Size(171, 134);
+            this.invitedUserNamesListBox.TabIndex = 23;
+            this.invitedUserNamesListBox.Click += new System.EventHandler(this.InvitedUserNamesListBox_Click);
             // 
-            // notInvitedUsernamesListBox
+            // notInvitedUserNamesListBox
             // 
-            this.notInvitedUsernamesListBox.BackColor = System.Drawing.Color.LightPink;
-            this.notInvitedUsernamesListBox.FormattingEnabled = true;
-            this.notInvitedUsernamesListBox.Location = new System.Drawing.Point(327, 51);
-            this.notInvitedUsernamesListBox.Name = "notInvitedUsernamesListBox";
-            this.notInvitedUsernamesListBox.Size = new System.Drawing.Size(171, 134);
-            this.notInvitedUsernamesListBox.TabIndex = 22;
-            this.notInvitedUsernamesListBox.Click += new System.EventHandler(this.NotInvitedUsernamesListBox_Click);
+            this.notInvitedUserNamesListBox.BackColor = System.Drawing.Color.LightPink;
+            this.notInvitedUserNamesListBox.FormattingEnabled = true;
+            this.notInvitedUserNamesListBox.Location = new System.Drawing.Point(327, 51);
+            this.notInvitedUserNamesListBox.Name = "notInvitedUserNamesListBox";
+            this.notInvitedUserNamesListBox.Size = new System.Drawing.Size(171, 134);
+            this.notInvitedUserNamesListBox.TabIndex = 22;
+            this.notInvitedUserNamesListBox.Click += new System.EventHandler(this.NotInvitedUserNamesListBox_Click);
             // 
             // editAppointmentButton
             // 
@@ -167,8 +167,8 @@
             this.ClientSize = new System.Drawing.Size(774, 284);
             this.Controls.Add(this.invitedUsersLabel);
             this.Controls.Add(this.allUsersLabel);
-            this.Controls.Add(this.invitedUsernamesListBox);
-            this.Controls.Add(this.notInvitedUsernamesListBox);
+            this.Controls.Add(this.invitedUserNamesListBox);
+            this.Controls.Add(this.notInvitedUserNamesListBox);
             this.Controls.Add(this.editAppointmentButton);
             this.Controls.Add(this.appointmentEndDateLabel);
             this.Controls.Add(this.appointmentEndDateDateTimePicker);
@@ -190,8 +190,8 @@
 
         private System.Windows.Forms.Label invitedUsersLabel;
         private System.Windows.Forms.Label allUsersLabel;
-        private System.Windows.Forms.ListBox invitedUsernamesListBox;
-        private System.Windows.Forms.ListBox notInvitedUsernamesListBox;
+        private System.Windows.Forms.ListBox invitedUserNamesListBox;
+        private System.Windows.Forms.ListBox notInvitedUserNamesListBox;
         private System.Windows.Forms.Button editAppointmentButton;
         private System.Windows.Forms.Label appointmentEndDateLabel;
         private System.Windows.Forms.DateTimePicker appointmentEndDateDateTimePicker;

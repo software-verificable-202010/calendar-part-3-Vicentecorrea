@@ -11,8 +11,8 @@ namespace CalendarApp.Views
     {
         #region Fields
         private readonly CalendarForm calendar;
-        private BindingList<string> allUsernames = new BindingList<string>();
-        private BindingList<string> invitedUsernames = new BindingList<string>();
+        private readonly BindingList<string> allUserNames = new BindingList<string>();
+        private readonly BindingList<string> invitedUserNames = new BindingList<string>();
         #endregion
 
         #region Methods
@@ -20,18 +20,18 @@ namespace CalendarApp.Views
         {
             InitializeComponent();
             calendar = calendarForm;
-            AddUsernamesToAllUsernamesList();
-            allUsernamesListBox.DataSource = allUsernames;
-            invitedUsernamesListBox.DataSource = invitedUsernames;
+            AddUserNamesToAllUserNamesList();
+            allUserNamesListBox.DataSource = allUserNames;
+            invitedUserNamesListBox.DataSource = invitedUserNames;
         }
 
-        private void AddUsernamesToAllUsernamesList()
+        private void AddUserNamesToAllUserNamesList()
         {
             foreach (User user in UserController.Users)
             {
-                if (user.Username != UserController.LoggedUsername)
+                if (user.UserName != UserController.LoggedUserName)
                 {
-                    allUsernames.Add(user.Username);
+                    allUserNames.Add(user.UserName);
                 }
             }
         }
@@ -40,12 +40,12 @@ namespace CalendarApp.Views
         {
             List<string> appointmentGuests = GetAppointmentGuests();
             Appointment newAppointment = new Appointment(appointmentTitleTextBox.Text, appointmentDescriptionRichTextBox.Text, 
-                appointmentStartDateDateTimePicker.Value, appointmentEndDateDateTimePicker.Value, UserController.LoggedUsername, appointmentGuests);
+                appointmentStartDateDateTimePicker.Value, appointmentEndDateDateTimePicker.Value, UserController.LoggedUserName, appointmentGuests);
             bool appointmentHasTitle = !String.IsNullOrWhiteSpace(newAppointment.Title);
             bool appointmentHasDescription = !String.IsNullOrWhiteSpace(newAppointment.Description);
             bool appointmentEndDateIsLaterThanStartDate = newAppointment.StartDate < newAppointment.EndDate;
-            List<string> usernamesThatCannotBeInvitedToAppointment = AppointmentController.GetUsernamesThatCannotBeInvitedToAppointment(appointmentGuests, newAppointment);
-            bool areAllTheGuestsCorrect = usernamesThatCannotBeInvitedToAppointment.Count.Equals(Constants.ZeroItemsInList);
+            List<string> userNamesThatCannotBeInvitedToAppointment = AppointmentController.GetUserNamesThatCannotBeInvitedToAppointment(appointmentGuests, newAppointment);
+            bool areAllTheGuestsCorrect = userNamesThatCannotBeInvitedToAppointment.Count.Equals(Constants.ZeroItemsInList);
             bool areTheAppointmentValuesCorrect = appointmentHasTitle && appointmentHasDescription && appointmentEndDateIsLaterThanStartDate;
             bool couldTheAppointmentBeCreated = areTheAppointmentValuesCorrect && areAllTheGuestsCorrect;
             if (couldTheAppointmentBeCreated)
@@ -64,7 +64,7 @@ namespace CalendarApp.Views
                 }
                 if (!areAllTheGuestsCorrect)
                 {
-                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(usernamesThatCannotBeInvitedToAppointment);
+                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(userNamesThatCannotBeInvitedToAppointment);
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
             }
@@ -72,31 +72,31 @@ namespace CalendarApp.Views
 
         private List<string> GetAppointmentGuests()
         {
-            List<string> guestsUsernames = new List<string>();
-            foreach(string invitedUsername in invitedUsernames)
+            List<string> guestsUserNames = new List<string>();
+            foreach(string invitedUserName in invitedUserNames)
             {
-                guestsUsernames.Add(invitedUsername);
+                guestsUserNames.Add(invitedUserName);
             }
-            return guestsUsernames;
+            return guestsUserNames;
         }
 
-        private void AllUsernamesListBox_Click(object sender, EventArgs e)
+        private void AllUserNamesListBox_Click(object sender, EventArgs e)
         {
-            if (allUsernames.Count > Constants.ZeroItemsInList)
+            if (allUserNames.Count > Constants.ZeroItemsInList)
             {
-                string usernameToMove = allUsernamesListBox.SelectedItem.ToString();
-                invitedUsernames.Add(usernameToMove);
-                allUsernames.Remove(usernameToMove);
+                string userNameToMove = allUserNamesListBox.SelectedItem.ToString();
+                invitedUserNames.Add(userNameToMove);
+                allUserNames.Remove(userNameToMove);
             }
         }
 
-        private void InvitedUsernamesListBox_Click(object sender, EventArgs e)
+        private void InvitedUserNamesListBox_Click(object sender, EventArgs e)
         {
-            if (invitedUsernames.Count > Constants.ZeroItemsInList)
+            if (invitedUserNames.Count > Constants.ZeroItemsInList)
             {
-                string usernameToMove = invitedUsernamesListBox.SelectedItem.ToString();
-                allUsernames.Add(usernameToMove);
-                invitedUsernames.Remove(usernameToMove);
+                string userNameToMove = invitedUserNamesListBox.SelectedItem.ToString();
+                allUserNames.Add(userNameToMove);
+                invitedUserNames.Remove(userNameToMove);
             }
         }
         #endregion

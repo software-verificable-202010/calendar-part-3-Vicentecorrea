@@ -43,25 +43,49 @@ namespace CalendarApp.Controllers
 
         private static void SerializeAppointments()
         {
-            Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            binaryFormatter.Serialize(stream, Appointments);
-            stream.Close();
+            Stream stream = null;
+            try
+            {
+                stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(stream, Appointments);
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
         }
 
         public static void LoadAppointments()
         {
-            Stream stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
-            if (stream.Length > Constants.ZeroItemsInList)
+            Stream stream = null;
+            try
             {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                Appointments = (List<Appointment>)binaryFormatter.Deserialize(stream);
+                stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
+                if (stream.Length > Constants.ZeroItemsInList)
+                {
+                    BinaryFormatter binaryFormatter = new BinaryFormatter();
+                    Appointments = (List<Appointment>)binaryFormatter.Deserialize(stream);
+                }
             }
-            stream.Close();
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
         }
 
         public static bool IsAppointmentInThisDay(Appointment appointment, DateTime day)
         {
+            if (appointment == null)
+            {
+                throw new ArgumentNullException("appointment");
+            }
             bool IsAppointmentInThisDay = appointment.StartDate.Date <= day && day <= appointment.EndDate.Date;
             return IsAppointmentInThisDay;
         }
@@ -77,6 +101,10 @@ namespace CalendarApp.Controllers
 
         public static bool IsAppointmentInThisDayAndTime(Appointment appointment, DateTime time)
         {
+            if (appointment == null)
+            {
+                throw new ArgumentNullException("appointment");
+            }
             DateTime previousHour = appointment.StartDate.AddHours(Constants.PreviousTimeInterval);
             bool IsAppointmentInThisDay = previousHour < time && time< appointment.EndDate;
             return IsAppointmentInThisDay;
@@ -93,8 +121,12 @@ namespace CalendarApp.Controllers
 
         public static bool LoggedUserCanSeeThisAppointment(Appointment appointment)
         {
-            bool appointmentOwnerIsLoggedUser = appointment.OwnerUsername.Equals(UserController.LoggedUsername);
-            bool loggedUserIsInvitedToThisAppointment = appointment.GuestUsernames.Contains(UserController.LoggedUsername);
+            if (appointment == null)
+            {
+                throw new ArgumentNullException("appointment");
+            }
+            bool appointmentOwnerIsLoggedUser = appointment.OwnerUserName.Equals(UserController.LoggedUserName);
+            bool loggedUserIsInvitedToThisAppointment = appointment.GuestUserNames.Contains(UserController.LoggedUserName);
             bool loggedUserCanSeeThisAppointment = appointmentOwnerIsLoggedUser || loggedUserIsInvitedToThisAppointment;
             return loggedUserCanSeeThisAppointment;
         }
@@ -110,7 +142,6 @@ namespace CalendarApp.Controllers
             if (!appointmentHasDescription)
             {
                 feedbackText = string.Format("{0}The appointment must have a description{1}", feedbackText, Environment.NewLine);
-
             }
             if (!appointmentEndDateIsLaterThanStartDate)
             {
@@ -119,29 +150,33 @@ namespace CalendarApp.Controllers
             return feedbackText;
         }
 
-        public static string GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(List<string> usernamesThatCannotBeInvitedToAppointment)
+        public static string GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(List<string> userNamesThatCannotBeInvitedToAppointment)
         {
-            string feedbackText = string.Format("The following users cannot be invited to your appointment because they have a time collision with another appointment:{0}", Environment.NewLine);
-            foreach (string username in usernamesThatCannotBeInvitedToAppointment)
+            if (userNamesThatCannotBeInvitedToAppointment == null)
             {
-                feedbackText = string.Format("{0}- {1}{2}", feedbackText, username, Environment.NewLine);
+                throw new ArgumentNullException("userNamesThatCannotBeInvitedToAppointment");
+            }
+            string feedbackText = string.Format("The following users cannot be invited to your appointment because they have a time collision with another appointment:{0}", Environment.NewLine);
+            foreach (string userName in userNamesThatCannotBeInvitedToAppointment)
+            {
+                feedbackText = string.Format("{0}- {1}{2}", feedbackText, userName, Environment.NewLine);
             }
             return feedbackText;
         }
 
-        private static List<Appointment> GetUsernameAppointments(string username)
+        private static List<Appointment> GetUserNameAppointments(string userName)
         {
             IEnumerable<Appointment> appointments = from appointment in Appointments
-                                                    where appointment.OwnerUsername.Equals(username) || appointment.GuestUsernames.Contains(username)
+                                                    where appointment.OwnerUserName.Equals(userName) || appointment.GuestUserNames.Contains(userName)
                                                     select appointment;
-            List<Appointment> usernameAppointments = new List<Appointment>(appointments);
-            return usernameAppointments;
+            List<Appointment> userNameAppointments = new List<Appointment>(appointments);
+            return userNameAppointments;
         }
 
-        private static bool CanTheUserBeInvitedToAppointment(string username, Appointment temporaryAppointment)
+        private static bool CanTheUserBeInvitedToAppointment(string userName, Appointment temporaryAppointment)
         {
-            List<Appointment> appointmentsOfUsernameToMove = GetUsernameAppointments(username);
-            foreach (Appointment appointment in appointmentsOfUsernameToMove)
+            List<Appointment> appointmentsOfUserNameToMove = GetUserNameAppointments(userName);
+            foreach (Appointment appointment in appointmentsOfUserNameToMove)
             {
                 bool temporaryStartDateCollidesWithAppointment = temporaryAppointment.StartDate < appointment.StartDate && appointment.StartDate < temporaryAppointment.EndDate;
                 bool temporaryEndDateCollidesWithAppointment = temporaryAppointment.StartDate < appointment.EndDate && appointment.EndDate < temporaryAppointment.EndDate;
@@ -155,17 +190,21 @@ namespace CalendarApp.Controllers
             return true;
         }
 
-        public static List<string> GetUsernamesThatCannotBeInvitedToAppointment(List<string> possibleGuestUsernames, Appointment temporaryAppointment)
+        public static List<string> GetUserNamesThatCannotBeInvitedToAppointment(List<string> possibleGuestUserNames, Appointment temporaryAppointment)
         {
-            List<string> usernamesThatCannotBeInvitedToAppointment = new List<string>();
-            foreach (string possibleUsernameGuest in possibleGuestUsernames)
+            if (possibleGuestUserNames == null)
             {
-                if (!CanTheUserBeInvitedToAppointment(possibleUsernameGuest, temporaryAppointment))
+                throw new ArgumentNullException("possibleGuestUserNames");
+            }
+            List<string> userNamesThatCannotBeInvitedToAppointment = new List<string>();
+            foreach (string possibleUserNameGuest in possibleGuestUserNames)
+            {
+                if (!CanTheUserBeInvitedToAppointment(possibleUserNameGuest, temporaryAppointment))
                 {
-                    usernamesThatCannotBeInvitedToAppointment.Add(possibleUsernameGuest);
+                    userNamesThatCannotBeInvitedToAppointment.Add(possibleUserNameGuest);
                 }
             }
-            return usernamesThatCannotBeInvitedToAppointment;
+            return userNamesThatCannotBeInvitedToAppointment;
         }
         #endregion
     }

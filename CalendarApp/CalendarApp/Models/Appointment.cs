@@ -11,8 +11,8 @@ namespace CalendarApp.Models
         private string description;
         private DateTime startDate;
         private DateTime endDate;
-        private string ownerUsername;
-        private List<string> guestUsernames;
+        private string ownerUserName;
+        private List<string> guestUserNames;
         #endregion
 
         #region Properties
@@ -69,47 +69,44 @@ namespace CalendarApp.Models
         }
 
         /// <summary>Public property for accessing the owner field.</summary>
-        public string OwnerUsername
+        public string OwnerUserName
         {
             get
             {
-                return ownerUsername;
+                return ownerUserName;
             }
             set
             {
-                ownerUsername = value;
+                ownerUserName = value;
             }
         }
         /// <summary>Public property for accessing the guests field.</summary>
-        public List<string> GuestUsernames
+        public List<string> GuestUserNames
         {
             get
             {
-                return guestUsernames;
+                return guestUserNames;
             }
             set
             {
-                guestUsernames = value;
+                guestUserNames = value;
             }
         }
         #endregion
 
         #region Methods
-        public Appointment(string title, string description, DateTime startDate, DateTime endDate, string ownerUsername, List<string> guestUsernames = null)
+        public Appointment(string title, string description, DateTime startDate, DateTime endDate, string ownerUserName, List<string> guestUserNames)
         {
             Title = title;
             Description = description;
             StartDate = startDate;
             EndDate = endDate;
-            OwnerUsername = ownerUsername;
-            if (guestUsernames == null)
+            OwnerUserName = ownerUserName;
+            if (guestUserNames == null)
             {
-                GuestUsernames = new List<string>();
+                throw new ArgumentNullException("guestUserNames");
             }
-            else
-            {
-                GuestUsernames = guestUsernames;
-            }
+            GuestUserNames = guestUserNames;
         }
         #endregion
     }

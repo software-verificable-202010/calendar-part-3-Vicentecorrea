@@ -13,7 +13,7 @@ namespace CalendarApp.Controllers
     {
         #region Fields
         private static List<User> users = new List<User>();
-        private static string loggedUsername;
+        private static string loggedUserName;
         #endregion
 
         #region Properties
@@ -31,15 +31,15 @@ namespace CalendarApp.Controllers
         }
 
         /// <summary>Public property for accessing the logged in user.</summary>
-        public static string LoggedUsername
+        public static string LoggedUserName
         {
             get
             {
-                return loggedUsername;
+                return loggedUserName;
             }
             set
             {
-                loggedUsername = value;
+                loggedUserName = value;
             }
         }
         #endregion
@@ -53,21 +53,35 @@ namespace CalendarApp.Controllers
 
         private static void SerializeUsers()
         {
-            Stream stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.OpenOrCreate);
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            binaryFormatter.Serialize(stream, Users);
-            stream.Close();
+            Stream stream = null;
+            try
+            {
+                stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.OpenOrCreate);
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(stream, Users);
+            }
+            finally
+            {
+                stream.Close();
+            }
         }
 
         public static void LoadUsers()
         {
-            Stream stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.OpenOrCreate);
-            if (stream.Length > Constants.ZeroItemsInList)
+            Stream stream = null;
+            try
             {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                Users = (List<User>)binaryFormatter.Deserialize(stream);
+                stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.OpenOrCreate);
+                if (stream.Length > Constants.ZeroItemsInList)
+                {
+                    BinaryFormatter binaryFormatter = new BinaryFormatter();
+                    Users = (List<User>)binaryFormatter.Deserialize(stream);
+                }
             }
-            stream.Close();
+            finally
+            {
+                stream.Close();
+            }
         }
         #endregion
     }
