@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace CalendarApp.Controllers
 {
-    public static class UserController
+    public class UserController
     {
         #region Fields
-        private static List<User> users = new List<User>();
-        private static string loggedUserName;
+        static private List<User> users = new List<User>();
+        static private string loggedUserName;
         #endregion
 
         #region Properties
         /// <summary>Public property for accessing the users.</summary>
-        public static List<User> Users
+        static public List<User> Users
         {
             get
             {
@@ -31,7 +31,7 @@ namespace CalendarApp.Controllers
         }
 
         /// <summary>Public property for accessing the logged in user.</summary>
-        public static string LoggedUserName
+        static public string LoggedUserName
         {
             get
             {

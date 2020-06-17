@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+				<Configuration>
+					<CodeCoverage>
+
+						<Functions>
+							<Include>
+								<!-- Including all methods belonging to the CalendarApp namespace -->
+								<Function>^CalendarApp..*</Function>
+							</Include>
+							<Exclude>
+								<!-- Excluding all methods called InitializeComponent, Dispose and Main -->
+								<Function>.*\.InitializeComponent\(.*</Function>
+								<Function>.*\.Dispose\(.*</Function>
+								<Function>.*\.Main\(.*</Function>
+								<!-- Excluding all methods belonging to the CalendarApp.Properties namespace -->
+								<Function>^CalendarApp.Properties..*</Function>
+							</Exclude>
+						</Functions>
+
+					</CodeCoverage>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>

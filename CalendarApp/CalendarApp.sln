@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarApp", "CalendarApp\CalendarApp.csproj", "{EC840045-FCCB-4D7F-BEB8-70789D1FDE49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarApp.Tests", "CalendarApp.Tests\CalendarApp.Tests.csproj", "{5CEBA10B-08AA-486F-83EA-7156CF1501FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarApp.Tests", "CalendarApp.Tests\CalendarApp.Tests.csproj", "{5CEBA10B-08AA-486F-83EA-7156CF1501FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3F3A0DB2-A954-45BA-AF26-CF95B30F487D}"
+	ProjectSection(SolutionItems) = preProject
+		TestsCoverage.runsettings = TestsCoverage.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
