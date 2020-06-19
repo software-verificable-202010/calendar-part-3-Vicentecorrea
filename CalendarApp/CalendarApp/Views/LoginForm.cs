@@ -77,7 +77,7 @@ namespace CalendarApp.Views
                 }
                 else
                 {
-                    MessageBox.Show("A user already exists with that userName, choose another username");
+                    MessageBox.Show("A user already exists with that username, choose another username");
                 }
             }
             else
