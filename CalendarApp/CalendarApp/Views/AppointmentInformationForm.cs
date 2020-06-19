@@ -11,10 +11,12 @@ namespace CalendarApp.Views
         #region Fields
         private readonly Appointment appointment;
         private readonly CalendarForm calendar;
+        private readonly AppointmentController appointmentController;
+        private readonly UserController userController;
         #endregion
 
         #region Methods
-        public AppointmentInformationForm(Appointment appointment, CalendarForm calendarForm, AppointmentsInDayForm appointmentsInDayForm = null)
+        public AppointmentInformationForm(Appointment appointment, CalendarForm calendarForm, AppointmentController appointmentController, UserController userController, AppointmentsInDayForm appointmentsInDayForm = null)
         {
             InitializeComponent();
             if (appointment == null)
@@ -29,6 +31,8 @@ namespace CalendarApp.Views
             }
             FillFields();
             HideOwnerButtonsIfLoggedUserDoesNotOwnTheAppointment();
+            this.appointmentController = appointmentController;
+            this.userController = userController;
         }
 
         private void HideOwnerButtonsIfLoggedUserDoesNotOwnTheAppointment()
@@ -72,7 +76,7 @@ namespace CalendarApp.Views
             DialogResult answer = MessageBox.Show(warningTitle, warningMessage, messageBoxButtons);
             if (answer == DialogResult.Yes)
             {
-                AppointmentController.DeleteAppointment(appointment);
+                appointmentController.DeleteAppointment(appointment);
                 calendar.ShowSelectedDisplay();
                 this.Close();
             }
@@ -80,7 +84,7 @@ namespace CalendarApp.Views
 
         private void EditAppointmentButton_Click(object sender, System.EventArgs e)
         {
-            EditAppointmentForm editAppointmentForm = new EditAppointmentForm(appointment, this, calendar, null);
+            EditAppointmentForm editAppointmentForm = new EditAppointmentForm(appointment, this, calendar, null, appointmentController, userController);
             editAppointmentForm.Show();
         }
         #endregion

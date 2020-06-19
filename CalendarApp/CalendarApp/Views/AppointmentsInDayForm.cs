@@ -13,10 +13,12 @@ namespace CalendarApp.Views
         private readonly List<Appointment> myAppointments = new List<Appointment>();
         private readonly List<Appointment> invitedAppointments = new List<Appointment>();
         private readonly CalendarForm calendar;
+        private readonly AppointmentController appointmentController;
+        private readonly UserController userController;
         #endregion
 
         #region Methods
-        public AppointmentsInDayForm(List<Appointment> appointmentsInDay, DateTime dayAndTime, CalendarForm calendarForm)
+        public AppointmentsInDayForm(List<Appointment> appointmentsInDay, DateTime dayAndTime, CalendarForm calendarForm, AppointmentController appointmentController, UserController userController)
         {
             InitializeComponent();
             this.calendar = calendarForm;
@@ -24,6 +26,8 @@ namespace CalendarApp.Views
             SetDateAndTimeLabel(dayAndTime);
             AddMyAppointmentsToListBox();
             AddInvitedAppointmentsToListBox();
+            this.appointmentController = appointmentController;
+            this.userController = userController;
         }
 
         private void SetDateAndTimeLabel(DateTime dayAndTime)
@@ -79,7 +83,7 @@ namespace CalendarApp.Views
         {
             if (Constants.DefaultInitialIndex <= myAppointmentsListBox.SelectedIndex && myAppointmentsListBox.SelectedIndex < myAppointments.Count)
             {
-                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(myAppointments[myAppointmentsListBox.SelectedIndex], calendar, this);
+                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(myAppointments[myAppointmentsListBox.SelectedIndex], calendar, appointmentController, userController, this);
                 appointmentInformationForm.Show();
             }
         }
@@ -88,7 +92,7 @@ namespace CalendarApp.Views
         {
             if (Constants.DefaultInitialIndex <= invitedAppointmentsListBox.SelectedIndex && invitedAppointmentsListBox.SelectedIndex < invitedAppointments.Count)
             {
-                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(invitedAppointments[invitedAppointmentsListBox.SelectedIndex], calendar, this);
+                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(invitedAppointments[invitedAppointmentsListBox.SelectedIndex], calendar, appointmentController, userController, this);
                 appointmentInformationForm.Show();
             }
         }

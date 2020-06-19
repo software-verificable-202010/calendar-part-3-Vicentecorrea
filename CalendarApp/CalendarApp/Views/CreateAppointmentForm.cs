@@ -13,21 +13,25 @@ namespace CalendarApp.Views
         private readonly CalendarForm calendar;
         private readonly BindingList<string> allUserNames = new BindingList<string>();
         private readonly BindingList<string> invitedUserNames = new BindingList<string>();
+        private readonly AppointmentController appointmentController;
+        private readonly UserController userController = new UserController();
         #endregion
 
         #region Methods
-        public CreateAppointmentForm(CalendarForm calendarForm)
+        public CreateAppointmentForm(CalendarForm calendarForm, AppointmentController appointmentController, UserController userController)
         {
             InitializeComponent();
             calendar = calendarForm;
             AddUserNamesToAllUserNamesList();
             allUserNamesListBox.DataSource = allUserNames;
             invitedUserNamesListBox.DataSource = invitedUserNames;
+            this.appointmentController = appointmentController;
+            this.userController = userController;
         }
 
         private void AddUserNamesToAllUserNamesList()
         {
-            foreach (User user in UserController.Users)
+            foreach (User user in userController.Users)
             {
                 if (user.UserName != UserController.LoggedUserName)
                 {
@@ -44,14 +48,14 @@ namespace CalendarApp.Views
             bool appointmentHasTitle = !String.IsNullOrWhiteSpace(newAppointment.Title);
             bool appointmentHasDescription = !String.IsNullOrWhiteSpace(newAppointment.Description);
             bool appointmentEndDateIsLaterThanStartDate = newAppointment.StartDate < newAppointment.EndDate;
-            List<string> userNamesThatCannotBeInvitedToAppointment = AppointmentController.GetUserNamesThatCannotBeInvitedToAppointment(appointmentGuests, newAppointment);
+            List<string> userNamesThatCannotBeInvitedToAppointment = appointmentController.GetUserNamesThatCannotBeInvitedToAppointment(appointmentGuests, newAppointment);
             bool areAllTheGuestsCorrect = userNamesThatCannotBeInvitedToAppointment.Count.Equals(Constants.ZeroItemsInList);
             bool areTheAppointmentValuesCorrect = appointmentHasTitle && appointmentHasDescription && appointmentEndDateIsLaterThanStartDate;
             bool couldTheAppointmentBeCreated = areTheAppointmentValuesCorrect && areAllTheGuestsCorrect;
             if (couldTheAppointmentBeCreated)
             {
                 MessageBox.Show("Successfully created appointment");
-                AppointmentController.SaveAppointment(newAppointment);
+                appointmentController.SaveAppointment(newAppointment);
                 calendar.ShowSelectedDisplay();
                 this.Close();
             }
@@ -59,12 +63,12 @@ namespace CalendarApp.Views
             {
                 if (!areTheAppointmentValuesCorrect)
                 {
-                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
+                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
                 if (!areAllTheGuestsCorrect)
                 {
-                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(userNamesThatCannotBeInvitedToAppointment);
+                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(userNamesThatCannotBeInvitedToAppointment);
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
             }

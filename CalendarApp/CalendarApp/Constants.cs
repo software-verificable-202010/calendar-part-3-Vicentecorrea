@@ -25,7 +25,7 @@
         public const string WeekOption = "Week";
         public const string FormatDateInAppointmentInformation = "dddd, dd MMMM yyyy, HH:mm";
         public const string DayAndMonthFormat = "d MMMM";
-        public const string HourAndMinuteFormat = "HH:mm   ";
+        public const string HourAndMinuteFormat = "HH:mm";
         public const string PathToAppointmentsSerializationFile = "..\\..\\appointments.bin";
         public const string PathToUsersSerializationFile = "..\\..\\users.bin";
         public const bool EnabledVisualStyles = true;

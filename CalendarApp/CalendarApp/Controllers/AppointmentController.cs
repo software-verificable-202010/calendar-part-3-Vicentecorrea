@@ -15,7 +15,7 @@ namespace CalendarApp.Controllers
 
         #region Properties
         /// <summary>Public property for accessing the appointments.</summary>
-        static public List<Appointment> Appointments
+        public List<Appointment> Appointments
         {
             get
             {
@@ -29,19 +29,19 @@ namespace CalendarApp.Controllers
         #endregion
 
         #region Methods
-        static public void SaveAppointment(Appointment appointment)
+        public void SaveAppointment(Appointment appointment)
         {
             Appointments.Add(appointment);
             SerializeAppointments();
         }
 
-        static public void DeleteAppointment(Appointment appointment)
+        public void DeleteAppointment(Appointment appointment)
         {
             Appointments.Remove(appointment);
             SerializeAppointments();
         }
 
-        static private void SerializeAppointments()
+        private void SerializeAppointments()
         {
             Stream stream = null;
             try
@@ -59,7 +59,7 @@ namespace CalendarApp.Controllers
             }
         }
 
-        static public void LoadAppointments()
+        public void LoadAppointments()
         {
             Stream stream = null;
             try
@@ -80,7 +80,7 @@ namespace CalendarApp.Controllers
             }
         }
 
-        static public List<Appointment> GetAppointmentsInThisDay(DateTime day)
+        public List<Appointment> GetAppointmentsInThisDay(DateTime day)
         {
             IEnumerable<Appointment> appointments = from appointment in Appointments
                                                     where IsAppointmentInThisDay(appointment, day) && LoggedUserCanSeeThisAppointment(appointment)
@@ -89,7 +89,7 @@ namespace CalendarApp.Controllers
             return appointmentsInThisDay;
         }
 
-        public static bool IsAppointmentInThisDay(Appointment appointment, DateTime day)
+        public bool IsAppointmentInThisDay(Appointment appointment, DateTime day)
         {
             if (appointment == null)
             {
@@ -99,7 +99,7 @@ namespace CalendarApp.Controllers
             return IsAppointmentInThisDay;
         }
 
-        static public List<Appointment> GetAppointmentsInThisDayAndTime(DateTime time)
+        public List<Appointment> GetAppointmentsInThisDayAndTime(DateTime time)
         {
             IEnumerable<Appointment> appointments = from appointment in Appointments
                                                     where IsAppointmentInThisDayAndTime(appointment, time) && LoggedUserCanSeeThisAppointment(appointment)
@@ -108,7 +108,7 @@ namespace CalendarApp.Controllers
             return appointmentsInThisDayAndTime;
         }
 
-        static public bool IsAppointmentInThisDayAndTime(Appointment appointment, DateTime time)
+        public bool IsAppointmentInThisDayAndTime(Appointment appointment, DateTime time)
         {
             if (appointment == null)
             {
@@ -119,7 +119,7 @@ namespace CalendarApp.Controllers
             return IsAppointmentInThisDay;
         }
 
-        static public bool LoggedUserCanSeeThisAppointment(Appointment appointment)
+        public bool LoggedUserCanSeeThisAppointment(Appointment appointment)
         {
             if (appointment == null)
             {
@@ -131,7 +131,7 @@ namespace CalendarApp.Controllers
             return loggedUserCanSeeThisAppointment;
         }
 
-        static public string GetErrorFeedbackTextCreatingAppointmentWithWrongValues(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
+        public string GetErrorFeedbackTextCreatingAppointmentWithWrongValues(bool appointmentHasTitle, bool appointmentHasDescription, bool appointmentEndDateIsLaterThanStartDate)
         {
             string feedbackText = "";
             if (!appointmentHasTitle)
@@ -150,7 +150,7 @@ namespace CalendarApp.Controllers
             return feedbackText;
         }
 
-        static public string GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(List<string> userNamesThatCannotBeInvitedToAppointment)
+        public string GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(List<string> userNamesThatCannotBeInvitedToAppointment)
         {
             if (userNamesThatCannotBeInvitedToAppointment == null)
             {
@@ -164,7 +164,7 @@ namespace CalendarApp.Controllers
             return feedbackText;
         }
 
-        static public List<string> GetUserNamesThatCannotBeInvitedToAppointment(List<string> possibleGuestUserNames, Appointment temporaryAppointment)
+        public List<string> GetUserNamesThatCannotBeInvitedToAppointment(List<string> possibleGuestUserNames, Appointment temporaryAppointment)
         {
             if (possibleGuestUserNames == null)
             {
@@ -181,7 +181,7 @@ namespace CalendarApp.Controllers
             return userNamesThatCannotBeInvitedToAppointment;
         }
 
-        static public bool CanTheUserBeInvitedToAppointment(string userName, Appointment temporaryAppointment)
+        public bool CanTheUserBeInvitedToAppointment(string userName, Appointment temporaryAppointment)
         {
             List<Appointment> appointmentsOfUserNameToMove = GetUserNameAppointments(userName);
             foreach (Appointment appointment in appointmentsOfUserNameToMove)
@@ -198,7 +198,7 @@ namespace CalendarApp.Controllers
             return true;
         }
 
-        static public List<Appointment> GetUserNameAppointments(string userName)
+        public List<Appointment> GetUserNameAppointments(string userName)
         {
             IEnumerable<Appointment> appointments = from appointment in Appointments
                                                     where appointment.OwnerUserName.Equals(userName) || appointment.GuestUserNames.Contains(userName)

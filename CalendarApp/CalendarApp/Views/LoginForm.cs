@@ -15,38 +15,29 @@ namespace CalendarApp.Views
 {
     public partial class LoginForm : Form
     {
+        #region Fields
+        private readonly UserController userController = new UserController();
+        #endregion
         #region Methods
         public LoginForm()
         {
             InitializeComponent();
-            UserController.LoadUsers();
-        }
-
-        private static bool CheckIfUserNameExists(string loginUserName)
-        {
-            foreach (User user in UserController.Users)
-            {
-                if (loginUserName.Equals(user.UserName))
-                {
-                    return true;
-                }
-            }
-            return false;
+            userController.LoadUsers();
         }
 
         private void Login(string loginUserName)
         {
             UserController.LoggedUserName = loginUserName;
             this.Hide();
-            CalendarForm calendarForm = new CalendarForm();
+            CalendarForm calendarForm = new CalendarForm(userController);
             calendarForm.ShowDialog();
             this.Close();
         }
 
-        private static void Register(string loginUserName)
+        private void Register(string loginUserName)
         {
             User newUser = new User(loginUserName);
-            UserController.SaveUser(newUser);
+            userController.SaveUser(newUser);
             MessageBox.Show("Successfully created user");
         }
 
@@ -56,7 +47,7 @@ namespace CalendarApp.Views
             if (isValidUserName)
             {
                 string loginUserName = userNameTextBox.Text;
-                bool userAlreadyExists = CheckIfUserNameExists(loginUserName);
+                bool userAlreadyExists = userController.CheckIfUserNameExists(loginUserName);
                 if (userAlreadyExists)
                 {
                     Login(loginUserName);
@@ -78,7 +69,7 @@ namespace CalendarApp.Views
             if (isValidUserName)
             {
                 string loginUserName = userNameTextBox.Text;
-                bool userAlreadyExists = CheckIfUserNameExists(loginUserName);
+                bool userAlreadyExists = userController.CheckIfUserNameExists(loginUserName);
                 if (!userAlreadyExists)
                 {
                     Register(loginUserName);

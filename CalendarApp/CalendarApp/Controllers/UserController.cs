@@ -18,7 +18,7 @@ namespace CalendarApp.Controllers
 
         #region Properties
         /// <summary>Public property for accessing the users.</summary>
-        static public List<User> Users
+        public List<User> Users
         {
             get
             {
@@ -45,13 +45,13 @@ namespace CalendarApp.Controllers
         #endregion
 
         #region Methods
-        public static void SaveUser(User user)
+        public void SaveUser(User user)
         {
             Users.Add(user);
             SerializeUsers();
         }
 
-        private static void SerializeUsers()
+        private void SerializeUsers()
         {
             Stream stream = null;
             try
@@ -66,7 +66,7 @@ namespace CalendarApp.Controllers
             }
         }
 
-        public static void LoadUsers()
+        public void LoadUsers()
         {
             Stream stream = null;
             try
@@ -82,6 +82,22 @@ namespace CalendarApp.Controllers
             {
                 stream.Close();
             }
+        }
+
+        public bool CheckIfUserNameExists(string loginUserName)
+        {
+            if (loginUserName == null)
+            {
+                throw new ArgumentNullException("loginUserName");
+            }
+            foreach (User user in Users)
+            {
+                if (loginUserName.Equals(user.UserName))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
     }

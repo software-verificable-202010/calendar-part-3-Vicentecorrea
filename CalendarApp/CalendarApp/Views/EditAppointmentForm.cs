@@ -21,10 +21,12 @@ namespace CalendarApp.Views
         private readonly AppointmentsInDayForm appointmentsInDay;
         private readonly BindingList<string> notInvitedUserNames = new BindingList<string>();
         private readonly BindingList<string> invitedUserNames = new BindingList<string>();
+        private readonly AppointmentController appointmentController;
+        private readonly UserController userController = new UserController();
         #endregion
 
         #region Methods
-        public EditAppointmentForm(Appointment appointment, AppointmentInformationForm appointmentInformationForm, CalendarForm calendarForm, AppointmentsInDayForm appointmentsInDayForm)
+        public EditAppointmentForm(Appointment appointment, AppointmentInformationForm appointmentInformationForm, CalendarForm calendarForm, AppointmentsInDayForm appointmentsInDayForm, AppointmentController appointmentController, UserController userController)
         {
             InitializeComponent();
             this.appointment = appointment;
@@ -35,6 +37,8 @@ namespace CalendarApp.Views
             SetPreviousValues();
             notInvitedUserNamesListBox.DataSource = notInvitedUserNames;
             invitedUserNamesListBox.DataSource = invitedUserNames;
+            this.appointmentController = appointmentController;
+            this.userController = userController;
         }
 
         private void SetPreviousValues()
@@ -47,7 +51,7 @@ namespace CalendarApp.Views
 
         private void AddUserNamesToLists()
         {
-            foreach (User user in UserController.Users)
+            foreach (User user in userController.Users)
             {
                 if (user.UserName != UserController.LoggedUserName)
                 {
@@ -80,14 +84,14 @@ namespace CalendarApp.Views
             bool appointmentHasTitle = !String.IsNullOrWhiteSpace(editedAppointment.Title);
             bool appointmentHasDescription = !String.IsNullOrWhiteSpace(editedAppointment.Description);
             bool appointmentEndDateIsLaterThanStartDate = editedAppointment.StartDate < editedAppointment.EndDate;
-            List<string> userNamesThatCannotBeInvitedToAppointment = AppointmentController.GetUserNamesThatCannotBeInvitedToAppointment(appointmentGuests, editedAppointment);
+            List<string> userNamesThatCannotBeInvitedToAppointment = appointmentController.GetUserNamesThatCannotBeInvitedToAppointment(appointmentGuests, editedAppointment);
             bool areAllTheGuestsCorrect = userNamesThatCannotBeInvitedToAppointment.Count.Equals(Constants.ZeroItemsInList);
             bool areTheAppointmentValuesCorrect = appointmentHasTitle && appointmentHasDescription && appointmentEndDateIsLaterThanStartDate;
             bool couldTheAppointmentBeCreated = areTheAppointmentValuesCorrect && areAllTheGuestsCorrect;
             if (couldTheAppointmentBeCreated)
             {
-                AppointmentController.DeleteAppointment(appointment);
-                AppointmentController.SaveAppointment(editedAppointment);
+                appointmentController.DeleteAppointment(appointment);
+                appointmentController.SaveAppointment(editedAppointment);
                 appointmentInformation.UpdateFields(editedAppointment);
                 calendar.ShowSelectedDisplay();
                 MessageBox.Show("Successfully edited appointment");
@@ -101,12 +105,12 @@ namespace CalendarApp.Views
             {
                 if (!areTheAppointmentValuesCorrect)
                 {
-                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
+                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
                 if (!areAllTheGuestsCorrect)
                 {
-                    string errorFeedbackText = AppointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(userNamesThatCannotBeInvitedToAppointment);
+                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(userNamesThatCannotBeInvitedToAppointment);
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
             }
