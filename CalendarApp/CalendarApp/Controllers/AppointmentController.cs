@@ -41,24 +41,6 @@ namespace CalendarApp.Controllers
             SerializeAppointments();
         }
 
-        private void SerializeAppointments()
-        {
-            Stream stream = null;
-            try
-            {
-                stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(stream, Appointments);
-            }
-            finally
-            {
-                if (stream != null)
-                {
-                    stream.Close();
-                }
-            }
-        }
-
         public void LoadAppointments()
         {
             Stream stream = null;
@@ -95,8 +77,8 @@ namespace CalendarApp.Controllers
             {
                 throw new ArgumentNullException("appointment");
             }
-            bool IsAppointmentInThisDay = appointment.StartDate.Date <= day && day <= appointment.EndDate.Date;
-            return IsAppointmentInThisDay;
+            bool isAppointmentInThisDay = appointment.StartDate.Date <= day && day <= appointment.EndDate.Date;
+            return isAppointmentInThisDay;
         }
 
         public List<Appointment> GetAppointmentsInThisDayAndTime(DateTime time)
@@ -115,8 +97,8 @@ namespace CalendarApp.Controllers
                 throw new ArgumentNullException("appointment");
             }
             DateTime previousHour = appointment.StartDate.AddHours(Constants.PreviousTimeInterval);
-            bool IsAppointmentInThisDay = previousHour < time && time < appointment.EndDate;
-            return IsAppointmentInThisDay;
+            bool isAppointmentInThisDay = previousHour < time && time < appointment.EndDate;
+            return isAppointmentInThisDay;
         }
 
         public bool LoggedUserCanSeeThisAppointment(Appointment appointment)
@@ -170,6 +152,10 @@ namespace CalendarApp.Controllers
             {
                 throw new ArgumentNullException("possibleGuestUserNames");
             }
+            if (temporaryAppointment == null)
+            {
+                throw new ArgumentNullException("temporaryAppointment");
+            }
             List<string> userNamesThatCannotBeInvitedToAppointment = new List<string>();
             foreach (string possibleUserNameGuest in possibleGuestUserNames)
             {
@@ -205,6 +191,24 @@ namespace CalendarApp.Controllers
                                                     select appointment;
             List<Appointment> userNameAppointments = new List<Appointment>(appointments);
             return userNameAppointments;
+        }
+
+        private void SerializeAppointments()
+        {
+            Stream stream = null;
+            try
+            {
+                stream = File.Open(Constants.PathToAppointmentsSerializationFile, FileMode.OpenOrCreate);
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(stream, Appointments);
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
         }
         #endregion
     }

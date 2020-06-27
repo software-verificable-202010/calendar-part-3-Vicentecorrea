@@ -25,22 +25,6 @@ namespace CalendarApp.Views
             userController.LoadUsers();
         }
 
-        private void Login(string loginUserName)
-        {
-            UserController.LoggedUserName = loginUserName;
-            this.Hide();
-            CalendarForm calendarForm = new CalendarForm(userController);
-            calendarForm.ShowDialog();
-            this.Close();
-        }
-
-        private void Register(string loginUserName)
-        {
-            User newUser = new User(loginUserName);
-            userController.SaveUser(newUser);
-            MessageBox.Show("Successfully created user");
-        }
-
         private void LoginButton_Click(object sender, EventArgs e)
         {
             bool isValidUserName = !String.IsNullOrWhiteSpace(userNameTextBox.Text);
@@ -84,6 +68,22 @@ namespace CalendarApp.Views
             {
                 MessageBox.Show("You should enter a username");
             }
+        }
+
+        private void Login(string loginUserName)
+        {
+            UserController.LoggedUserName = loginUserName;
+            this.Hide();
+            CalendarForm calendarForm = new CalendarForm(userController);
+            calendarForm.ShowDialog();
+            this.Close();
+        }
+
+        private void Register(string loginUserName)
+        {
+            User newUser = new User(loginUserName);
+            userController.SaveUser(newUser);
+            MessageBox.Show("Successfully created user");
         }
         #endregion
     }

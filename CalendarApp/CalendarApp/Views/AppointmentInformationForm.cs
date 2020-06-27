@@ -16,7 +16,8 @@ namespace CalendarApp.Views
         #endregion
 
         #region Methods
-        public AppointmentInformationForm(Appointment appointment, CalendarForm calendarForm, AppointmentController appointmentController, UserController userController, AppointmentsInDayForm appointmentsInDayForm = null)
+        public AppointmentInformationForm(Appointment appointment, CalendarForm calendarForm, AppointmentController appointmentController, 
+            UserController userController, AppointmentsInDayForm appointmentsInDayForm = null)
         {
             InitializeComponent();
             if (appointment == null)
@@ -33,6 +34,20 @@ namespace CalendarApp.Views
             HideOwnerButtonsIfLoggedUserDoesNotOwnTheAppointment();
             this.appointmentController = appointmentController;
             this.userController = userController;
+        }
+
+        public void UpdateFields(Appointment editedAppointment)
+        {
+            if (editedAppointment == null)
+            {
+                throw new ArgumentNullException("editedAppointment");
+            }
+            appointmentTitleValue.Text = editedAppointment.Title;
+            appointmentDescriptionRichTextBox.Text = editedAppointment.Description;
+            appointmentStartDateValue.Text = editedAppointment.StartDate.ToString(Constants.FormatDateInAppointmentInformation, new CultureInfo(Constants.EnglishLanguageCode));
+            appointmentEndDateValue.Text = editedAppointment.EndDate.ToString(Constants.FormatDateInAppointmentInformation, new CultureInfo(Constants.EnglishLanguageCode));
+            appointmentOwnerValue.Text = editedAppointment.OwnerUserName;
+            guestsListBox.DataSource = editedAppointment.GuestUserNames;
         }
 
         private void HideOwnerButtonsIfLoggedUserDoesNotOwnTheAppointment()
@@ -52,20 +67,6 @@ namespace CalendarApp.Views
             appointmentEndDateValue.Text = appointment.EndDate.ToString(Constants.FormatDateInAppointmentInformation, new CultureInfo(Constants.EnglishLanguageCode));
             appointmentOwnerValue.Text = appointment.OwnerUserName;
             guestsListBox.DataSource = appointment.GuestUserNames;
-        }
-
-        public void UpdateFields(Appointment editedAppointment)
-        {
-            if (editedAppointment == null)
-            {
-                throw new ArgumentNullException("editedAppointment");
-            }
-            appointmentTitleValue.Text = editedAppointment.Title;
-            appointmentDescriptionRichTextBox.Text = editedAppointment.Description;
-            appointmentStartDateValue.Text = editedAppointment.StartDate.ToString(Constants.FormatDateInAppointmentInformation, new CultureInfo(Constants.EnglishLanguageCode));
-            appointmentEndDateValue.Text = editedAppointment.EndDate.ToString(Constants.FormatDateInAppointmentInformation, new CultureInfo(Constants.EnglishLanguageCode));
-            appointmentOwnerValue.Text = editedAppointment.OwnerUserName;
-            guestsListBox.DataSource = editedAppointment.GuestUserNames;
         }
 
         private void DeleteAppointmentButton_Click(object sender, System.EventArgs e)

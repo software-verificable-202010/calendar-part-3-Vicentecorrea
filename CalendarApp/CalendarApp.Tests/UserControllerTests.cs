@@ -31,7 +31,7 @@ namespace Tests
             User firstDefaultUser = new User("Pedro");
             User secondDefaultUser = new User("Juan");
             User thirdDefaultUser = new User("Diego");
-            userController.Users = new List<User> { firstDefaultUser, secondDefaultUser, thirdDefaultUser };
+            userController.Users = new List<User> {firstDefaultUser, secondDefaultUser, thirdDefaultUser};
             string userNameInput = "Juan";
 
             // Act

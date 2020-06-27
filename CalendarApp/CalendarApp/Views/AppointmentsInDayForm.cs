@@ -22,6 +22,10 @@ namespace CalendarApp.Views
         {
             InitializeComponent();
             this.calendar = calendarForm;
+            if (appointmentsInDay == null)
+            {
+                throw new ArgumentNullException("appointmentsInDay");
+            }
             SeparateAppointments(appointmentsInDay);
             SetDateAndTimeLabel(dayAndTime);
             AddMyAppointmentsToListBox();
@@ -83,7 +87,8 @@ namespace CalendarApp.Views
         {
             if (Constants.DefaultInitialIndex <= myAppointmentsListBox.SelectedIndex && myAppointmentsListBox.SelectedIndex < myAppointments.Count)
             {
-                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(myAppointments[myAppointmentsListBox.SelectedIndex], calendar, appointmentController, userController, this);
+                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(myAppointments[myAppointmentsListBox.SelectedIndex], 
+                    calendar, appointmentController, userController, this);
                 appointmentInformationForm.Show();
             }
         }
@@ -92,7 +97,8 @@ namespace CalendarApp.Views
         {
             if (Constants.DefaultInitialIndex <= invitedAppointmentsListBox.SelectedIndex && invitedAppointmentsListBox.SelectedIndex < invitedAppointments.Count)
             {
-                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(invitedAppointments[invitedAppointmentsListBox.SelectedIndex], calendar, appointmentController, userController, this);
+                AppointmentInformationForm appointmentInformationForm = new AppointmentInformationForm(invitedAppointments[invitedAppointmentsListBox.SelectedIndex], 
+                    calendar, appointmentController, userController, this);
                 appointmentInformationForm.Show();
             }
         }

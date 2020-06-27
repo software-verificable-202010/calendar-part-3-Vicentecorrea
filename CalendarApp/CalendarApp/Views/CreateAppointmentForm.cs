@@ -63,7 +63,8 @@ namespace CalendarApp.Views
             {
                 if (!areTheAppointmentValuesCorrect)
                 {
-                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
+                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, 
+                        appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
                 if (!areAllTheGuestsCorrect)

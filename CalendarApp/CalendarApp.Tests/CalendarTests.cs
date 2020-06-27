@@ -63,7 +63,7 @@ namespace Tests
 
             DateTime firstAppointmentDefaultStartDate = new DateTime(2020, 8, 26, 2, 34, 11);
             DateTime firstAppointmentDefaultEndDate = new DateTime(2020, 8, 26, 7, 12, 56);
-            List<string> firstGuestUserNames = new List<string> { "Ignacio", "Antonia", "Juan" };
+            List<string> firstGuestUserNames = new List<string> {"Ignacio", "Antonia", "Juan"};
             Appointment firstDefaultAppointment = new Appointment("Subida al cerro", "Description", firstAppointmentDefaultStartDate, firstAppointmentDefaultEndDate, "Diego", firstGuestUserNames);
 
             DateTime secondAppointmentDefaultStartDate = new DateTime(2020, 8, 25, 2, 12, 51);
@@ -71,11 +71,12 @@ namespace Tests
             List<string> secondGuestUserNames = new List<string>();
             Appointment secondDefaultAppointment = new Appointment("Campeonato", "Description", secondAppointmentDefaultStartDate, secondAppointmentDefaultEndDate, "Ignacio", secondGuestUserNames);
 
-            List<Appointment> appointmentsInThisDayInput = new List<Appointment> { firstDefaultAppointment, secondDefaultAppointment };
+            List<Appointment> appointmentsInThisDayInput = new List<Appointment> {firstDefaultAppointment, secondDefaultAppointment};
 
             DateTime dayInput = new DateTime(2020, 8, 26);
 
-            string expectedCellText = string.Format("26{0}{1}   Subida al cerro{2}Campeonato", Environment.NewLine, firstDefaultAppointment.StartDate.ToString(Constants.HourAndMinuteFormat), Environment.NewLine);
+            string expectedCellText = string.Format("26{0}{1}   Subida al cerro{2}Campeonato", Environment.NewLine, 
+                firstDefaultAppointment.StartDate.ToString(Constants.HourAndMinuteFormat), Environment.NewLine);
 
             // Act
             string result = calendar.GetCellTextInMonthView(appointmentsInThisDayInput, dayInput);
@@ -93,7 +94,7 @@ namespace Tests
 
             DateTime firstAppointmentDefaultStartDate = new DateTime(2020, 6, 17, 2, 34, 11);
             DateTime firstAppointmentDefaultEndDate = new DateTime(2020, 6, 19, 7, 12, 56);
-            List<string> firstGuestUserNames = new List<string> { "Ignacio", "Antonia", "Juan" };
+            List<string> firstGuestUserNames = new List<string> {"Ignacio", "Antonia", "Juan"};
             Appointment firstDefaultAppointment = new Appointment("Fiesta", "Description", firstAppointmentDefaultStartDate, firstAppointmentDefaultEndDate, "Diego", firstGuestUserNames);
 
             DateTime secondAppointmentDefaultStartDate = new DateTime(2020, 6, 18, 17, 12, 51);
@@ -101,11 +102,12 @@ namespace Tests
             List<string> secondGuestUserNames = new List<string>();
             Appointment secondDefaultAppointment = new Appointment("Juego de mesa", "Description", secondAppointmentDefaultStartDate, secondAppointmentDefaultEndDate, "Ignacio", secondGuestUserNames);
 
-            List<Appointment> appointmentsInThisDayAtThisHour = new List<Appointment> { firstDefaultAppointment, secondDefaultAppointment };
+            List<Appointment> appointmentsInThisDayAtThisHour = new List<Appointment> {firstDefaultAppointment, secondDefaultAppointment};
 
             int hourInput = 17;
 
-            string expectedCellText = string.Format("Fiesta{0}{1}   Juego de mesa{2}", Environment.NewLine, secondDefaultAppointment.StartDate.ToString(Constants.HourAndMinuteFormat), Environment.NewLine);
+            string expectedCellText = string.Format("Fiesta{0}{1}   Juego de mesa{2}", Environment.NewLine, 
+                secondDefaultAppointment.StartDate.ToString(Constants.HourAndMinuteFormat), Environment.NewLine);
 
             // Act
             string result = calendar.GetCellTextInWeekView(appointmentsInThisDayAtThisHour, hourInput);

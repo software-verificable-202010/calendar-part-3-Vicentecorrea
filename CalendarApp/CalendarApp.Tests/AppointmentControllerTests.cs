@@ -95,7 +95,7 @@ namespace Tests
 
             DateTime appointmentInputStartDate = new DateTime(2020, 6, 17, 10, 30, 0);
             DateTime appointmentInputEndDate = new DateTime(2020, 6, 17, 21, 45, 30);
-            List<string> guestUserNamesInput = new List<string> { "Ignacia", "Diego", "Pepe" };
+            List<string> guestUserNamesInput = new List<string> {"Ignacia", "Diego", "Pepe"};
             Appointment appointmentInput = new Appointment("Title", "Description", appointmentInputStartDate, appointmentInputEndDate, "Alberto", guestUserNamesInput);
 
             // Act
@@ -123,11 +123,11 @@ namespace Tests
             DateTime appointmentDefaultStartDate = new DateTime(2020, 11, 11);
             DateTime appointmentDefaultEndDate = new DateTime(2020, 11, 11);
             appointmentController.Appointments = new List<Appointment>();
-            List<string> ownerUserNames = new List<string> { userNameInput, "Juan", "Diego" };
-            List<string> guestListOfUserNameInput = new List<string> { "Fernanda", "Francisca", "Diego" };
-            List<string> guestListOfJuan = new List<string> { "Fernanda" };
-            List<string> guestListOfDiego = new List<string> { "Francisca", userNameInput };
-            List<List<string>> guestUserNames = new List<List<string>> { guestListOfUserNameInput, guestListOfJuan, guestListOfDiego };
+            List<string> ownerUserNames = new List<string> {userNameInput, "Juan", "Diego"};
+            List<string> guestListOfUserNameInput = new List<string> {"Fernanda", "Francisca", "Diego"};
+            List<string> guestListOfJuan = new List<string> {"Fernanda"};
+            List<string> guestListOfDiego = new List<string> {"Francisca", userNameInput};
+            List<List<string>> guestUserNames = new List<List<string>> {guestListOfUserNameInput, guestListOfJuan, guestListOfDiego};
             for (int index = Constants.DefaultInitialIndex; index < ownerUserNames.Count; index++)
             {
                 Appointment appointmentInput = new Appointment("Title", "Description", appointmentDefaultStartDate, appointmentDefaultEndDate, ownerUserNames[index], guestUserNames[index]);
@@ -136,7 +136,7 @@ namespace Tests
 
             int FirstAppointmentIndex = 0;
             int ThirdAppointmentIndex = 2;
-            List<Appointment> appointmentsForUserNameInput = new List<Appointment> { appointmentController.Appointments[FirstAppointmentIndex], appointmentController.Appointments[ThirdAppointmentIndex] };
+            List<Appointment> appointmentsForUserNameInput = new List<Appointment> {appointmentController.Appointments[FirstAppointmentIndex], appointmentController.Appointments[ThirdAppointmentIndex]};
 
             // Act
             List<Appointment> result = appointmentController.GetUserNameAppointments(userNameInput);
@@ -168,15 +168,15 @@ namespace Tests
         public void GetErrorFeedbackTextCreatingAppointmentWithWrongGuests_ListOfUserNames_ReturnsExpectedText()
         {
             // Arrange
-            List<string> userNamesThatCannotBeInvitedToAppointment = new List<string> { "Juan", "Ignacia", "Max" };
-            string expectedErrorFeedbackText = string.Format("The following users cannot be invited to your appointment because they have a time collision with another appointment:{0}- Juan{1}- Ignacia{2}- Max{3}",
+            List<string> userNamesThatCannotBeInvitedToAppointment = new List<string> {"Juan", "Ignacia", "Max"};
+            string expectedText = string.Format("The following users cannot be invited to your appointment because they have a time collision with another appointment:{0}- Juan{1}- Ignacia{2}- Max{3}", 
                 Environment.NewLine, Environment.NewLine, Environment.NewLine, Environment.NewLine);
 
             // Act
             string result = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongGuests(userNamesThatCannotBeInvitedToAppointment);
 
             // Assert
-            Assert.AreEqual(expectedErrorFeedbackText, result);
+            Assert.AreEqual(expectedText, result);
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace Tests
             string userNameInput = "Juan";
             DateTime appointmentDefaultStartDate = new DateTime(2020, 8, 10, 20, 34, 11);
             DateTime appointmentDefaultEndDate = new DateTime(2020, 8, 11, 7, 12, 56);
-            List<string> guestUserNames = new List<string> { "Ignacio", "Antonia", userNameInput };
+            List<string> guestUserNames = new List<string> {"Ignacio", "Antonia", userNameInput};
             Appointment defaultAppointment = new Appointment("Title", "Description", appointmentDefaultStartDate, appointmentDefaultEndDate, "Diego", guestUserNames);
 
             appointmentController.Appointments = new List<Appointment> { defaultAppointment };
@@ -220,18 +220,18 @@ namespace Tests
             // Arrange
             DateTime appointmentDefaultStartDate = new DateTime(2020, 8, 10, 20, 34, 11);
             DateTime appointmentDefaultEndDate = new DateTime(2020, 8, 11, 7, 12, 56);
-            List<string> guestUserNames = new List<string> { "Ignacio", "Antonia", "Juan" };
+            List<string> guestUserNames = new List<string> {"Ignacio", "Antonia", "Juan"};
             Appointment defaultAppointment = new Appointment("Title", "Description", appointmentDefaultStartDate, appointmentDefaultEndDate, "Diego", guestUserNames);
 
-            appointmentController.Appointments = new List<Appointment> { defaultAppointment };
+            appointmentController.Appointments = new List<Appointment> {defaultAppointment};
 
             DateTime appointmentInDoubtStartDate = new DateTime(2020, 8, 10, 8, 41, 16);
             DateTime appointmentInDoubtEndDate = new DateTime(2020, 8, 10, 23, 12, 46);
             List<string> guestUserNamesOfAppointmentInDoubt = new List<string>();
             Appointment appointmentInDoubt = new Appointment("Title", "Description", appointmentInDoubtStartDate, appointmentInDoubtEndDate, "Alberto", guestUserNamesOfAppointmentInDoubt);
 
-            List<string> possibleUserNames = new List<string> { "Francisca", "Ignacio", "Diego", "Antonia", "Pedro", "Juan" };
-            List<string> expectedUserNamesWhoCannotBeInvitedToAppointment = new List<string> { "Ignacio", "Diego", "Antonia", "Juan" };
+            List<string> possibleUserNames = new List<string> {"Francisca", "Ignacio", "Diego", "Antonia", "Pedro", "Juan"};
+            List<string> expectedUserNamesWhoCannotBeInvitedToAppointment = new List<string> {"Ignacio", "Diego", "Antonia", "Juan"};
 
             // Act
             List<string> result = appointmentController.GetUserNamesThatCannotBeInvitedToAppointment(possibleUserNames, appointmentInDoubt);
@@ -265,7 +265,7 @@ namespace Tests
 
             DateTime firstAppointmentDefaultStartDate = new DateTime(2020, 8, 16, 20, 34, 11);
             DateTime firstAppointmentDefaultEndDate = new DateTime(2020, 8, 17, 7, 12, 56);
-            List<string> firstGuestUserNames = new List<string> { "Ignacio", "Antonia", "Juan" };
+            List<string> firstGuestUserNames = new List<string> {"Ignacio", "Antonia", "Juan"};
             Appointment firstDefaultAppointment = new Appointment("Title", "Description", firstAppointmentDefaultStartDate, firstAppointmentDefaultEndDate, "Diego", firstGuestUserNames);
 
             DateTime secondAppointmentDefaultStartDate = new DateTime(2020, 8, 17, 2, 12, 51);
@@ -273,8 +273,8 @@ namespace Tests
             List<string> secondGuestUserNames = new List<string>();
             Appointment secondDefaultAppointment = new Appointment("Title", "Description", secondAppointmentDefaultStartDate, secondAppointmentDefaultEndDate, "Ignacio", secondGuestUserNames);
 
-            appointmentController.Appointments = new List<Appointment> { firstDefaultAppointment, secondDefaultAppointment };
-            List<Appointment> expectedAppointmentsInThisDay = new List<Appointment> { firstDefaultAppointment };
+            appointmentController.Appointments = new List<Appointment> {firstDefaultAppointment, secondDefaultAppointment};
+            List<Appointment> expectedAppointmentsInThisDay = new List<Appointment> {firstDefaultAppointment};
 
             DateTime dayInDoubt = new DateTime(2020, 8, 17);
 
@@ -295,7 +295,7 @@ namespace Tests
 
             DateTime firstAppointmentDefaultStartDate = new DateTime(2020, 10, 16, 20, 34, 11);
             DateTime firstAppointmentDefaultEndDate = new DateTime(2020, 10, 19, 7, 12, 56);
-            List<string> firstGuestUserNames = new List<string> { "Antonia", "Juan" };
+            List<string> firstGuestUserNames = new List<string> {"Antonia", "Juan"};
             Appointment firstDefaultAppointment = new Appointment("Title", "Description", firstAppointmentDefaultStartDate, firstAppointmentDefaultEndDate, "Ignacio", firstGuestUserNames);
 
             DateTime secondAppointmentDefaultStartDate = new DateTime(2020, 8, 11, 2, 12, 51);
@@ -305,11 +305,11 @@ namespace Tests
 
             DateTime thirdAppointmentDefaultStartDate = new DateTime(2020, 8, 11, 10, 12, 00);
             DateTime thirdAppointmentDefaultEndDate = new DateTime(2020, 8, 12, 3, 42, 15);
-            List<string> thirdGuestUserNames = new List<string> { "Fernanda", "Ignacio", "Pedro" };
+            List<string> thirdGuestUserNames = new List<string> {"Fernanda", "Ignacio", "Pedro"};
             Appointment thirdDefaultAppointment = new Appointment("Title", "Description", thirdAppointmentDefaultStartDate, thirdAppointmentDefaultEndDate, "Diego", thirdGuestUserNames);
 
-            appointmentController.Appointments = new List<Appointment> { firstDefaultAppointment, secondDefaultAppointment, thirdDefaultAppointment };
-            List<Appointment> expectedAppointmentsInThisDayAndTime = new List<Appointment> { thirdDefaultAppointment };
+            appointmentController.Appointments = new List<Appointment> {firstDefaultAppointment, secondDefaultAppointment, thirdDefaultAppointment};
+            List<Appointment> expectedAppointmentsInThisDayAndTime = new List<Appointment> {thirdDefaultAppointment};
 
             DateTime datetimeInDoubt = new DateTime(2020, 8, 11, 15, 30, 00);
 

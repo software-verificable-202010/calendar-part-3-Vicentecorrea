@@ -26,7 +26,8 @@ namespace CalendarApp.Views
         #endregion
 
         #region Methods
-        public EditAppointmentForm(Appointment appointment, AppointmentInformationForm appointmentInformationForm, CalendarForm calendarForm, AppointmentsInDayForm appointmentsInDayForm, AppointmentController appointmentController, UserController userController)
+        public EditAppointmentForm(Appointment appointment, AppointmentInformationForm appointmentInformationForm, CalendarForm calendarForm, 
+            AppointmentsInDayForm appointmentsInDayForm, AppointmentController appointmentController, UserController userController)
         {
             InitializeComponent();
             this.appointment = appointment;
@@ -66,16 +67,6 @@ namespace CalendarApp.Views
             }
         }
 
-        private List<string> GetAppointmentGuests()
-        {
-            List<string> guestsUserNames = new List<string>();
-            foreach (string invitedUserName in invitedUserNames)
-            {
-                guestsUserNames.Add(invitedUserName);
-            }
-            return guestsUserNames;
-        }
-
         private void EditAppointmentButton_Click(object sender, EventArgs e)
         {
             List<string> appointmentGuests = GetAppointmentGuests();
@@ -105,7 +96,8 @@ namespace CalendarApp.Views
             {
                 if (!areTheAppointmentValuesCorrect)
                 {
-                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
+                    string errorFeedbackText = appointmentController.GetErrorFeedbackTextCreatingAppointmentWithWrongValues(appointmentHasTitle, 
+                        appointmentHasDescription, appointmentEndDateIsLaterThanStartDate);
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
                 if (!areAllTheGuestsCorrect)
@@ -114,6 +106,16 @@ namespace CalendarApp.Views
                     MessageBox.Show(errorFeedbackText, "Error");
                 }
             }
+        }
+
+        private List<string> GetAppointmentGuests()
+        {
+            List<string> guestsUserNames = new List<string>();
+            foreach (string invitedUserName in invitedUserNames)
+            {
+                guestsUserNames.Add(invitedUserName);
+            }
+            return guestsUserNames;
         }
 
         private void NotInvitedUserNamesListBox_Click(object sender, EventArgs e)

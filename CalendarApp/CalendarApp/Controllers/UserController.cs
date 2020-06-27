@@ -51,21 +51,6 @@ namespace CalendarApp.Controllers
             SerializeUsers();
         }
 
-        private void SerializeUsers()
-        {
-            Stream stream = null;
-            try
-            {
-                stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.OpenOrCreate);
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(stream, Users);
-            }
-            finally
-            {
-                stream.Close();
-            }
-        }
-
         public void LoadUsers()
         {
             Stream stream = null;
@@ -98,6 +83,21 @@ namespace CalendarApp.Controllers
                 }
             }
             return false;
+        }
+
+        private void SerializeUsers()
+        {
+            Stream stream = null;
+            try
+            {
+                stream = File.Open(Constants.PathToUsersSerializationFile, FileMode.OpenOrCreate);
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(stream, Users);
+            }
+            finally
+            {
+                stream.Close();
+            }
         }
         #endregion
     }
